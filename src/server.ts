@@ -88,11 +88,11 @@ export function createServer(engine: Engine, cfg: ServerConfig) {
     if (rel.includes("\0") || rel.includes("\\")) return new Response("Bad request", { status: 400 });
     const file = PAGES[rel] ?? (rel.startsWith("/report/") ? "report.html" : rel.replace(/^\/+/, ""));
     const full = resolve(join(publicRoot, normalize(file)));
-    if (full !== publicRoot && !full.startsWith(publicRoot + sep)) return new Response("Not found", { status: 404 });
-    if (!existsSync(full) || !statSync(full).isFile()) return new Response("Not found", { status: 404 });
+    if (full !== publicRoot && !full.startsWith(publicRoot + sep)) return new Response("Not found", { status: 404, headers: { "Cache-Control": "no-store" } });
+    if (!existsSync(full) || !statSync(full).isFile()) return new Response("Not found", { status: 404, headers: { "Cache-Control": "no-store" } });
     const ext = full.slice(full.lastIndexOf(".") + 1).toLowerCase();
     const type = TYPES[ext];
-    if (!type) return new Response("Not found", { status: 404 });
+    if (!type) return new Response("Not found", { status: 404, headers: { "Cache-Control": "no-store" } });
     const cache = ext === "jpg" || ext === "jpeg" || ext === "png" || ext === "webp" ? "public, max-age=86400" : "no-cache";
     return new Response(Bun.file(full), { headers: { "Content-Type": type, "Cache-Control": cache, ...SECURITY_HEADERS } });
   }
