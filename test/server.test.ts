@@ -26,7 +26,7 @@ describe("http", () => {
   });
 
   test("pages are served with security headers", async () => {
-    for (const p of ["/", "/play", "/host", "/host/help", "/report/abcdef"]) {
+    for (const p of ["/", "/play", "/host", "/host/help", "/host/review", "/host/notes", "/report/abcdef"]) {
       const r = await fetch(base + p);
       expect(r.status).toBe(200);
       expect(r.headers.get("x-content-type-options")).toBe("nosniff");
@@ -63,6 +63,25 @@ describe("http", () => {
     expect(sc).toContain("Secure");
     cookie = sc.split(";")[0]!;
     expect((await fetch(base + "/api/host/state", { headers: { Cookie: "play_host=forged.abc" } })).status).toBe(401);
+  });
+
+  test("/api/host/content needs the host cookie and returns the full content", async () => {
+    expect((await fetch(base + "/api/host/content")).status).toBe(401);
+    const c = (await (await host("/api/host/content")).json()) as any;
+    expect(c.rounds.length).toBe(2);
+    expect(c.rounds[0].options[0].feedback.en).toBeTruthy();
+    expect(c.rounds[1]).toMatchObject({ set: "core", minutes: 6 });
+    expect(c.meta.hospital).toBeTruthy();
+  });
+
+  test("create game with a round selection over HTTP", async () => {
+    expect((await host("/api/host/game", { roundIds: [] })).status).toBe(400);
+    expect((await host("/api/host/game", { roundIds: [1, 42] })).status).toBe(400);
+    const one = (await (await host("/api/host/game", { roundIds: [2] })).json()) as any;
+    expect(one.game.rounds).toBe(1);
+    expect(one.game.roundIds).toEqual([2]);
+    const def = (await (await host("/api/host/game", {})).json()) as any;
+    expect(def.game.roundIds).toEqual([1, 2]); // default = core rounds (both in the example)
   });
 
   test("full flow over HTTP: create, join, play, reveal, report", async () => {

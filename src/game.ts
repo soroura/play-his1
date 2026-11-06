@@ -25,6 +25,7 @@ interface GameRow {
   deadline: number;
   version: number;
   created_at: number;
+  round_ids: string | null;
 }
 interface PlayerRow {
   token: string;
@@ -61,7 +62,8 @@ CREATE TABLE IF NOT EXISTS games(
   phase_started INTEGER NOT NULL,
   deadline INTEGER NOT NULL DEFAULT 0,
   version INTEGER NOT NULL DEFAULT 1,
-  created_at INTEGER NOT NULL
+  created_at INTEGER NOT NULL,
+  round_ids TEXT
 );
 CREATE TABLE IF NOT EXISTS players(
   token TEXT PRIMARY KEY,
@@ -97,6 +99,12 @@ export function sanitizeNickname(raw: unknown): string {
   return Array.from(cleaned).slice(0, 20).join("").trim();
 }
 
+/** Idempotent migrations for databases created by earlier releases. */
+export function migrate(db: Database): void {
+  const cols = db.query("PRAGMA table_info(games)").all() as { name: string }[];
+  if (!cols.some((c) => c.name === "round_ids")) db.exec("ALTER TABLE games ADD COLUMN round_ids TEXT");
+}
+
 export class Engine {
   readonly db: Database;
   private seen = new Map<string, number>();
@@ -108,6 +116,7 @@ export class Engine {
     this.db = new Database(dbPath, { create: true });
     this.db.exec("PRAGMA journal_mode = WAL; PRAGMA synchronous = NORMAL; PRAGMA busy_timeout = 3000;");
     this.db.exec(SCHEMA);
+    migrate(this.db);
     // After a restart nobody has polled yet: treat every known player as connected so a
     // question does not auto-close before clients have had a chance to reconnect.
     const now = this.clock();
@@ -122,8 +131,42 @@ export class Engine {
     return this.clock();
   }
 
+  /** All rounds in the content file (the pool a game can pick from). */
   get rounds() {
     return this.content.rounds;
+  }
+
+  /** Default selection: every round in the "core" set (all rounds if none is core). */
+  defaultRoundIds(): number[] {
+    const core = this.content.rounds.filter((r) => r.set === "core");
+    return (core.length ? core : this.content.rounds).map((r) => r.id);
+  }
+
+  /** Validate a requested selection: content order, deduplicated, at least one, all ids known. */
+  resolveRoundIds(input: unknown): number[] {
+    if (input === undefined || input === null) return this.defaultRoundIds();
+    if (!Array.isArray(input) || input.length === 0) throw new HttpError(400, "Pick at least one round");
+    if (input.length > 200) throw new HttpError(400, "Too many rounds");
+    const known = new Set(this.content.rounds.map((r) => r.id));
+    for (const v of input) if (typeof v !== "number" || !Number.isInteger(v) || !known.has(v)) throw new HttpError(400, `Unknown round id: ${String(v).slice(0, 20)}`);
+    const want = new Set(input as number[]);
+    return this.content.rounds.filter((r) => want.has(r.id)).map((r) => r.id);
+  }
+
+  /** The rounds this game plays, in order. round_idx indexes into this list. NULL (games from before selection existed) = default. */
+  gameRounds(g: GameRow): Round[] {
+    let ids: number[] | null = null;
+    if (g.round_ids) {
+      try {
+        const v = JSON.parse(g.round_ids);
+        if (Array.isArray(v)) ids = v.filter((x) => typeof x === "number");
+      } catch {
+        /* fall through to default */
+      }
+    }
+    const byId = new Map(this.content.rounds.map((r) => [r.id, r]));
+    const list = (ids ?? this.defaultRoundIds()).map((id) => byId.get(id)).filter((r): r is Round => !!r);
+    return list.length ? list : this.content.rounds;
   }
 
   // ---------- games ----------
@@ -135,14 +178,15 @@ export class Engine {
     return this.db.query("SELECT * FROM games WHERE id=?").get(id) as GameRow | null;
   }
 
-  createGame(): GameRow {
+  createGame(roundIdsIn?: unknown): GameRow {
+    const roundIds = this.resolveRoundIds(roundIdsIn);
     const now = this.now();
     const tx = this.db.transaction(() => {
       this.db.query("UPDATE games SET status='closed' WHERE status='active'").run();
       const code = String(1000 + (randomBytes(4).readUInt32BE(0) % 9000));
       this.db
-        .query("INSERT INTO games(code,status,phase,round_idx,phase_started,deadline,version,created_at) VALUES(?, 'active','lobby',0,?,0,1,?)")
-        .run(code, now, now);
+        .query("INSERT INTO games(code,status,phase,round_idx,phase_started,deadline,version,created_at,round_ids) VALUES(?, 'active','lobby',0,?,0,1,?,?)")
+        .run(code, now, now, JSON.stringify(roundIds));
     });
     tx();
     return this.activeGame() as GameRow;
@@ -156,7 +200,7 @@ export class Engine {
     const now = this.now();
     let deadline = 0;
     if (phase === "question") {
-      const r = this.rounds[roundIdx];
+      const r = this.gameRounds(g)[roundIdx];
       if (!r) throw new HttpError(500, "round missing");
       deadline = now + r.timeLimit * 1000;
     }
@@ -183,7 +227,7 @@ export class Engine {
         this.setPhase(g, "leaderboard", g.round_idx);
         break;
       case "leaderboard":
-        if (g.round_idx + 1 < this.rounds.length) this.setPhase(g, "scene", g.round_idx + 1);
+        if (g.round_idx + 1 < this.gameRounds(g).length) this.setPhase(g, "scene", g.round_idx + 1);
         else this.setPhase(g, "final", g.round_idx);
         break;
       case "final":
@@ -299,7 +343,7 @@ export class Engine {
     this.seen.set(p.token, now);
     if (g.phase !== "question") throw new HttpError(409, "No question is open");
     if (now > g.deadline + ANSWER_GRACE_MS) throw new HttpError(409, "Time is up");
-    const r = this.rounds[g.round_idx] as Round;
+    const r = this.gameRounds(g)[g.round_idx] as Round;
     const opt = r.options.find((o) => o.key === key);
     if (!opt) throw new HttpError(400, "Unknown option");
     const prev = this.db.query("SELECT option_key FROM answers WHERE token=? AND round_idx=?").get(p.token, g.round_idx) as { option_key: string } | null;
@@ -325,7 +369,7 @@ export class Engine {
       case "leaderboard":
         return g.round_idx + 1;
       case "final":
-        return this.rounds.length;
+        return this.gameRounds(g).length;
     }
   }
 
@@ -350,7 +394,7 @@ export class Engine {
   }
 
   private publicRound(g: GameRow, withQuestion: boolean) {
-    const r = this.rounds[g.round_idx] as Round;
+    const r = this.gameRounds(g)[g.round_idx] as Round;
     const out: Record<string, unknown> = {
       id: r.id,
       index: g.round_idx,
@@ -367,7 +411,7 @@ export class Engine {
   }
 
   private revealBlock(g: GameRow) {
-    const r = this.rounds[g.round_idx] as Round;
+    const r = this.gameRounds(g)[g.round_idx] as Round;
     const counts = new Map<string, number>();
     for (const a of this.db.query("SELECT option_key, COUNT(*) AS n FROM answers WHERE game_id=? AND round_idx=? GROUP BY option_key").all(g.id, g.round_idx) as {
       option_key: string;
@@ -402,7 +446,7 @@ export class Engine {
       version: g.version,
       now,
       meta: this.content.meta,
-      game: { id: g.id, code: g.code, phase: g.phase, round: g.round_idx, rounds: this.rounds.length, joinUrl, ...this.timing(g) },
+      game: { id: g.id, code: g.code, phase: g.phase, round: g.round_idx, rounds: this.gameRounds(g).length, roundIds: this.gameRounds(g).map((x) => x.id), joinUrl, ...this.timing(g) },
       players: { total: prog.total, connected: prog.connected },
       answered: g.phase === "question" || g.phase === "reveal" ? prog.answered : 0,
       answerTotal: Math.max(prog.connected, prog.answered),
@@ -412,7 +456,7 @@ export class Engine {
     }
     if (g.phase !== "lobby" && g.phase !== "final") {
       base.round = this.publicRound(g, g.phase !== "scene");
-      if (g.phase === "scene") base.scene = (this.rounds[g.round_idx] as Round).scene;
+      if (g.phase === "scene") base.scene = (this.gameRounds(g)[g.round_idx] as Round).scene;
     }
     if (g.phase === "reveal" || g.phase === "leaderboard") base.reveal = this.revealBlock(g);
     if (g.phase === "leaderboard") {
@@ -443,7 +487,7 @@ export class Engine {
       name: p.nickname,
       lang: p.lang,
       meta: { title: this.content.meta.title, hospital: this.content.meta.hospital },
-      game: { phase: g.phase, round: g.round_idx, rounds: this.rounds.length, active: g.status === "active", ...this.timing(g) },
+      game: { phase: g.phase, round: g.round_idx, rounds: this.gameRounds(g).length, active: g.status === "active", ...this.timing(g) },
     };
     if (g.phase === "lobby") {
       out.players = (this.db.query("SELECT COUNT(*) AS n FROM players WHERE game_id=?").get(g.id) as { n: number }).n;
@@ -455,7 +499,7 @@ export class Engine {
     }
     if (g.phase === "reveal" || g.phase === "leaderboard") {
       out.round = this.publicRound(g, true);
-      const r = this.rounds[g.round_idx] as Round;
+      const r = this.gameRounds(g)[g.round_idx] as Round;
       const best = r.options.find((o) => o.score === 1000);
       const opt = mine ? r.options.find((o) => o.key === mine.option_key) : undefined;
       out.best = best ? { key: best.key, text: best.text } : null;
@@ -492,7 +536,7 @@ export class Engine {
     );
     const st = this.standings(g, null);
     const me = st.find((s) => s.token === p.token);
-    const rounds = this.rounds.slice(0, revealed).map((r, i) => {
+    const rounds = this.gameRounds(g).slice(0, revealed).map((r, i) => {
       const a = answers.get(i);
       const best = r.options.find((o) => o.score === 1000);
       const opt = a ? r.options.find((o) => o.key === a.option_key) : undefined;
@@ -528,7 +572,7 @@ export class Engine {
       rank: me?.rank ?? null,
       of: st.length,
       knockouts: me?.knockouts ?? 0,
-      roundsTotal: this.rounds.length,
+      roundsTotal: this.gameRounds(g).length,
       expires: g.created_at + REPORT_DAYS * 86_400_000,
       rounds,
     };

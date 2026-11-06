@@ -14,7 +14,7 @@
       else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
       else e.setAttribute(k, v === true ? '' : v);
     }
-    for (const kid of kids.flat()) if (kid != null && kid !== false) e.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+    for (const kid of kids.flat(Infinity)) if (kid != null && kid !== false) e.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
     return e;
   }
   const $ = (s, r) => (r || document).querySelector(s);
@@ -36,5 +36,17 @@
     try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { return null; }
     return null;
   }
-  window.P = { SHAPES, TAGS, TAGS_AR, h, $, tr, api, store };
+  // PIN login box for the facilitator-only pages (review, notes). onOk runs after a successful login.
+  function staffLogin(root, onOk) {
+    const pin = h('input', { type: 'password', inputmode: 'numeric', autocomplete: 'off', placeholder: 'PIN', 'aria-label': 'Host PIN' });
+    const err = h('div', { class: 'err' });
+    const go = async () => {
+      try { await api('/api/host/login', { pin: pin.value }); onOk(); }
+      catch (e) { err.textContent = e.message; pin.select(); }
+    };
+    pin.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
+    root.replaceChildren(h('div', { class: 'slogin' }, h('h1', { text: 'Facilitator login' }), h('p', { text: 'Enter the host PIN to continue.' }), pin, h('button', { class: 'sbtn', onclick: go, text: 'Log in' }), err));
+    pin.focus();
+  }
+  window.P = { SHAPES, TAGS, TAGS_AR, h, $, tr, api, store, staffLogin };
 })();

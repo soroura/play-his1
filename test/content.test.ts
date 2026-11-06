@@ -68,4 +68,36 @@ describe("content validation", () => {
     expect(r.fallback).toBe(true);
     expect(r.path.endsWith("rounds.example.json")).toBe(true);
   });
+
+  test("optional facilitator fields default and validate", () => {
+    const { content } = loadContent(EXAMPLE);
+    expect(content.rounds[0]!.set).toBe("core");
+    expect(content.rounds[1]!.set).toBe("core");
+    expect(content.rounds[1]!.minutes).toBe(6);
+    expect(content.rounds[0]!.keyMessages.length).toBe(2);
+    expect(content.rounds[1]!.discussion.length).toBe(2);
+    const c = raw();
+    for (const r of c.rounds) for (const k of ["set", "minutes", "keyMessages", "discussion"]) delete r[k];
+    const d = validateContent(c).content!;
+    expect(d.rounds[0]).toMatchObject({ set: "core", minutes: 8, keyMessages: [], discussion: [] });
+  });
+
+  test("rejects bad set, minutes, keyMessages and discussion", () => {
+    const c = raw();
+    c.rounds[0].set = "bonus";
+    c.rounds[0].minutes = 2;
+    c.rounds[1].minutes = 21;
+    c.rounds[1].keyMessages = Array.from({ length: 5 }, () => ({ en: "x" }));
+    expect(validateContent(c).errors.join("\n")).toMatch(/set: must be[\s\S]*minutes[\s\S]*minutes[\s\S]*keyMessages: at most 4/);
+    const d = raw();
+    d.rounds[0].discussion = [{ en: "a" }, { en: "b" }, { en: "c" }, { en: "d" }];
+    d.rounds[1].keyMessages = [{ ar: "x" }];
+    const e = validateContent(d).errors.join("\n");
+    expect(e).toContain("discussion: at most 3");
+    expect(e).toContain("keyMessages[0]");
+    const f = raw();
+    f.rounds[0].minutes = "8";
+    f.rounds[0].keyMessages = "nope";
+    expect(validateContent(f).errors.length).toBe(2);
+  });
 });

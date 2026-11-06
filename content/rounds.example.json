@@ -32,6 +32,15 @@
         { "tag": "S", "text": { "en": "Insulin is time-critical; the order source must stay verifiable.", "ar": "الإنسولين حرج زمنيا ويجب بقاء مصدر الأمر قابلا للتحقق." } },
         { "tag": "E", "text": { "en": "Paper forms are back-entered after restore, with a reconciliation check.", "ar": "تدخل النماذج الورقية بعد الاستعادة مع مراجعة المطابقة." } }
       ],
+      "set": "core",
+      "minutes": 8,
+      "keyMessages": [
+        { "en": "Downtime procedures must be known before the power goes, not found during it.", "ar": "يجب معرفة إجراءات التوقف قبل انقطاع الكهرباء لا أثناءه." },
+        { "en": "Safety first: give the insulin on paper charts, back-enter later.", "ar": "السلامة أولا: أعط الإنسولين وفق الأوراق ثم أدخل البيانات لاحقا." }
+      ],
+      "discussion": [
+        { "en": "Where is the downtime form on your ward, and who has seen it used?", "ar": "أين نموذج التوقف في عنبرك ومن رآه يستخدم؟" }
+      ],
       "standards": ["IMT.12", "MMU.01"],
       "realCase": {
         "title": "Illustrative downtime case",
@@ -65,6 +74,15 @@
       "why": [
         { "tag": "S", "text": { "en": "Critical results must reach a clinician within a defined time.", "ar": "يجب أن تصل النتائج الحرجة إلى الطبيب خلال زمن محدد." } },
         { "tag": "G", "text": { "en": "Read-back and a time-stamped note keep the chain auditable.", "ar": "إعادة القراءة والتدوين بالوقت يحفظان سلسلة قابلة للمراجعة." } }
+      ],
+      "set": "core",
+      "minutes": 6,
+      "keyMessages": [
+        { "en": "A critical result must reach a clinician by a route that still works in downtime." }
+      ],
+      "discussion": [
+        { "en": "How does a critical result reach the nurse when the system is down?" },
+        { "en": "Who documents the call, and where?" }
       ],
       "standards": ["IMT.12"],
       "realCase": {

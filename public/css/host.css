@@ -134,3 +134,14 @@ body{overflow-x:hidden}
 .invite-ov{position:fixed;inset:0;z-index:60;background:rgba(10,5,25,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px}
 .invite-ov .invite{background:var(--bg2);border-radius:14px;padding:30px;max-width:1100px}
 .lobby{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
+/* round picker */
+.picker{max-width:860px;margin:6vh auto 0;display:flex;flex-direction:column;gap:10px}
+.picker .ppre{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0}
+.picker .pgrp{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:2px;font-size:26px;color:var(--gold);margin-top:8px}
+.prow{display:flex;gap:14px;align-items:center;background:var(--bg2);border:2px solid transparent;border-radius:8px;padding:10px 16px;cursor:pointer;font-size:20px}
+.prow.on{border-color:var(--gold)}
+.prow input{width:22px;height:22px;accent-color:#ffcc00}
+.prow .pn{flex:0 0 30px;font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold)}
+.prow .pt{flex:1}.prow .ps{color:var(--soft);font-size:15px;text-transform:uppercase;letter-spacing:.06em}.prow .pm{color:var(--soft);font-size:16px;min-width:56px;text-align:end}
+.ptotal{font-size:22px;font-weight:600;margin:8px 0}
+.toollinks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:16px;margin-top:10px}

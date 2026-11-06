@@ -228,8 +228,8 @@ Every Arabic string drafted by the model (not copied from the source `BEATS` arr
 ## Round 8
 - [place] Daily briefing
   - AR: الاجتماع اليومي
-- [title] What could stop accreditation?
-  - AR: ما الذي قد يوقف الاعتماد؟
+- [title] What could jeopardize accreditation?
+  - AR: ما الذي قد يهدد الاعتماد؟
 - [scene] Downtime forms box: locked away yesterday
   - AR: صندوق نماذج التوقف: كان مقفلًا أمس
 - [scene] Screen: no connection
@@ -254,3 +254,416 @@ Every Arabic string drafted by the model (not copied from the source `BEATS` arr
   - AR: مرشحو GSR اليوم: ACT.03 / GSR.01 وICD.19 / GSR.03 وEFS.11 / GSR.28. أما IMT.05 وIMT.06 وIMT.11 وIMT.12 فليست GSR.
 - [why] A back-dated restore-test report is falsification. The legitimate route is a corrective action plan after the survey.
   - AR: تقرير اختبار استرجاع بتاريخ سابق تزوير. الطريق المشروع هو خطة تصحيحية بعد المسح.
+
+# Additions: keyMessages and discussion for rounds 1-8, and new rounds 9-14
+All Arabic below is drafted by the model and needs a native-speaker check. Rounds 9-14 are Day 2 stops (extra set). Chat lines (round 12) are Egyptian colloquial, with the English as the translation; all other text is Modern Standard Arabic.
+
+## Round 1 (keyMessages and discussion only)
+- [keyMessage] Show the evidence as it is. IMT.12 needs a scheduled backup, a tested restore for each new system and a log reviewed for exceptions.
+  - AR: اعرضوا الدليل كما هو. يتطلب IMT.12 نسخًا مجدولًا واسترجاعًا مُختبرًا لكل نظام جديد وسجلًا يُراجع بحثًا عن الاستثناءات.
+- [keyMessage] A policy proves the plan exists; only the log and the restore test prove it was followed over the look-back period.
+  - AR: السياسة تثبت وجود الخطة؛ أما السجل واختبار الاسترجاع فيثبتان تنفيذها خلال فترة المراجعة السابقة.
+- [keyMessage] Never produce or alter a log for the survey: falsifying risks rejection, while a weak backup only lowers the IMT score.
+  - AR: لا تُنشئوا سجلًا ولا تعدّلوه من أجل المسح: التزوير يعرّض للرفض، أما ضعف النسخ الاحتياطي فيخفض درجة IMT فقط.
+- [discussion] Who reads the backup log in your hospital, how often, and where is that review recorded?
+  - AR: من يقرأ سجل النسخ الاحتياطي في مستشفاكم، وكل كم مرة، وأين تُسجَّل هذه المراجعة؟
+- [discussion] When did you last restore from a backup to prove it works?
+  - AR: متى كانت آخر مرة استرجعتم فيها نسخة احتياطية للتأكد من أنها تعمل؟
+
+## Round 2 (keyMessages and discussion only)
+- [keyMessage] One missing file is a signal, not a verdict: surveyors pull more files to see whether it is a pattern.
+  - AR: ملف مفقود واحد إشارة وليس حكمًا: يسحب المُقيِّمون ملفات إضافية ليروا هل هو نمط.
+- [keyMessage] IMT.08 covers flow, tracking, storage and availability, so someone must own chasing late files.
+  - AR: يشمل IMT.08 التدفق والتتبع والتخزين والإتاحة، لذلك يجب أن يتولى أحد متابعة الملفات المتأخرة.
+- [keyMessage] Judge the process, not the clerk: three weeks out means the workflow has no owner.
+  - AR: قيِّموا العملية لا الموظف: ثلاثة أسابيع خارج الغرفة تعني أن سير العمل بلا مسؤول.
+- [discussion] Who chases a file that has been out of the records room for a week, and where is that written?
+  - AR: من يتابع ملفًا مضى عليه أسبوع خارج غرفة السجلات، وأين هذا مكتوب؟
+- [discussion] What does your movement logbook show about the oldest file that is still out?
+  - AR: ماذا يُظهر دفتر حركة الملفات لديكم عن أقدم ملف ما زال خارج الغرفة؟
+
+## Round 3 (keyMessages and discussion only)
+- [keyMessage] Two patient identifiers at every point of care; a bed or room number is not an identifier (ACT.03 / GSR.01).
+  - AR: معرّفان للمريض عند كل نقطة رعاية؛ رقم السرير أو الغرفة ليس معرّفًا (ACT.03 / GSR.01).
+- [keyMessage] Rank findings by the harm they can cause: a wrong-patient event outranks an unlocked screen or a password note.
+  - AR: رتّبوا الملاحظات بحسب الضرر المحتمل: حدث المريض الخطأ يتقدم على الشاشة المفتوحة وورقة كلمة المرور.
+- [keyMessage] Similar Arabic names are a known hazard: plan for them in registration, wristbands and orders.
+  - AR: تشابه الأسماء العربية خطر معروف: خططوا له في التسجيل والأساور والأوامر الطبية.
+- [discussion] Which two patients on your ward have the most similar names today, and what keeps them apart?
+  - AR: أي مريضين في عنبركم لديهما أكثر الأسماء تشابهًا اليوم، وما الذي يفصل بينهما؟
+- [discussion] What exactly is printed on your wristbands?
+  - AR: ما المكتوب بالضبط على أساور المرضى لديكم؟
+
+## Round 4 (keyMessages and discussion only)
+- [keyMessage] A backup kept in the same cabinet as the server is one copy, not two: IMT.12 intent is a separate location.
+  - AR: نسخة احتياطية في نفس الدولاب مع الخادم تعني نسخة واحدة لا اثنتين: مقصد IMT.12 موقع منفصل.
+- [keyMessage] Record first what can cause total loss; the access and fire findings follow under IMT.06 and IMT.05.
+  - AR: سجّلوا أولًا ما قد يسبب فقدًا كاملًا؛ ثم ملاحظات الوصول والحريق ضمن IMT.06 وIMT.05.
+- [keyMessage] Off-site, offline or immutable copies are good practice beyond GAHAR: label them that way.
+  - AR: النسخ خارج الموقع أو غير المتصلة أو غير القابلة للتعديل ممارسة جيدة تتجاوز GAHAR: صنّفوها هكذا.
+- [discussion] Where is your backup physically, and what single event could destroy both it and the server?
+  - AR: أين توجد نسختكم الاحتياطية فعليًا، وما الحدث الواحد الذي قد يدمرها مع الخادم معًا؟
+- [discussion] Walk from the server room to the backup: what floods or burns first?
+  - AR: امشوا من غرفة الخوادم إلى النسخة الاحتياطية: ما الذي يغمره الماء أو تلتهمه النار أولًا؟
+
+## Round 5 (keyMessages and discussion only)
+- [keyMessage] Declare downtime when care is affected; do not wait for IT to agree (IMT.11).
+  - AR: أعلنوا التوقف عندما تتأثر الرعاية؛ لا تنتظروا موافقة تقنية المعلومات (IMT.11).
+- [keyMessage] A downtime kit nobody can open is a plan on paper: know who holds the key on every shift.
+  - AR: حقيبة التوقف التي لا يستطيع أحد فتحها خطة على الورق: اعرفوا من يحمل المفتاح في كل وردية.
+- [keyMessage] Generators must be tested with and without load (EFS.11 / GSR.28), and the test recorded.
+  - AR: يجب اختبار المولدات مع الحمل وبدونه (EFS.11 / GSR.28) وتسجيل الاختبار.
+- [discussion] Who has the key to your downtime kit at 03:00 on a Friday?
+  - AR: من يملك مفتاح حقيبة التوقف لديكم الساعة 3 فجر يوم الجمعة؟
+- [discussion] When was your generator last tested under load, and where is the record?
+  - AR: متى اختُبر مولدكم آخر مرة تحت الحمل، وأين السجل؟
+
+## Round 6 (keyMessages and discussion only)
+- [keyMessage] A critical result by phone needs date and time, who called, who received, the result, escalation and read-back (ICD.19 / GSR.03), plus two patient identifiers (ACT.03 / GSR.01).
+  - AR: النتيجة الحرجة عبر الهاتف تتطلب التاريخ والوقت ومن أبلغ ومن تلقى والنتيجة والتصعيد وإعادة القراءة (ICD.19 / GSR.03)، مع معرّفين للمريض (ACT.03 / GSR.01).
+- [keyMessage] Never record a critical result by name alone, and never on a wristband: both are outside a safe record.
+  - AR: لا تسجلوا النتيجة الحرجة بالاسم وحده ولا على سوار المريض: كلاهما خارج السجل الآمن.
+- [keyMessage] Two GSR standards can fail in a single phone call, and one not-met GSR means rejection.
+  - AR: قد يفشل معيارا GSR في مكالمة هاتفية واحدة، وGSR واحد غير مستوفى يعني الرفض.
+- [discussion] If two patients on your ward share a name tonight, how does the lab's phone call identify the right one?
+  - AR: إذا تشارك مريضان في عنبركم الاسم الليلة، كيف تحدد مكالمة المعمل المريض الصحيح؟
+- [discussion] Where does your downtime form record the read-back?
+  - AR: أين يسجّل نموذج التوقف لديكم إعادة القراءة؟
+
+## Round 7 (keyMessages and discussion only)
+- [keyMessage] After a restore, first define the loss window and check for duplicate doses given on paper.
+  - AR: بعد الاسترجاع، حدّدوا أولًا نافذة الفقد وتحققوا من تكرار الجرعات المعطاة على الورق.
+- [keyMessage] Best practice: each author enters or countersigns their own paper entries with the true time, marked as a late entry. This is PHC IMT.08, not a hospital requirement.
+  - AR: أفضل ممارسة: يُدخل كل كاتب مدخلاته الورقية أو يوقّعها بنفسه بالوقت الحقيقي مع وسمها «إدخال متأخر». هذا من IMT.08 للرعاية الأولية وليس متطلبًا للمستشفيات.
+- [keyMessage] Keep the paper originals until the entry has been checked.
+  - AR: احتفظوا بالأصول الورقية إلى أن يتم التحقق من الإدخال.
+- [discussion] After a restore, who decides what was lost and who checks the doses already given on paper?
+  - AR: بعد الاسترجاع، من يحدد ما فُقد ومن يتحقق من الجرعات التي أُعطيت على الورق؟
+- [discussion] Who would enter 46 paper sheets in your hospital, and under whose login?
+  - AR: من سيُدخل 46 ورقة في مستشفاكم، وتحت أي حساب؟
+
+## Round 8 (keyMessages and discussion only)
+- [keyMessage] One not-met GSR means rejection, whatever the overall score.
+  - AR: GSR واحد غير مستوفى يعني الرفض مهما كانت الدرجة الكلية.
+- [keyMessage] IMT.05, IMT.06, IMT.11 and IMT.12 lower a chapter score but are not GSR.
+  - AR: IMT.05 وIMT.06 وIMT.11 وIMT.12 تخفض درجة الفصل لكنها ليست GSR.
+- [keyMessage] After a weak finding the legitimate route is a corrective action plan, never a back-dated report.
+  - AR: بعد ملاحظة ضعيفة الطريق المشروع خطة تصحيحية، لا تقريرًا بتاريخ سابق.
+- [discussion] Which GSR standards could your records alone put at risk this week?
+  - AR: أي معايير GSR قد تعرّضها سجلاتكم وحدها للخطر هذا الأسبوع؟
+- [discussion] What would your team say at the daily briefing about the critical-result finding?
+  - AR: ماذا سيقول فريقكم في الاجتماع اليومي بشأن ملاحظة النتيجة الحرجة؟
+
+## Round 9 (new)
+- [place] Meeting room · closed medical record review
+  - AR: قاعة الاجتماعات · مراجعة السجلات الطبية المغلقة
+- [title] Ten closed files, one pattern
+  - AR: عشرة ملفات مغلقة ونمط واحد
+- [scene] 10 closed files pulled at random from the look-back period
+  - AR: 10 ملفات مغلقة سُحبت عشوائيًا من فترة المراجعة السابقة
+- [scene] Two identifiers on every sheet: 10 of 10
+  - AR: معرّفان للمريض على كل ورقة: 10 من 10
+- [scene] Missing in 3 files
+  - AR: غائبة في 3 ملفات
+- [scene] Signed by the patient only, no physician signature: 2 of 4 surgical files
+  - AR: موقّعة من المريض فقط دون توقيع الطبيب: ملفان من 4 ملفات جراحية
+- [scene] Present in all 10, but 6 have no discharge medications or follow-up plan
+  - AR: موجود في الملفات العشرة، لكن 6 منها بلا أدوية الخروج أو خطة المتابعة
+- [scene] Done every quarter. It counted files, not missing forms.
+  - AR: تُجرى كل ربع سنة. كانت تعدّ الملفات لا الاستمارات الناقصة.
+- [scene] Please show me how a missing consent or an incomplete summary is found before a file is closed.
+  - AR: من فضلكم وضّحوا كيف يُكتشف نقص الموافقة أو عدم اكتمال الملخص قبل إغلاق الملف.
+- [question] The surveyor shows the team her tally. What does the hospital team do?
+  - AR: تعرض المُقيِّمة حصيلتها على الفريق. ماذا يفعل فريق المستشفى؟
+- [option A] Offer to re-check the ten files tonight and report at the daily briefing
+  - AR: يعرض إعادة فحص الملفات العشرة الليلة وتقديم تقرير في الاجتماع اليومي
+- [feedback A] Allowed, but a fresh check cannot show compliance over the look-back period, and it does not explain why the quarterly review missed the gaps.
+  - AR: مسموح، لكن فحصًا جديدًا لا يثبت الالتزام خلال فترة المراجعة السابقة ولا يفسر لماذا لم تلتقط المراجعة الفصلية الثغرات.
+- [option B] Have the doctors sign the missing consents and complete the summaries tonight, then put the files back
+  - AR: يطلب من الأطباء توقيع الموافقات الناقصة واستكمال الملخصات الليلة ثم إعادة الملفات
+- [feedback B] Falsification: altering closed files the surveyor already sampled, including a consent signed after the event. It risks rejection or withdrawal of accreditation.
+  - AR: تزوير: تعديل ملفات مغلقة سبق أن سحبتها المُقيِّمة، ومنها موافقة تُوقَّع بعد الواقعة. يعرّض الاعتماد للرفض أو السحب.
+- [option C] Accept the findings, show the IMT.09 review results, and explain honestly why the review missed the gaps and what will change
+  - AR: يقبل النتائج، ويعرض نتائج مراجعة IMT.09، ويشرح بصراحة لماذا لم تلتقط المراجعة الثغرات وما الذي سيتغير
+- [feedback C] Right: it shows the process, where it is weak and the fix. Surveyors score the system, not the person who forgot.
+  - AR: صحيح: يُظهر العملية وموضع ضعفها والإصلاح. يقيّم المُقيِّمون المنظومة لا من نسي.
+- [option D] Say the sample was unlucky and ask the surveyor to pull ten different files
+  - AR: يقول إن العينة سيئة الحظ ويطلب من المُقيِّمة سحب عشرة ملفات أخرى
+- [feedback D] Surveyors choose the sample and add files when a concern appears. Asking to swap it looks like avoiding the evidence.
+  - AR: يختار المُقيِّمون العينة ويضيفون ملفات عند ظهور قلق. طلب تغييرها يبدو تهربًا من الدليل.
+- [why S] PCC.04 and PCC.08: admission consent is recorded in the patient record, and the physician signs the informed consent with the patient. ACT.15: the discharge summary has nine elements, including medications and follow-up instructions, with a copy in the file and one given to the patient.
+  - AR: PCC.04 وPCC.08: تُسجَّل موافقة الدخول في ملف المريض، ويوقّع الطبيب الموافقة المستنيرة مع المريض. ACT.15: يتضمن ملخص الخروج تسعة عناصر منها الأدوية وتعليمات المتابعة، مع نسخة في الملف وأخرى للمريض.
+- [why G] Each surveyor pulls at least 10 closed records from the look-back period, may ask for more, and a significant number of findings can be read as system-wide non-compliance. None of PCC.04, PCC.08, ACT.15 or IMT.09 is a GSR; ACT.03 / GSR.01 is met on this sample.
+  - AR: يسحب كل مُقيِّم 10 سجلات مغلقة على الأقل من فترة المراجعة، وله طلب المزيد، وقد يُعدّ عدد كبير من الملاحظات عدم التزام على مستوى المنظومة. لا يُعدّ PCC.04 ولا PCC.08 ولا ACT.15 ولا IMT.09 من GSR؛ أما ACT.03 / GSR.01 فمستوفى في هذه العينة.
+- [why S] IMT.09: the hospital's own quarterly review (about 5% of records, completeness and legibility, findings reported to leaders, corrective action) should find these gaps first.
+  - AR: IMT.09: على مراجعة المستشفى الفصلية الخاصة (نحو 5% من السجلات، الاكتمال والوضوح، رفع النتائج إلى القيادة، إجراءات تصحيحية) أن تكتشف هذه الثغرات قبل غيرها.
+- [keyMessage] A whole form missing from many files is a process failure: ask where it should be caught, not who forgot.
+  - AR: غياب استمارة كاملة عن ملفات كثيرة خلل في العملية: اسألوا أين كان يجب اكتشافه لا من نسي.
+- [keyMessage] Your own IMT.09 review must test content (consent, the nine discharge elements), not only count files.
+  - AR: يجب أن تفحص مراجعة IMT.09 لديكم المحتوى (الموافقة والعناصر التسعة لملخص الخروج) لا أن تعدّ الملفات فقط.
+- [keyMessage] Never touch a file a surveyor has sampled: show the gap and the corrective action.
+  - AR: لا تلمسوا ملفًا سحبته المُقيِّمة: اعرضوا الثغرة والإجراء التصحيحي.
+- [discussion] Which of the nine ACT.15 elements is most often missing in your discharge summaries, and who would notice first?
+  - AR: أي عنصر من العناصر التسعة في ACT.15 يغيب غالبًا عن ملخصات الخروج لديكم، ومن سيلاحظه أولًا؟
+- [discussion] Between the ward and the records office, where could a missing consent be caught?
+  - AR: بين العنبر وقسم السجلات، أين يمكن اكتشاف موافقة ناقصة؟
+
+## Round 10 (new)
+- [place] Ward 4 · paper order sheets from yesterday's downtime
+  - AR: العنبر 4 · أوراق الأوامر الطبية من توقف الأمس
+- [title] "U", "QD" and ".5 mg"
+  - AR: «U» و«QD» و«.5 mg»
+- [scene] Handwritten order: Insulin 8 U SC
+  - AR: أمر مكتوب بخط اليد: Insulin 8 U تحت الجلد
+- [scene] Handwritten order: Warfarin 5 mg QD
+  - AR: أمر مكتوب بخط اليد: Warfarin 5 mg QD
+- [scene] Handwritten order: Morphine .5 mg IV
+  - AR: أمر مكتوب بخط اليد: Morphine .5 mg وريدي
+- [scene] Arabic and English mixed; the last word is illegible
+  - AR: عربي وإنجليزي معًا؛ الكلمة الأخيرة غير مقروءة
+- [scene] Approved and not-to-use lists: in the policy folder, not on the ward
+  - AR: قائمتا الاختصارات المعتمدة والممنوعة: في ملف السياسات لا في العنبر
+- [question] The surveyor holds the sheet and asks: "Where is your not-to-use list, and how do you know staff follow it?" What does the team do?
+  - AR: تمسك المُقيِّمة الورقة وتسأل: «أين قائمة الاختصارات الممنوعة لديكم، وكيف تعرفون أن العاملين يلتزمون بها؟» ماذا يفعل الفريق؟
+- [option A] Explain that downtime paper orders are exceptional, so the lists do not apply
+  - AR: يشرح أن أوامر الورق أثناء التوقف استثنائية ولذلك لا تنطبق القوائم
+- [feedback A] The standard has no downtime exemption, and handwritten downtime orders are where ambiguous abbreviations do the most harm.
+  - AR: لا يستثني المعيار فترة التوقف، والأوامر المكتوبة يدويًا أثناء التوقف هي أكثر ما تضر فيه الاختصارات الملتبسة.
+- [option B] Show the approved policy and the signed staff awareness sheets
+  - AR: يعرض السياسة المعتمدة وأوراق إقرار العاملين الموقّعة
+- [feedback B] Policy and awareness are only the first two of four evidence items. The surveyor still needs proof the lists are used and violations are monitored.
+  - AR: السياسة والوعي أول دليلين فقط من أربعة. ما زالت المُقيِّمة تحتاج إثباتًا بأن القوائم تُستخدم وأن المخالفات تُرصد.
+- [option C] Rewrite the three orders on the original sheet in full words and clear figures before she reads them
+  - AR: يعيد كتابة الأوامر الثلاثة على الورقة الأصلية بكلمات كاملة وأرقام واضحة قبل أن تقرأها
+- [feedback C] Falsification: altering an original order after the event, and hiding the very finding monitoring should catch. The legitimate route is to report the error and correct it under the policy.
+  - AR: تزوير: تعديل أمر أصلي بعد الواقعة وإخفاء ما يجب أن يلتقطه الرصد. الطريق المشروع الإبلاغ عن الخطأ وتصحيحه وفق السياسة.
+- [option D] Show the policy and both lists, admit these three entries are violations, and show how violations are monitored and acted on
+  - AR: يعرض السياسة والقائمتين، ويقرّ بأن هذه المدخلات الثلاثة مخالفات، ويبيّن كيف تُرصد المخالفات ويُتخذ إجراء بشأنها
+- [feedback D] Right: IMT.04 needs the policy, staff awareness, use according to the policy, and monitoring of violations with corrective action.
+  - AR: صحيح: يتطلب IMT.04 السياسة ووعي العاملين والاستخدام وفق السياسة ورصد المخالفات مع إجراءات تصحيحية.
+- [why S] IMT.04 / GSR.29: an approved abbreviation list and a not-to-use list guided by a reliable reference such as ISMP; non-English abbreviations and illegible handwriting addressed; violations monitored with corrective action.
+  - AR: IMT.04 / GSR.29: قائمة اختصارات معتمدة وقائمة ممنوعة تستند إلى مرجع موثوق مثل ISMP؛ ومعالجة الاختصارات غير الإنجليزية والخط غير المقروء؛ ورصد المخالفات مع إجراءات تصحيحية.
+- [why S] GSR.29 is a safety requirement: a not-met GSR standard means rejection. Abbreviations, even approved ones, must also stay out of informed consent forms and records given to patients (IMT.04 d, PCC.08).
+  - AR: GSR.29 متطلب سلامة: معيار GSR غير مستوفى يعني الرفض. ويجب أيضًا ألا تظهر الاختصارات، حتى المعتمدة منها، في نماذج الموافقة المستنيرة والسجلات التي تُسلَّم للمرضى (IMT.04 د، PCC.08).
+- [why I] No Egyptian audit of abbreviations was found. On a bilingual ward, mixed Arabic and English and illegible handwriting are plausible extra risks, but the evidence is thin.
+  - AR: لم نجد دراسة مصرية عن الاختصارات. في عنبر ثنائي اللغة يُحتمل أن يزيد خلط العربية بالإنجليزية والخط غير المقروء المخاطر، لكن الأدلة محدودة.
+- [keyMessage] Downtime does not suspend IMT.04: handwritten paper orders are where abbreviations do the most harm.
+  - AR: التوقف لا يعلّق IMT.04: الأوامر الورقية المكتوبة بخط اليد هي أكثر ما تضر فيه الاختصارات.
+- [keyMessage] A policy that is not on the ward and not monitored is only half the evidence.
+  - AR: سياسة غير موجودة في العنبر وغير مرصودة نصف الدليل فقط.
+- [keyMessage] Write "units", "0.5 mg" and "1 mg": naked decimals and trailing zeros cause tenfold errors.
+  - AR: اكتبوا «وحدات» و«0.5 mg» و«1 mg»: الكسر العاري والصفر الزائد يسببان أخطاء بعشرة أضعاف.
+- [discussion] Which three abbreviations will appear on your ward's order sheets this morning, and are they on your not-to-use list?
+  - AR: ما الاختصارات الثلاثة التي ستظهر في أوراق الأوامر بعنبركم هذا الصباح، وهل هي في قائمتكم الممنوعة؟
+- [discussion] Who checks handwritten downtime orders for abbreviations before the drug is given or transcribed?
+  - AR: من يفحص الأوامر المكتوبة يدويًا أثناء التوقف بحثًا عن الاختصارات قبل إعطاء الدواء أو نقله؟
+
+## Round 11 (new)
+- [place] Ward 4 and IT office · electronic walk, access
+  - AR: العنبر 4 ومكتب تقنية المعلومات · الجولة الإلكترونية، الوصول
+- [title] One login for every doctor
+  - AR: حساب واحد لكل الأطباء
+- [scene] Login: DOCTOR (generic account), Ward 4 PC 1
+  - AR: تسجيل دخول: DOCTOR (حساب عام)، حاسوب العنبر 4 رقم 1
+- [scene] Same account also logged in on clinic, ER and radiology PCs
+  - AR: نفس الحساب مسجّل دخوله أيضًا في حواسيب العيادة والطوارئ والأشعة
+- [scene] 12 orders signed by: DOCTOR. Which doctor?
+  - AR: 12 أمرًا طبيًا موقّعة باسم: DOCTOR. أي طبيب؟
+- [scene] Sticky note on the monitor with the password
+  - AR: ورقة لاصقة على الشاشة عليها كلمة المرور
+- [scene] IT: 71 active doctor profiles. HR list: 52 doctors, and some have left.
+  - AR: تقنية المعلومات: 71 حسابًا نشطًا بصفة طبيب. كشف الموارد البشرية: 52 طبيبًا، وبعضهم غادر.
+- [scene] Surveyor: Show me the list of people authorised to open patient records.
+  - AR: المُقيِّمة: أرني قائمة المصرّح لهم بفتح ملفات المرضى.
+- [question] The surveyor waits for the list. What does the hospital team do?
+  - AR: تنتظر المُقيِّمة القائمة. ماذا يفعل فريق المستشفى؟
+- [option A] Say the generic account is only used by senior doctors in emergencies
+  - AR: يقول إن الحساب العام لا يستخدمه إلا كبار الأطباء في الطوارئ
+- [feedback A] The log shows four PCs in use from early morning. A minimising answer loses trust, and the evidence contradicts it.
+  - AR: يظهر السجل أربعة حواسيب قيد الاستخدام منذ الصباح الباكر. التهوين يفقد الثقة والدليل يناقضه.
+- [option B] Show the authorised-user list as it is, name the generic account and the leavers as gaps, and replace shared access with named, role-based accounts
+  - AR: يعرض قائمة المصرّح لهم كما هي، ويسمّي الحساب العام وحسابات من غادروا ثغرات، ويستبدل الوصول المشترك بحسابات شخصية مبنية على الدور
+- [feedback B] Right: access follows a named person and a role. Stating the gap and fixing it starts a real corrective action.
+  - AR: صحيح: الوصول يتبع شخصًا مسمّى ودورًا. الإقرار بالثغرة وإصلاحها يبدآن إجراءً تصحيحيًا حقيقيًا.
+- [option C] Re-attribute the orders signed "DOCTOR" to the doctors who were probably on duty
+  - AR: ينسب الأوامر الموقّعة باسم «DOCTOR» إلى الأطباء الذين يُرجَّح أنهم كانوا مناوبين
+- [feedback C] Falsification: authorship of a record cannot be assigned afterwards by guesswork.
+  - AR: تزوير: لا يجوز تحديد كاتب السجل لاحقًا بالتخمين.
+- [option D] Show the access policy and the signed confidentiality agreements, and promise to retrain staff on passwords
+  - AR: يعرض سياسة الوصول وإقرارات السرية الموقّعة، ويعد بإعادة تدريب العاملين على كلمات المرور
+- [feedback D] Policy, agreements and training are real evidence, but they do not show that only authorised people have access when one account is shared.
+  - AR: السياسة والإقرارات والتدريب أدلة حقيقية، لكنها لا تثبت أن المصرّح لهم فقط يصلون عندما يُشارَك حساب واحد.
+- [why S] IMT.05: a policy on who can access what, a list of authorised individuals, only authorised individuals having access, a signed confidentiality agreement in each staff file, and a breach procedure. A shared login makes the list and "only authorised access" impossible to show. IMT.05 is not a GSR.
+  - AR: IMT.05: سياسة تحدد من يصل إلى ماذا، وقائمة بالمصرّح لهم، ووصول المصرّح لهم فقط، وإقرار سرية موقّع في ملف كل عامل، وإجراء عند حدوث خرق. الحساب المشترك يجعل القائمة و«وصول المصرّح لهم فقط» غير قابلين للإثبات. IMT.05 ليس GSR.
+- [why X] The survey guide lists access audit logs among documents the IMT tracer may request. A routine programme to review who opened which record is good practice beyond the hospital handbook.
+  - AR: يذكر دليل المسح سجلات تدقيق الوصول ضمن المستندات التي قد يطلبها تتبّع IMT. وبرنامج دوري لمراجعة من فتح أي ملف ممارسة جيدة تتجاوز دليل معايير المستشفيات.
+- [why E] In Egypt, health data is "sensitive" under the Personal Data Protection Law 151/2020 (law-firm summaries and an unofficial translation read, partly verified). GAHAR does not cite it.
+  - AR: في مصر تُعدّ البيانات الصحية «حساسة» بموجب قانون حماية البيانات الشخصية 151 لسنة 2020 (اطُّلع على ملخصات مكاتب محاماة وترجمة غير رسمية، تحقق جزئي). ولا تستند إليه GAHAR.
+- [keyMessage] One person, one account: a shared login makes the authorised list and every signature meaningless.
+  - AR: شخص واحد حساب واحد: الحساب المشترك يفرغ قائمة المصرّح لهم وكل توقيع من معناه.
+- [keyMessage] Access follows role and need to know: match accounts to the staff list and remove leavers.
+  - AR: الوصول يتبع الدور والحاجة إلى المعرفة: طابقوا الحسابات مع كشف العاملين وأزيلوا حسابات من غادروا.
+- [keyMessage] Fix the gap openly and record the corrective action; never assign authorship afterwards.
+  - AR: عالجوا الثغرة علنًا وسجّلوا الإجراء التصحيحي؛ ولا تنسبوا الكتابة لأحد بعد الواقعة.
+- [discussion] How many active accounts does your system have compared with your staff list?
+  - AR: كم عدد الحسابات النشطة في نظامكم مقارنةً بكشف العاملين لديكم؟
+- [discussion] If an order is signed by a generic account, who in your hospital can say who wrote it?
+  - AR: إذا وُقّع أمر بحساب عام، من في مستشفاكم يستطيع أن يقول من كتبه؟
+
+## Round 12 (new)
+- [place] Ward 4 nurses' station · release of information
+  - AR: محطة تمريض العنبر 4 · الإفراج عن المعلومات
+- [title] A photo of the whole file, on WhatsApp
+  - AR: صورة للملف كاملًا على واتساب
+- [scene] Hello. I am the son of Hassan Ibrahim, bed 8. Please send me photos of the whole file on WhatsApp.
+  - AR (colloquial original): السلام عليكم. أنا ابن المريض حسن إبراهيم، سرير ٨. لو سمحتم ابعتولي صور الملف كله على الواتس.
+- [scene] My brother abroad wants to see it today. Dad is tired and sleeping.
+  - AR (colloquial original): أخويا المسافر عايز يشوفه النهاردة. والدي تعبان ونايم.
+- [scene] The file is right here. I can photograph it quickly and send it.
+  - AR (colloquial original): الملف قدامي. أقدر أصوره بسرعة وأبعته.
+- [scene] We do have a release procedure. It is not on the ward.
+  - AR (colloquial original): عندنا إجراء للإفراج عن الملفات. بس مش موجود في العنبر.
+- [scene] I am observing. Staff answer when asked.
+  - AR: أنا أراقب فقط. يجيب العاملون عند السؤال.
+- [question] What should Amal do with the son's request?
+  - AR: ماذا تفعل أمل بطلب الابن؟
+- [option A] Send nothing on WhatsApp. Explain kindly and direct him to Medical Records for the hospital's release procedure: written request, identity check, and the patient's consent or other legal authority
+  - AR: لا ترسل شيئًا عبر واتساب. تشرح بلطف وتوجّهه إلى السجلات الطبية لإجراء الإفراج في المستشفى: طلب كتابي والتحقق من الهوية وموافقة المريض أو سند قانوني آخر
+- [feedback A] Right: release goes through a defined route and an authorised person, and patient information must not travel on a personal app.
+  - AR: صحيح: يمر الإفراج عبر مسار محدد وشخص مخوّل، ولا يجوز أن تنتقل معلومات المريض عبر تطبيق شخصي.
+- [option B] Send everything: he is family and the patient is in no state to refuse
+  - AR: ترسل كل شيء: هو من الأسرة والمريض غير قادر على الرفض
+- [feedback B] Being family is not authority. Without consent or a legal basis this is a breach of confidentiality, and the photos now sit on personal phones outside hospital control.
+  - AR: القرابة ليست سلطة. دون موافقة أو سند قانوني هذا إخلال بالسرية، والصور الآن على هواتف شخصية خارج سيطرة المستشفى.
+- [option C] Wake Dad, get his verbal permission, then photograph the file and send it
+  - AR: توقظ الأب وتأخذ إذنه الشفهي ثم تصوّر الملف وترسله
+- [feedback C] The patient's wishes matter, but the channel is wrong: a personal WhatsApp is not a secure route, and release is a defined process, not one nurse's decision.
+  - AR: رغبة المريض مهمة، لكن القناة خاطئة: واتساب الشخصي ليس مسارًا آمنًا، والإفراج عملية محددة لا قرار ممرضة واحدة.
+- [option D] Photograph only the discharge summary, as the least sensitive part
+  - AR: تصوّر ملخص الخروج فقط لأنه أقل الأجزاء حساسية
+- [feedback D] A partial photo is still an uncontrolled release: no identity check, no consent, no record of what left the hospital.
+  - AR: الصورة الجزئية إفراج غير مضبوط أيضًا: لا تحقق من الهوية ولا موافقة ولا تسجيل لما خرج من المستشفى.
+- [why S] IMT.08 d: the medical record policy must cover release of the patient's record. IMT.01: the hospital follows the laws on confidentiality and release of patient information.
+  - AR: IMT.08 د: يجب أن تغطي سياسة السجل الطبي الإفراج عن سجل المريض. IMT.01: يلتزم المستشفى بالقوانين الخاصة بسرية معلومات المريض والإفراج عنها.
+- [why S] IMT.05 e and f: procedures to secure patient information sent by e-mail or mobile devices, and staff training on the risks of insecure channels. A personal WhatsApp photo of a chart sits outside that. IMT.05 is not a GSR.
+  - AR: IMT.05 هـ وو: إجراءات لتأمين معلومات المريض المرسلة بالبريد أو الأجهزة المحمولة، وتدريب العاملين على مخاطر القنوات غير الآمنة. صورة ملف على واتساب شخصي خارج ذلك. IMT.05 ليس GSR.
+- [why E] Egyptian professional-secrecy and personal-data rules apply (Law 13/2025 Art 6 lists exceptions such as judicial mandates; PDPL 151/2020 treats health data as sensitive), read in unofficial translation and partly verified. No Egyptian rule on a relative's right to a copy was verified, so the hospital's release policy, checked with legal affairs, decides.
+  - AR: تسري قواعد السر المهني وحماية البيانات الشخصية في مصر (المادة 6 من القانون 13 لسنة 2025 تحدد استثناءات مثل التكليفات القضائية؛ وقانون حماية البيانات 151 لسنة 2020 يعدّ البيانات الصحية حساسة)، اطُّلع عليها في ترجمة غير رسمية وتحقق جزئي. لم يثبت وجود قاعدة مصرية عن حق القريب في الحصول على نسخة، فيحسم الأمرَ إجراءُ الإفراج في المستشفى بعد مراجعة الشؤون القانونية.
+- [keyMessage] Release of a record goes through one defined route and an authorised person, not through a nurse's phone.
+  - AR: يمر الإفراج عن السجل عبر مسار واحد محدد وشخص مخوّل، لا عبر هاتف ممرضة.
+- [keyMessage] Being a relative is not authority: ask for consent or a legal basis, and note the request.
+  - AR: القرابة ليست سلطة: اطلبوا الموافقة أو السند القانوني وسجّلوا الطلب.
+- [keyMessage] Personal messaging apps sit outside IMT.05 secure-communication rules unless the hospital approved a secure tool.
+  - AR: تطبيقات المراسلة الشخصية خارج قواعد الاتصال الآمن في IMT.05 ما لم يعتمد المستشفى أداة آمنة.
+- [discussion] A relative asks for a photo of the chart on WhatsApp. Who in your hospital may say yes, and where is that written?
+  - AR: يطلب قريب صورة من الملف على واتساب. من في مستشفاكم يحق له الموافقة، وأين هذا مكتوب؟
+- [discussion] What can the nurse offer the son right now that helps without breaching confidentiality?
+  - AR: ماذا تستطيع الممرضة أن تعرض على الابن الآن بما يفيده دون الإخلال بالسرية؟
+
+## Round 13 (new)
+- [place] Ward 4 · patient tracer, last night's shift
+  - AR: العنبر 4 · تتبّع مريض، وردية الليلة الماضية
+- [title] The order given by phone at 02:15
+  - AR: الأمر الذي أُعطي بالهاتف الساعة 2:15
+- [scene] Night shift, Ward 4: two nurses, 22 patients.
+  - AR: الوردية الليلية، العنبر 4: ممرضتان و22 مريضًا.
+- [scene] Nurse Hoda is with a deteriorating patient in bed 3.
+  - AR: الممرضة هدى مع مريض تتدهور حالته في السرير 3.
+- [scene] The desk phone rings: Dr Karim, on call from home.
+  - AR: يرن هاتف المكتب: د. كريم، المناوب من المنزل.
+- [scene] "Bed 7, furosemide 40 mg IV now. I will write it in the morning."
+  - AR: «السرير 7، فيوروسيميد 40 ملغ وريدي الآن. سأكتبه في الصباح.»
+- [scene] Nurse Amal is alone at the desk. The order chart is in the next room.
+  - AR: الممرضة أمل وحدها عند المكتب. لوحة الأوامر في الغرفة المجاورة.
+- [scene] Shift change is a spoken chat at the desk.
+  - AR: تغيير الوردية حديث شفهي عند المكتب.
+- [question] What does Amal do with the phone order?
+  - AR: ماذا تفعل أمل بالأمر الهاتفي؟
+- [option A] Tell Dr Karim she cannot take phone orders and he must come in
+  - AR: تخبر د. كريم أنها لا تستطيع قبول أوامر هاتفية وعليه الحضور
+- [feedback A] The policy defines when phone orders may be used. A blanket refusal without checking it can delay care; the safe response is to follow the process.
+  - AR: تحدد السياسة متى يجوز استخدام الأوامر الهاتفية. الرفض المطلق دون الرجوع إليها قد يؤخر الرعاية؛ والاستجابة الآمنة اتباع العملية.
+- [option B] Write it on a paper towel, read it back and give it; enter it in the chart at the end of the shift
+  - AR: تكتبه على منديل ورقي وتعيد قراءته وتعطيه، وتدخله في السجل في نهاية الوردية
+- [feedback B] Read-back and confirmation are done, but a scrap of paper is not a record, and a late entry leaves the order invisible to the next shift.
+  - AR: إعادة القراءة والتأكيد تمّتا، لكن قصاصة الورق ليست سجلًا، والإدخال المتأخر يترك الأمر غير مرئي للوردية التالية.
+- [option C] Give the dose from memory without writing or reading it back: Dr Karim is reliable and the patient is waiting
+  - AR: تعطي الجرعة من الذاكرة دون كتابة أو إعادة قراءة: د. كريم موثوق والمريض ينتظر
+- [feedback C] Not documented, not read back, not confirmed: a breach of ICD.18 / GSR.02, and one not-met GSR means rejection.
+  - AR: غير موثّق وبلا إعادة قراءة وبلا تأكيد: مخالفة لـ ICD.18 / GSR.02، وGSR واحد غير مستوفى يعني الرفض.
+- [option D] Write the full order as she hears it (patient, drug, dose, route), read it back, get the doctor's confirmation, give it, and record it in the chart and the handover for his authentication
+  - AR: تكتب الأمر كاملًا كما تسمعه (المريض والدواء والجرعة والطريق)، وتعيد قراءته، وتحصل على تأكيد الطبيب، وتعطيه، وتسجله في السجل وفي التسليم لتوثيقه من الطبيب
+- [feedback D] Right: documented, read back and confirmed are the three steps ICD.18 requires, then the order reaches the chart and the next shift.
+  - AR: صحيح: التوثيق وإعادة القراءة والتأكيد هي الخطوات الثلاث التي يتطلبها ICD.18، ثم يصل الأمر إلى السجل والوردية التالية.
+- [why S] ICD.18 / GSR.02: the policy says when verbal and telephone orders may be used; the receiver documents the order and reads it back, the ordering physician confirms, orders are recorded in the medical record within a predefined timeframe, and use is monitored.
+  - AR: ICD.18 / GSR.02: تحدد السياسة متى يجوز استخدام الأوامر الشفهية والهاتفية؛ يوثّق المتلقي الأمر ويعيد قراءته، ويؤكده الطبيب الآمر، ويُسجَّل في السجل الطبي خلال إطار زمني محدد مسبقًا، ويُرصد الاستخدام.
+- [why S] ACT.08 / GSR.04: handover uses a standardised method (SBAR, ISOBAR, I-PASS and others) and is recorded in a logbook, form or electronic tool. That record need not be in the patient's file, so an order passed on only by word of mouth leaves no trace unless it is also in the chart.
+  - AR: ACT.08 / GSR.04: يعتمد التسليم والتسلم أسلوبًا موحدًا (SBAR وISOBAR وI-PASS وغيرها) ويُسجَّل في دفتر أو نموذج أو أداة إلكترونية. لا يشترط وجود هذا السجل في ملف المريض، فالأمر الذي يُنقل شفهيًا فقط لا يترك أثرًا ما لم يكن في السجل أيضًا.
+- [why I] Busy-shift pressure is the real driver: two nurses and 22 patients. A pad kept at the phone and a handover tool that lists new orders are design choices, not discipline.
+  - AR: ضغط الوردية المزدحمة هو الدافع الحقيقي: ممرضتان و22 مريضًا. دفتر عند الهاتف وأداة تسليم تسرد الأوامر الجديدة خيارات تصميم لا مسألة انضباط.
+- [keyMessage] A verbal order is safe only when it is written down, read back and confirmed by the ordering physician. A missing step breaches GSR.02.
+  - AR: الأمر الشفهي آمن فقط إذا كُتب وأُعيدت قراءته وأكده الطبيب الآمر. أي خطوة ناقصة مخالفة لـ GSR.02.
+- [keyMessage] Put the order where the next person will see it: in the chart within the policy timeframe, and in the handover.
+  - AR: ضعوا الأمر حيث يراه الشخص التالي: في السجل خلال الإطار الزمني للسياسة وفي التسليم.
+- [keyMessage] Keep an order pad at the phone: busy shifts break habits that good design can protect.
+  - AR: احتفظوا بدفتر للأوامر عند الهاتف: الورديات المزدحمة تكسر العادات التي يحميها التصميم الجيد.
+- [discussion] Where is the pad or form for taking a telephone order on your busiest ward, and who checks the authentication afterwards?
+  - AR: أين دفتر أو نموذج تلقي الأمر الهاتفي في أكثر عنابركم ازدحامًا، ومن يتحقق من توثيقه لاحقًا؟
+- [discussion] What does your handover record say about verbal orders given during the last shift?
+  - AR: ماذا يقول سجل التسليم لديكم عن الأوامر الشفهية التي أُعطيت في الوردية الأخيرة؟
+
+## Round 14 (new)
+- [place] Medical records archive, basement · paper walk
+  - AR: أرشيف السجلات الطبية بالبدروم · الجولة الورقية
+- [title] The basement archive
+  - AR: أرشيف البدروم
+- [scene] Old paper archive in the basement, below the ward plumbing
+  - AR: الأرشيف الورقي القديم في البدروم، أسفل شبكة سباكة العنبر
+- [scene] Boxes on the floor; the oldest are next to the floor drain
+  - AR: صناديق على الأرض؛ وأقدمها بجوار مصرف الأرضية
+- [scene] Water marks 30 cm high from a pipe leak last winter
+  - AR: آثار مياه بارتفاع 30 سم من تسرب ماسورة في الشتاء الماضي
+- [scene] One extinguisher, type not checked. No smoke detector.
+  - AR: طفاية واحدة لم يُتحقق من نوعها. لا يوجد كاشف دخان.
+- [scene] None. Boxes are labelled by year only.
+  - AR: لا يوجد. الصناديق مكتوب عليها السنة فقط.
+- [scene] No entries. Staff say old boxes went to the municipal skip last summer.
+  - AR: لا توجد مدخلات. يقول العاملون إن صناديق قديمة ذهبت إلى الحاوية البلدية الصيف الماضي.
+- [scene] Please show me the retention times by type of document, and the destruction logbook.
+  - AR: من فضلكم أرُوني مدد الاحتفاظ بحسب نوع المستند وسجل الإتلاف.
+- [question] What does the hospital team do?
+  - AR: ماذا يفعل فريق المستشفى؟
+- [option A] Fill in the destruction logbook now for last summer's boxes, dated last summer
+  - AR: يملأ سجل الإتلاف الآن عن صناديق الصيف الماضي بتاريخ الصيف الماضي
+- [feedback A] Falsification: back-dated entries in a logbook the surveyor may observe. It risks rejection or withdrawal of accreditation.
+  - AR: تزوير: مدخلات بتاريخ سابق في سجل قد تطلع عليه المُقيِّمة. يعرّض الاعتماد للرفض أو السحب.
+- [option B] Move the boxes upstairs today and write a retention table from what staff remember
+  - AR: ينقل الصناديق إلى الأعلى اليوم ويكتب جدول احتفاظ مما يتذكره العاملون
+- [feedback B] Moving the boxes protects them, but a table written from memory has no legal basis. IMT.07 needs retention by document type according to law.
+  - AR: نقل الصناديق يحميها، لكن جدولًا مكتوبًا من الذاكرة بلا سند قانوني. يتطلب IMT.07 الاحتفاظ بحسب نوع المستند وفق القانون.
+- [option C] Say plainly there is no retention table or log, move the records out of the water risk now, stop all destruction, and commit in a corrective plan to a retention table with its legal basis and a destruction log
+  - AR: يقول بوضوح إنه لا يوجد جدول احتفاظ ولا سجل، وينقل السجلات بعيدًا عن خطر المياه فورًا، ويوقف أي إتلاف، ويلتزم في خطة تصحيحية بجدول احتفاظ له سند قانوني وسجل للإتلاف
+- [feedback C] Right: honest, it protects the records now (IMT.06) and starts the policy and logbook IMT.07 needs.
+  - AR: صحيح: صريح، ويحمي السجلات الآن (IMT.06)، ويبدأ السياسة والسجل اللذين يتطلبهما IMT.07.
+- [option D] Destroy the oldest boxes tonight so the shelves look in order, and log it later
+  - AR: يتلف أقدم الصناديق الليلة لتبدو الرفوف منظمة ويسجل ذلك لاحقًا
+- [feedback D] Destruction without a retention basis cannot be undone and may destroy records the law requires you to keep.
+  - AR: الإتلاف دون سند احتفاظ لا رجعة فيه وقد يتلف سجلات يوجب القانون حفظها.
+- [why S] IMT.07: retention time for each type of document, confidentiality during retention, archival rules, and destruction procedures. Surveyors may observe the destruction logbook and the storage area (controlled access, cameras). IMT.01: records are stored according to law.
+  - AR: IMT.07: مدة الاحتفاظ لكل نوع مستند، والسرية خلال الاحتفاظ، وقواعد الأرشفة، وإجراءات الإتلاف. قد يطلع المُقيِّمون على سجل الإتلاف ومنطقة التخزين (التحكم في الدخول والكاميرات). IMT.01: تُحفظ السجلات وفق القانون.
+- [why S] IMT.06: records protected from loss, destruction, tampering and unauthorised access, including water and fire, with suitable extinguishers and controlled access. IMT.06 and IMT.07 are not GSR: poor storage lowers the IMT score, but falsifying a log risks rejection.
+  - AR: IMT.06: حماية السجلات من الفقد والإتلاف والعبث والوصول غير المصرح به، ومنها الماء والحريق، مع طفايات مناسبة وتحكم في الدخول. IMT.06 وIMT.07 ليسا GSR: سوء التخزين يخفض درجة IMT، أما تزوير السجل فيعرّض للرفض.
+- [why E] No statutory retention period in years for medical records was verified for Egypt. GAHAR defers to applicable laws, so the survey team asks for the hospital's table and its legal basis, not a number. Confirm with legal affairs or the National Archives.
+  - AR: لم يثبت وجود مدة احتفاظ قانونية بالسنوات للسجلات الطبية في مصر. تحيل GAHAR إلى القوانين السارية، فيطلب فريق المسح جدول المستشفى وسنده القانوني لا رقمًا. تُؤكَّد المدة مع الشؤون القانونية أو دار الوثائق.
+- [keyMessage] Protect the paper now, define retention by document type with its legal basis, and destroy only under that policy.
+  - AR: احموا الورق الآن، وحدّدوا الاحتفاظ بحسب نوع المستند بسند قانوني، ولا تُتلفوا إلا وفق هذه السياسة.
+- [keyMessage] A destruction logbook is evidence only when it is written at the time of destruction.
+  - AR: سجل الإتلاف دليل فقط إذا كُتب وقت الإتلاف.
+- [keyMessage] Walk the archive and ask what floods or burns first, as NYU Langone learned about its basement.
+  - AR: امشوا في الأرشيف واسألوا ما الذي يغمره الماء أو تحرقه النار أولًا، كما تعلّم NYU Langone عن بدرومه.
+- [discussion] Where is your oldest paper archive, and what is directly above and below it?
+  - AR: أين أقدم أرشيف ورقي لديكم، وما الذي يقع فوقه وتحته مباشرة؟
+- [discussion] If a surveyor asked today for your retention time for a radiology report, what would you show and who approved it?
+  - AR: لو سألت مُقيِّمة اليوم عن مدة احتفاظكم بتقرير أشعة، فماذا تعرضون ومن اعتمدها؟
+
+- R1 why look-back wording (first survey vs re-survey), R4 callout 5 (extinguisher) Arabic edited by Opus, 2026-11-06: needs native check.

@@ -1,5 +1,5 @@
 // Spawn fake players against a running server.
-//   bun scripts/simulate.ts [url] [--players 30] [--code 1234] [--auto --pin 1234] [--origin https://...] [--fast]
+//   bun scripts/simulate.ts [url] [--players 30] [--code 1234] [--auto --pin 1234] [--origin https://...] [--fast] [--rounds 1,3,5]
 // Without --auto the host is driven manually in the browser; pass --code <room code>.
 // With --auto the script logs in as host (PIN from --pin or HOST_PIN), creates the game and drives every step.
 export {};
@@ -13,6 +13,7 @@ const url = (args[0]?.startsWith("http") ? args[0] : "http://127.0.0.1:8098").re
 const N = Number(opt("players", "30"));
 const auto = flag("auto");
 const fast = flag("fast");
+const roundIds = opt("rounds") ? opt("rounds")!.split(",").map((x) => Number(x.trim())) : undefined; // default: server's core rounds
 const pin = opt("pin", process.env.HOST_PIN ?? "1234")!;
 const reqOrigin = opt("origin", new URL(url).origin)!;
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -43,6 +44,7 @@ const hostGet = () => call("/api/host/state", undefined, hostCookie);
 const hostDo = (what: string, from?: string) => call("/api/host/" + what, { from }, hostCookie);
 
 let finished = false;
+let expectedRounds = 0; // set when --auto creates the game
 const stats = { answers: 0, errors: 0, joined: 0 };
 
 async function player(i: number, code: string) {
@@ -84,9 +86,11 @@ async function main() {
   let code = opt("code");
   if (auto) {
     await hostLogin();
-    const g = await call("/api/host/game", {}, hostCookie);
+    const g = await call("/api/host/game", roundIds ? { roundIds } : {}, hostCookie);
+    if (g.status !== 200) throw new Error("create game failed: " + JSON.stringify(g.data));
     code = g.data.game.code;
-    console.log(`created game, room code ${code}`);
+    expectedRounds = g.data.game.rounds;
+    console.log(`created game, room code ${code}, rounds ${JSON.stringify(g.data.game.roundIds)}`);
   }
   if (!code) throw new Error("need --code <room code> (or --auto --pin <pin>)");
   console.log(`joining ${N} players to ${url} room ${code}`);
@@ -119,7 +123,10 @@ async function main() {
   for (const t of tokens.slice(0, 5)) {
     const rep = await call("/api/report/" + t);
     if (rep.status !== 200) bad++;
-    else console.log(`report ok: ${rep.data.name} total=${rep.data.total} rank=${rep.data.rank}/${rep.data.of} ko=${rep.data.knockouts} rounds=${rep.data.rounds.length}`);
+    else if (expectedRounds && rep.data.rounds.length !== expectedRounds) {
+      bad++;
+      console.error(`report has ${rep.data.rounds.length} rounds, expected ${expectedRounds}`);
+    } else console.log(`report ok: ${rep.data.name} total=${rep.data.total} rank=${rep.data.rank}/${rep.data.of} ko=${rep.data.knockouts} rounds=${rep.data.rounds.length}`);
   }
   console.log(`done: joined=${stats.joined} answers=${stats.answers} errors=${stats.errors} reportFailures=${bad}`);
   process.exit(stats.errors || bad ? 1 : 0);

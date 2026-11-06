@@ -41,7 +41,13 @@ export interface Round {
   why: WhyPoint[];
   standards: string[];
   realCase: RealCase;
+  set: RoundSet;
+  minutes: number;
+  keyMessages: L[];
+  discussion: L[];
 }
+export type RoundSet = "core" | "extra";
+export const DEFAULT_MINUTES = 8;
 export interface Content {
   meta: { title: L; hospital: string };
   rounds: Round[];
@@ -200,6 +206,32 @@ export function validateContent(raw: unknown, publicDir?: string): Validation {
         if (title && text && source && (rc.status === "verified" || rc.status === "partly"))
           realCase = { title, text, source, status: rc.status };
       }
+      // optional facilitator fields
+      let set: RoundSet = "core";
+      if (r.set !== undefined) {
+        if (r.set !== "core" && r.set !== "extra") errors.push(`${p}.set: must be "core" or "extra"`);
+        else set = r.set;
+      }
+      let minutes = DEFAULT_MINUTES;
+      if (r.minutes !== undefined) {
+        if (typeof r.minutes !== "number" || !Number.isFinite(r.minutes) || r.minutes < 3 || r.minutes > 20) errors.push(`${p}.minutes: must be a number between 3 and 20`);
+        else minutes = r.minutes;
+      }
+      const checkList = (v: unknown, name: string, max: number): L[] => {
+        const out: L[] = [];
+        if (v === undefined) return out;
+        if (!Array.isArray(v)) errors.push(`${p}.${name}: must be an array`);
+        else {
+          if (v.length > max) errors.push(`${p}.${name}: at most ${max} items (found ${v.length})`);
+          v.forEach((x, j) => {
+            const l = checkL(x, `${p}.${name}[${j}]`, errors);
+            if (l) out.push(l);
+          });
+        }
+        return out;
+      };
+      const keyMessages = checkList(r.keyMessages, "keyMessages", 4);
+      const discussion = checkList(r.discussion, "discussion", 3);
       if (errors.length === before && place && title && question && scene && realCase && metaOut !== undefined) {
         rounds.push({
           id: r.id as number,
@@ -213,6 +245,10 @@ export function validateContent(raw: unknown, publicDir?: string): Validation {
           why,
           standards,
           realCase,
+          set,
+          minutes,
+          keyMessages,
+          discussion,
         });
       }
     });

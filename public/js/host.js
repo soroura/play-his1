@@ -3,7 +3,7 @@
   const app = $('#app'), controls = $('#controls');
   let st = null, version = null, recvAt = 0, key = '', authed = true, hidden = false;
   let muted = store('play_muted') === '1';
-  let sceneCtl = null, dyn = {}, timers = [];
+  let sceneCtl = null, dyn = {}, timers = [], picking = false;
 
   // ---------- audio ----------
   let actx = null;
@@ -26,6 +26,12 @@
   const remaining = () => Math.max(0, (st.game.remainingMs || 0) - (performance.now() - recvAt));
   const phaseKey = () => (st && st.game ? st.game.id + ':' + st.game.phase + ':' + st.game.round : 'none');
 
+  // ---------- facilitator tool links (review before the session, notes during it) ----------
+  function toolLinks() {
+    const a = (href, text) => h('a', { href, target: '_blank', rel: 'noopener', style: 'color:var(--soft)', text });
+    return h('div', { class: 'toollinks' }, a('/host/review', 'Review rounds'), a('/host/notes', 'Presenter notes'), a('/host/help', 'Run sheet'));
+  }
+
   // ---------- login ----------
   function loginView() {
     clearTimers(); key = 'login'; controls.hidden = true;
@@ -36,7 +42,7 @@
       catch (e) { err.textContent = e.message; pin.select(); }
     };
     pin.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
-    app.replaceChildren(h('div', { class: 'login' }, h('div', { class: 'display', style: 'font-size:48px;color:var(--gold)', text: 'Host' }), pin, h('button', { class: 'btn', onclick: go, text: 'Log in' }), err));
+    app.replaceChildren(h('div', { class: 'login' }, h('div', { class: 'display', style: 'font-size:48px;color:var(--gold)', text: 'Host' }), pin, h('button', { class: 'btn', onclick: go, text: 'Log in' }), err, toolLinks()));
     pin.focus();
   }
 
@@ -247,26 +253,77 @@
   // ---------- noGame ----------
   function noGameView() {
     app.replaceChildren(h('div', { class: 'login' }, h('div', { class: 'display', style: 'font-size:56px;color:var(--gold)', text: st.meta.title.en }), h('div', { class: 'sub', text: st.rounds + ' rounds - ' + st.meta.hospital }),
-      h('button', { class: 'btn', onclick: () => act('game'), text: 'Create game' })));
+      h('button', { class: 'btn', onclick: () => showPicker(), text: 'Create game' }), toolLinks()));
+  }
+
+  // ---------- round picker (before creating a game) ----------
+  const INTRO_MIN = 5;
+  async function showPicker() {
+    let content;
+    try { content = await api('/api/host/content'); }
+    catch (e) { if (e.status === 401) { authed = false; loginView(); } else alert(e.message); return; }
+    picking = true; clearTimers(); renderControls();
+    const rounds = content.rounds;
+    const core = rounds.filter((r) => (r.set || 'core') === 'core').map((r) => r.id);
+    const known = new Set(rounds.map((r) => r.id));
+    let saved = [];
+    try { saved = JSON.parse(store('play_rounds_sel') || '[]').filter((x) => known.has(x)); } catch (e) { saved = []; }
+    const sel = new Set(saved.length ? saved : core.length ? core : rounds.map((r) => r.id));
+    const mins = (r) => r.minutes || 8;
+    const sum = (ids) => rounds.filter((r) => ids.includes(r.id)).reduce((a, r) => a + mins(r), 0) + INTRO_MIN;
+    const boxes = new Map();
+    const total = h('div', { class: 'ptotal' });
+    const create = h('button', { class: 'btn', text: 'Create game' });
+    function refresh() {
+      boxes.forEach((cb, id) => { cb.checked = sel.has(id); cb.closest('.prow').classList.toggle('on', sel.has(id)); });
+      const ids = rounds.filter((r) => sel.has(r.id)).map((r) => r.id);
+      total.textContent = ids.length + (ids.length === 1 ? ' round' : ' rounds') + ', about ' + sum(ids) + ' min (including ' + INTRO_MIN + ' min intro and close)';
+      create.disabled = ids.length === 0;
+    }
+    const preset = (label, ids) => h('button', { class: 'btn sec', onclick: () => { sel.clear(); ids.forEach((i) => sel.add(i)); refresh(); }, text: label });
+    const group = (name, list) => list.length ? [h('h3', { class: 'pgrp', text: name + ' (' + list.length + ')' }), list.map((r) => {
+      const cb = h('input', { type: 'checkbox', 'aria-label': 'Round ' + r.id });
+      cb.addEventListener('change', () => { cb.checked ? sel.add(r.id) : sel.delete(r.id); refresh(); });
+      boxes.set(r.id, cb);
+      return h('label', { class: 'prow' }, cb, h('span', { class: 'pn', text: r.id }), h('span', { class: 'pt', text: r.title.en }), h('span', { class: 'ps', text: r.scene.style }), h('span', { class: 'pm', text: mins(r) + ' min' }));
+    })] : [];
+    create.onclick = async () => {
+      const ids = rounds.filter((r) => sel.has(r.id)).map((r) => r.id);
+      if (!ids.length) return;
+      store('play_rounds_sel', JSON.stringify(ids));
+      create.disabled = true;
+      await act('game', { roundIds: ids });
+      if (picking) refresh(); // the request failed (alert shown): let the facilitator retry
+    };
+    const cancel = h('button', { class: 'btn sec', text: 'Cancel', onclick: () => { picking = false; key = ''; if (st) applyState(st); } });
+    app.replaceChildren(h('div', { class: 'picker' },
+      h('div', { class: 'display', style: 'font-size:48px;color:var(--gold)', text: 'Choose the rounds' }),
+      h('div', { class: 'sub', text: 'Core rounds are on by default. Order follows the content file.' }),
+      h('div', { class: 'ppre' }, preset('Core (' + core.length + ' rounds, ~' + sum(core) + ' min)', core), preset('All (' + rounds.length + ' rounds, ~' + sum(rounds.map((r) => r.id)) + ' min)', rounds.map((r) => r.id))),
+      group('Core', rounds.filter((r) => (r.set || 'core') === 'core')), group('Extra', rounds.filter((r) => r.set === 'extra')),
+      total, h('div', { class: 'ppre' }, create, cancel)));
+    refresh();
   }
 
   // ---------- controls ----------
   function renderControls() {
-    controls.hidden = hidden || !st || !authed;
+    controls.hidden = hidden || picking || !st || !authed;
     if (controls.hidden) return;
     const g = st.game, ph = g ? g.phase : 'none';
     const b = (label, fn, cls) => h('button', { class: 'btn' + (cls ? ' ' + cls : ''), onclick: fn, text: label });
     const kids = [];
-    if (ph === 'none') kids.push(b('Create game', () => act('game')));
+    if (ph === 'none') kids.push(b('Create game', () => showPicker()));
     if (ph === 'lobby') kids.push(b('Start game  [Space]', () => act('advance')));
     if (ph === 'scene') kids.push(b('Question  [Space]', next));
     if (ph === 'question') { kids.push(b('Reveal now  [R]', () => act('reveal'))); kids.push(b('+15 s  [+]', () => act('extend'), 'sec')); }
     if (ph === 'reveal') kids.push(b('Leaderboard  [L]', () => act('advance')));
     if (ph === 'leaderboard') kids.push(b(g.round + 1 < g.rounds ? 'Next round  [Space]' : 'Final podium  [Space]', () => act('advance')));
-    if (ph === 'final') kids.push(b('New game', () => { if (confirm('Start a new game? Players will need the new code.')) act('game'); }, 'sec'));
+    if (ph === 'final') kids.push(b('New game', () => showPicker(), 'sec'));
     if (g && ph !== 'final') kids.push(b(inviteOpen ? 'Close invite [Q]' : 'Invite / QR [Q]', () => toggleInvite(), 'sec'));
     kids.push(b(muted ? 'Sound off [M]' : 'Sound on [M]', toggleMute, 'sec'));
     kids.push(b('Hide [H]', () => { hidden = true; renderControls(); }, 'sec'));
+    kids.push(h('a', { href: '/host/notes', target: '_blank', rel: 'noopener', style: 'color:var(--soft)', text: 'Notes' }));
+    kids.push(h('a', { href: '/host/review', target: '_blank', rel: 'noopener', style: 'color:var(--soft)', text: 'Review' }));
     kids.push(h('a', { href: '/host/help', target: '_blank', rel: 'noopener', style: 'color:var(--soft)', text: 'Run sheet' }));
     kids.push(h('span', { class: 'hint', text: g ? g.phase + (g.phase === 'lobby' ? '' : ' - round ' + (g.round + 1)) + ' - room ' + g.code : '' }));
     controls.replaceChildren(...kids);
@@ -304,7 +361,7 @@
     st = r; recvAt = performance.now(); version = r.version; authed = true;
     const k = st.game ? phaseKey() : 'none';
     if (k !== key) {
-      key = k; clearTimers(); shownNames = 0; lastTick = -1;
+      key = k; picking = false; clearTimers(); shownNames = 0; lastTick = -1;
       const ph = st.game ? st.game.phase : 'none';
       if (ph === 'none') noGameView();
       else if (ph === 'lobby') lobbyView();

@@ -1,17 +1,25 @@
 # Facilitator run sheet
 
-Live online session, 8 rounds, about 60 to 75 minutes. Players use their own phones or laptops; you share the host screen.
+Live online session, about 60 to 75 minutes for the core rounds (the picker shows the estimate for your selection). Players use their own phones or laptops; you share the host screen.
+
+## Before the day: check the rounds
+
+Open `/host/review` (same PIN). Every round is on one page: scene lines, question, the four options with scores, knock-outs and feedback, the why, the real case, standards, key messages and discussion prompts. Use the EN / AR / EN + AR toggle and the Core / Extra filter; `Print` gives one round per page.
 
 ## Before (T minus 15 minutes)
 
 1. Open `https://play-his1.endura-assess.com/host`. Log in with the PIN at least 15 minutes before the session (the login lasts 12 hours; repeated wrong PINs from anyone lock new logins for 10 minutes).
-2. Create the game. The lobby shows a QR code, the join link with the room code already in it, and the code in large type.
+2. Press Create game and choose the rounds: Core is preselected, Extra rounds are optional; the picker shows the total rounds and estimated minutes. Your last choice is remembered. The lobby shows a QR code, the join link with the room code already in it, and the code in large type.
 3. Share the browser tab (not the whole desktop) in the meeting. Check the text is readable in the meeting's shared view.
 4. Press "Copy invite for chat" and paste it into the meeting chat or a WhatsApp group (English and Arabic, link + code).
    The link already carries the code, so people only type a nickname. Phones in the room can scan the QR on the shared screen.
 5. Do a quick check on your own phone: join and see the "How to play" card (then close that test player's tab).
 6. Watch the player count in the lobby climb. Start when most people are in.
 7. Press `H` to hide the control bar once you are set, so the shared screen is clean.
+
+## Two screens during the session
+
+Share the `/host` tab. Keep `/host/notes` open in a second tab or on a second monitor that you do not share: it follows the live game and shows the best answer and why, knock-outs, feedback per option, key messages, discussion prompts, real case, who has answered, and the next round. It has the same Next / Reveal / +15 s buttons, so you can drive from it.
 
 ## Keys (host screen)
 

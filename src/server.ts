@@ -17,6 +17,8 @@ const PAGES: Record<string, string> = {
   "/play": "play.html",
   "/host": "host.html",
   "/host/help": "help.html",
+  "/host/review": "review.html",
+  "/host/notes": "notes.html",
 };
 
 const TYPES: Record<string, string> = {
@@ -128,12 +130,13 @@ export function createServer(engine: Engine, cfg: ServerConfig) {
         const v = url.searchParams.get("v");
         return json(engine.hostState(requestOrigin(req), v !== null && /^\d+$/.test(v) ? Number(v) : undefined));
       }
+      if (path === "/api/host/content" && req.method === "GET") return json({ ok: true, ...engine.content });
       if (isPost) {
         const b = await body(req);
         const from = typeof b.from === "string" ? b.from : undefined;
         switch (path) {
           case "/api/host/game":
-            engine.createGame();
+            engine.createGame(b.roundIds);
             break;
           case "/api/host/advance":
             engine.advance(from);
