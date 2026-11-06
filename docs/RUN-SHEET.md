@@ -4,7 +4,7 @@ Live online session, 8 rounds, about 60 to 75 minutes. Players use their own pho
 
 ## Before (T minus 15 minutes)
 
-1. Open `https://play-his1.endura-assess.com/host`. Log in with the PIN.
+1. Open `https://play-his1.endura-assess.com/host`. Log in with the PIN at least 15 minutes before the session (the login lasts 12 hours; repeated wrong PINs from anyone lock new logins for 10 minutes).
 2. Create the game. The lobby shows the join link and the 4-digit room code in large type.
 3. Share the browser tab (not the whole desktop) in the meeting. Check the text is readable in the meeting's shared view.
 4. Paste the join link and the room code in the meeting chat. Say it aloud once: "open the link, type the code, choose a nickname

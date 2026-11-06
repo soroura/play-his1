@@ -109,10 +109,12 @@ export function createServer(engine: Engine, cfg: ServerConfig) {
     if (path === "/api/host/login" && isPost) {
       if (!loginLimit.allow(ip)) throw new HttpError(429, "Too many attempts. Wait a minute.");
       // Global cap on failed PINs, independent of the (client-supplied) CF-Connecting-IP header.
+      // Body is parsed first; the check and the record below run with no await between them (no TOCTOU).
+      // A hard cap is acceptable: the host cookie lasts 12 h, so a facilitator logged in before the session is never locked out.
+      const b = await body(req);
       const now = Date.now();
       while (loginFailures.length && now - loginFailures[0]! > 10 * 60_000) loginFailures.shift();
       if (loginFailures.length >= 30) throw new HttpError(429, "Too many failed attempts. Wait ten minutes.");
-      const b = await body(req);
       if (typeof b.pin !== "string" || !safeEqual(b.pin, cfg.hostPin)) {
         loginFailures.push(now);
         throw new HttpError(401, "Wrong PIN");
