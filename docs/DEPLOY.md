@@ -29,7 +29,7 @@ chmod 750 /opt/play-his1
 cd /opt/play-his1
 umask 077
 cat > .env <<ENV
-HOST_PIN=<6+ characters, you choose>
+HOST_PIN=<4+ characters (6+ recommended), you choose>
 SESSION_SECRET=$(openssl rand -hex 32)
 PUBLIC_ORIGIN=https://play-his1.endura-assess.com
 ENV

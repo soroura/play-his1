@@ -87,7 +87,7 @@ for var in $REQUIRED_ENV; do
   val="${!var:-}"
   [ -n "$val" ] || { echo "required env var $var is empty in $ENV_FILE"; exit 1; }
 done
-[ "${#HOST_PIN}" -ge 6 ] || { echo "HOST_PIN must be at least 6 characters"; exit 1; }
+[ "${#HOST_PIN}" -ge 4 ] || { echo "HOST_PIN must be at least 4 characters (6+ recommended)"; exit 1; }
 [ "${#SESSION_SECRET}" -ge 32 ] || { echo "SESSION_SECRET must be at least 32 characters (openssl rand -hex 32)"; exit 1; }
 
 # Case-folded placeholder checks (a case-sensitive glob lets YOUR-DOMAIN or ChangeMe through).
