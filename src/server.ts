@@ -47,12 +47,14 @@ export function createServer(engine: Engine, cfg: ServerConfig) {
   const joinLimit = new RateLimiter(120, 60_000);
   const answerLimit = new RateLimiter(400, 60_000);
   const loginLimit = new RateLimiter(10, 60_000);
+  const loginFailures: number[] = [];
 
   function clientIp(req: Request, server: { requestIP(r: Request): { address: string } | null }): string {
     return req.headers.get("cf-connecting-ip") ?? server.requestIP(req)?.address ?? "unknown";
   }
 
   async function body(req: Request): Promise<Record<string, unknown>> {
+    if (Number(req.headers.get("content-length") ?? 0) > 4096) throw new HttpError(413, "Request too large");
     const text = await req.text();
     if (text.length > 4096) throw new HttpError(413, "Request too large");
     if (!text.trim()) return {};
@@ -106,8 +108,15 @@ export function createServer(engine: Engine, cfg: ServerConfig) {
     // ----- host -----
     if (path === "/api/host/login" && isPost) {
       if (!loginLimit.allow(ip)) throw new HttpError(429, "Too many attempts. Wait a minute.");
+      // Global cap on failed PINs, independent of the (client-supplied) CF-Connecting-IP header.
+      const now = Date.now();
+      while (loginFailures.length && now - loginFailures[0]! > 10 * 60_000) loginFailures.shift();
+      if (loginFailures.length >= 30) throw new HttpError(429, "Too many failed attempts. Wait ten minutes.");
       const b = await body(req);
-      if (typeof b.pin !== "string" || !safeEqual(b.pin, cfg.hostPin)) throw new HttpError(401, "Wrong PIN");
+      if (typeof b.pin !== "string" || !safeEqual(b.pin, cfg.hostPin)) {
+        loginFailures.push(now);
+        throw new HttpError(401, "Wrong PIN");
+      }
       return json({ ok: true }, 200, { "Set-Cookie": hostCookie(makeHostToken(cfg.secret), secureCookie) });
     }
     if (path === "/api/host/logout" && isPost) return json({ ok: true }, 200, { "Set-Cookie": hostCookie("", secureCookie, true) });
@@ -165,6 +174,7 @@ export function createServer(engine: Engine, cfg: ServerConfig) {
   const server = Bun.serve({
     port: cfg.port,
     hostname: process.env.HOST_BIND ?? "0.0.0.0",
+    maxRequestBodySize: 16 * 1024, // bodies are tiny JSON; refuse anything large before buffering
     async fetch(req, srv) {
       const url = new URL(req.url);
       try {
