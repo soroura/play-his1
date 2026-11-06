@@ -5,10 +5,10 @@ Live online session, 8 rounds, about 60 to 75 minutes. Players use their own pho
 ## Before (T minus 15 minutes)
 
 1. Open `https://play-his1.endura-assess.com/host`. Log in with the PIN at least 15 minutes before the session (the login lasts 12 hours; repeated wrong PINs from anyone lock new logins for 10 minutes).
-2. Create the game. The lobby shows the join link and the 4-digit room code in large type.
+2. Create the game. The lobby shows a QR code, the join link with the room code already in it, and the code in large type.
 3. Share the browser tab (not the whole desktop) in the meeting. Check the text is readable in the meeting's shared view.
-4. Paste the join link and the room code in the meeting chat. Say it aloud once: "open the link, type the code, choose a nickname
-   and your language".
+4. Press "Copy invite for chat" and paste it into the meeting chat or a WhatsApp group (English and Arabic, link + code).
+   The link already carries the code, so people only type a nickname. Phones in the room can scan the QR on the shared screen.
 5. Do a quick check on your own phone: join and see the "How to play" card (then close that test player's tab).
 6. Watch the player count in the lobby climb. Start when most people are in.
 7. Press `H` to hide the control bar once you are set, so the shared screen is clean.
@@ -22,6 +22,8 @@ Live online session, 8 rounds, about 60 to 75 minutes. Players use their own pho
 | `+` | add 15 seconds to the open question |
 | `L` | show the leaderboard |
 | `H` | hide or show the control bar |
+| `Q` | show or hide the invite (QR, link with code, copy buttons) for late joiners, any time |
+| `M` | sound on or off |
 
 ## Each round (about 7 to 9 minutes)
 

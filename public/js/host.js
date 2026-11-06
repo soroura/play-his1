@@ -48,18 +48,57 @@
       h('span', { class: 'rt', text: g.phase === 'lobby' ? 'LOBBY' : g.phase === 'final' ? 'FINAL' : 'ROUND ' + (g.round + 1) + ' / ' + g.rounds }));
   }
 
+  // ---------- invite (QR + link with the code + copy for chat) ----------
+  const inviteLink = (g) => g.joinUrl.replace(/\/+$/, '') + '/?code=' + g.code;
+  const inviteText = (g) => 'Join the survey game / انضم إلى لعبة زيارة التقييم\n' + inviteLink(g) + '\nRoom code / رمز الغرفة: ' + g.code;
+  function qrImg(text, size) {
+    try {
+      const q = qrcode(0, 'M'); q.addData(text); q.make();
+      const n = q.getModuleCount(), cell = Math.max(2, Math.floor(size / (n + 8)));
+      return h('img', { class: 'qr', src: q.createDataURL(cell, cell * 4), alt: 'QR code: ' + text, width: cell * (n + 8), height: cell * (n + 8) });
+    } catch (e) { return h('div', { class: 'qr' }); }
+  }
+  async function copy(text, btn) {
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; } catch (e) {
+      const ta = h('textarea', { style: 'position:fixed;opacity:0' }); ta.value = text; document.body.append(ta); ta.select();
+      try { ok = document.execCommand('copy'); } catch (e2) { ok = false; } ta.remove();
+    }
+    const old = btn.textContent; btn.textContent = ok ? 'Copied' : 'Copy failed: select the link'; setTimeout(() => { btn.textContent = old; }, 1800);
+  }
+  function inviteBox(g, big) {
+    const link = inviteLink(g);
+    const b1 = h('button', { class: 'btn', text: 'Copy invite for chat' }); b1.onclick = () => copy(inviteText(g), b1);
+    const b2 = h('button', { class: 'btn sec', text: 'Copy link' }); b2.onclick = () => copy(link, b2);
+    return h('div', { class: 'invite' + (big ? ' big' : '') },
+      qrImg(link, big ? 340 : 300),
+      h('div', { class: 'inv-txt' },
+        h('div', { class: 'sub', text: 'Scan, or open the link (the code is already in it)' }),
+        h('a', { class: 'joinurl', href: link, target: '_blank', rel: 'noopener', text: link.replace(/^https?:\/\//, '') }),
+        h('div', { class: 'sub', style: 'margin-top:10px', text: 'Room code' }),
+        h('div', { class: 'roomcode', text: g.code }),
+        h('div', { class: 'ar', style: 'font-size:22px;color:var(--soft)', text: 'امسح الرمز أو افتح الرابط، رمز الغرفة موجود فيه' }),
+        h('div', { class: 'inv-btns' }, b1, b2)));
+  }
+  let inviteOpen = false;
+  function toggleInvite(force) {
+    inviteOpen = force === undefined ? !inviteOpen : force;
+    const old = document.getElementById('invite-ov'); if (old) old.remove();
+    if (inviteOpen && st && st.game) {
+      const ov = h('div', { id: 'invite-ov', class: 'invite-ov' }, inviteBox(st.game, true), h('div', { class: 'sub', style: 'text-align:center;margin-top:12px', text: 'Press Q or click outside to close' }));
+      ov.addEventListener('click', (e) => { if (e.target === ov) toggleInvite(false); });
+      document.body.append(ov);
+    }
+    renderControls();
+  }
+
   // ---------- lobby ----------
   function lobbyView() {
     const g = st.game;
     dyn.names = h('div', { class: 'names' });
     dyn.count = h('div', { class: 'count', text: '0 players' });
     app.replaceChildren(header(), h('div', { class: 'lobby' },
-      h('div', { class: 'joinbox' },
-        h('div', { class: 'sub', style: 'font-size:26px', text: 'Join on your phone or laptop' }),
-        h('div', { class: 'joinurl', text: g.joinUrl.replace(/^https?:\/\//, '') }),
-        h('div', { class: 'sub', style: 'font-size:26px;margin-top:14px', text: 'Room code' }),
-        h('div', { class: 'roomcode', text: g.code }),
-        h('div', { class: 'ar', style: 'font-size:24px;color:var(--soft)', text: 'ادخل الرابط واكتب رمز الغرفة' })),
+      h('div', { class: 'joinbox' }, inviteBox(g, false)),
       h('div', null, dyn.count, dyn.names)));
     updateLobby();
   }
@@ -225,6 +264,7 @@
     if (ph === 'reveal') kids.push(b('Leaderboard  [L]', () => act('advance')));
     if (ph === 'leaderboard') kids.push(b(g.round + 1 < g.rounds ? 'Next round  [Space]' : 'Final podium  [Space]', () => act('advance')));
     if (ph === 'final') kids.push(b('New game', () => { if (confirm('Start a new game? Players will need the new code.')) act('game'); }, 'sec'));
+    if (g && ph !== 'final') kids.push(b(inviteOpen ? 'Close invite [Q]' : 'Invite / QR [Q]', () => toggleInvite(), 'sec'));
     kids.push(b(muted ? 'Sound off [M]' : 'Sound on [M]', toggleMute, 'sec'));
     kids.push(b('Hide [H]', () => { hidden = true; renderControls(); }, 'sec'));
     kids.push(h('a', { href: '/host/help', target: '_blank', rel: 'noopener', style: 'color:var(--soft)', text: 'Run sheet' }));
@@ -254,6 +294,8 @@
     else if (k === 'l' || k === 'L') { if (ph === 'reveal') act('advance'); }
     else if (k === 'h' || k === 'H') { hidden = !hidden; renderControls(); }
     else if (k === 'm' || k === 'M') toggleMute();
+    else if (k === 'q' || k === 'Q') { if (st.game && ph !== 'final') toggleInvite(); }
+    else if (k === 'Escape' && inviteOpen) toggleInvite(false);
   });
 
   // ---------- state ----------

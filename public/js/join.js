@@ -16,13 +16,14 @@
   document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.l)));
   setLang(lang);
   const q = new URLSearchParams(location.search);
-  if (/^\d{4}$/.test(q.get('code') || '')) $('#code').value = q.get('code');
+  const linkCode = /^\d{4}$/.test(q.get('code') || '') ? q.get('code') : '';
+  if (linkCode) { $('#code').value = linkCode; setTimeout(() => $('#nick').focus(), 50); }
   $('#code').addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4); });
   store('play_nick') && ($('#nick').value = store('play_nick'));
 
   // silent rejoin
   const tok = store('play_token');
-  if (tok) api('/api/join', { token: tok }).then((r) => { store('play_lang', r.lang); location.replace('/play'); }).catch((e) => { if (e.status === 404 || e.status === 409) store('play_token', null); });
+  if (tok) api('/api/join', linkCode ? { token: tok, code: linkCode } : { token: tok }).then((r) => { store('play_lang', r.lang); location.replace('/play'); }).catch((e) => { if (e.status === 404 || e.status === 409) store('play_token', null); });
 
   $('#f').addEventListener('submit', async (ev) => {
     ev.preventDefault();

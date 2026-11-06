@@ -254,9 +254,16 @@ export class Engine {
     if (typeof input.token === "string" && /^[0-9a-f]{32}$/.test(input.token)) {
       const existing = this.db.query("SELECT * FROM players WHERE token=?").get(input.token) as PlayerRow | null;
       if (existing) {
-        if (input.lang === "ar" || input.lang === "en") this.db.query("UPDATE players SET lang=? WHERE token=?").run(lang, existing.token);
-        this.seen.set(existing.token, this.now());
-        return { token: existing.token, nickname: existing.nickname, lang: input.lang ? lang : existing.lang, rejoined: true };
+        // Rejoin only the player's own game while it is still active, and only if it matches a code given in the link;
+        // otherwise an old token from an earlier game would hijack a new invite link.
+        const eg = this.gameById(existing.game_id);
+        const codeIn = typeof input.code === "string" ? input.code.trim() : "";
+        if (eg && eg.status === "active" && (!codeIn || codeIn === eg.code)) {
+          if (input.lang === "ar" || input.lang === "en") this.db.query("UPDATE players SET lang=? WHERE token=?").run(lang, existing.token);
+          this.seen.set(existing.token, this.now());
+          return { token: existing.token, nickname: existing.nickname, lang: input.lang ? lang : existing.lang, rejoined: true };
+        }
+        if (!codeIn) throw new HttpError(409, "That game has ended. Enter the new room code.");
       }
     }
     const code = typeof input.code === "string" ? input.code.trim() : String(input.code ?? "");

@@ -123,3 +123,14 @@ body{overflow-x:hidden}
 .otiles.rev ~ .revgrid .case .src{font-size:14px}
 .otiles.rev .otile .ko{position:static;display:inline-block;float:inline-end;margin:4px 0 2px;transform:rotate(-3deg)}
 .otiles.rev .otile .cnt{clear:both}
+/* invite: QR + link with code + copy buttons */
+.invite{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.invite .qr{background:#fff;border-radius:10px;padding:0;image-rendering:pixelated;flex:0 0 auto}
+.invite .inv-txt{flex:1;min-width:260px}
+.invite .sub{font-size:22px;color:var(--soft)}
+.invite .joinurl{display:block;font-size:26px;color:var(--gold);text-decoration:none;word-break:break-all}
+.invite .roomcode{font-size:150px}
+.inv-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.invite-ov{position:fixed;inset:0;z-index:60;background:rgba(10,5,25,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px}
+.invite-ov .invite{background:var(--bg2);border-radius:14px;padding:30px;max-width:1100px}
+.lobby{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}

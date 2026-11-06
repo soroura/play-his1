@@ -111,6 +111,18 @@ describe("players", () => {
     expect(engine.playerState(a.token).name).toBe("Ana");
   });
 
+  test("an old token does not hijack a new game's invite link", () => {
+    const { engine, join } = setup();
+    const old = join("Ana");
+    const g2 = engine.createGame(); // closes the first game
+    expect(() => engine.join({ token: old.token })).toThrow(/ended/);
+    const fresh = engine.join({ token: old.token, code: g2.code, nickname: "Ana", lang: "en" });
+    expect(fresh.rejoined).toBe(false);
+    expect(fresh.token).not.toBe(old.token);
+    // and the same token + matching code still rejoins
+    expect(engine.join({ token: fresh.token, code: g2.code }).rejoined).toBe(true);
+  });
+
   test("unknown token is a 404", () => {
     const { engine } = setup();
     expect(() => engine.playerState("0".repeat(32))).toThrow(/Unknown player/);
