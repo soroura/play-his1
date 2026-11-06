@@ -1097,8 +1097,8 @@
         "ar": "الاجتماع اليومي"
       },
       "title": {
-        "en": "What could stop accreditation?",
-        "ar": "ما الذي قد يوقف الاعتماد؟"
+        "en": "What could jeopardize accreditation?",
+        "ar": "ما الذي قد يهدد الاعتماد؟"
       },
       "scene": {
         "style": "photo",
@@ -1142,8 +1142,8 @@
         ]
       },
       "question": {
-        "en": "Which finding could stop accreditation on its own?",
-        "ar": "أي ملاحظة يمكن أن توقف الاعتماد وحدها؟"
+        "en": "Which finding could jeopardize accreditation on its own?",
+        "ar": "أي ملاحظة يمكن أن تهدد الاعتماد وحدها؟"
       },
       "timeLimit": 60,
       "options": [
