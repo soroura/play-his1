@@ -1,0 +1,1241 @@
+{
+  "meta": {
+    "title": {
+      "en": "Survey day at Canal General Hospital",
+      "ar": "يوم المسح في مستشفى القناة العام"
+    },
+    "hospital": "Canal General Hospital"
+  },
+  "rounds": [
+    {
+      "id": 1,
+      "clock": "09:30",
+      "place": {
+        "en": "Meeting room · IMT tracer, interactive session",
+        "ar": "قاعة الاجتماعات · تتبّع IMT التفاعلي"
+      },
+      "title": {
+        "en": "\"How do you know last night's backup worked?\"",
+        "ar": "«كيف تعرفون أن نسخة الليلة الماضية نجحت؟»"
+      },
+      "scene": {
+        "style": "document",
+        "lines": [
+          {
+            "t": "02:00",
+            "tone": "normal",
+            "text": {
+              "en": "Backup job started: OK",
+              "ar": "بدأت مهمة النسخ الاحتياطي: ناجحة"
+            }
+          },
+          {
+            "t": "02:41",
+            "tone": "warn",
+            "text": {
+              "en": "Backup finished. Verification: SKIPPED (warning)",
+              "ar": "انتهى النسخ. التحقق: لم يتم (تحذير)"
+            }
+          },
+          {
+            "t": "Last 9 nights",
+            "tone": "warn",
+            "text": {
+              "en": "Same warning every night. Nobody opened it.",
+              "ar": "نفس التحذير كل ليلة. لم يفتحه أحد."
+            }
+          },
+          {
+            "t": "New lab module",
+            "tone": "crit",
+            "text": {
+              "en": "Restore test: no record",
+              "ar": "اختبار الاسترجاع: لا يوجد سجل"
+            }
+          },
+          {
+            "t": "Log review",
+            "tone": "warn",
+            "text": {
+              "en": "Reviewed by: (blank)",
+              "ar": "راجعه: (فارغ)"
+            }
+          },
+          {
+            "t": "09:31",
+            "who": "Surveyor",
+            "text": {
+              "en": "The surveyor waits for an answer.",
+              "ar": "المُقيِّمة تنتظر الإجابة."
+            }
+          }
+        ]
+      },
+      "question": {
+        "en": "The surveyor asks: \"How do you know last night's backup worked?\" What does the hospital team do?",
+        "ar": "المُقيِّم يسأل: «كيف تعرفون أن النسخة الاحتياطية الليلة الماضية نجحت؟» ماذا يفعل فريق المستشفى؟"
+      },
+      "timeLimit": 45,
+      "options": [
+        {
+          "key": "A",
+          "text": {
+            "en": "Show the backup log as it is and explain the warnings",
+            "ar": "عرض سجل النسخ الاحتياطي كما هو وشرح التحذيرات"
+          },
+          "score": 1000,
+          "knockout": false,
+          "feedback": {
+            "en": "Right: honesty keeps trust, and the gaps (IMT.12 items 3 and 5) are already known.",
+            "ar": "صحيح: الصراحة تحفظ الثقة، والثغرات معروفة أصلًا."
+          }
+        },
+        {
+          "key": "B",
+          "text": {
+            "en": "Say the IT manager will bring a report to the daily briefing",
+            "ar": "القول إن مدير تقنية المعلومات سيُحضر تقريرًا في الاجتماع اليومي"
+          },
+          "score": 400,
+          "knockout": false,
+          "feedback": {
+            "en": "Allowed, but a report written tonight cannot cover the look-back period.",
+            "ar": "مسموح، لكن تقريرًا يُكتب الليلة لا يغطي فترة المراجعة السابقة."
+          }
+        },
+        {
+          "key": "C",
+          "text": {
+            "en": "Show the approved backup policy instead of the log",
+            "ar": "عرض سياسة النسخ الاحتياطي المعتمدة بدلًا من السجل"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "A policy proves the plan exists, not that it was followed. The surveyor will ask for the log.",
+            "ar": "السياسة تثبت وجود الخطة لا تنفيذها. ستطلب المُقيِّمة السجل."
+          }
+        },
+        {
+          "key": "D",
+          "text": {
+            "en": "Export a \"clean\" log from the new system and present it",
+            "ar": "استخراج سجل «نظيف» من النظام الجديد وتقديمه"
+          },
+          "score": 0,
+          "knockout": true,
+          "feedback": {
+            "en": "Falsification: altered documents risk rejection or withdrawal of accreditation.",
+            "ar": "تزوير: المستندات المعدّلة تعرّض الاعتماد للرفض أو السحب."
+          }
+        }
+      ],
+      "why": [
+        {
+          "tag": "S",
+          "text": {
+            "en": "IMT.12 evidence: scheduled backups, a tested restore for every new system, and a backup log reviewed for exceptions.",
+            "ar": "أدلة IMT.12: نسخ مجدولة، واسترجاع مُختبر لكل نظام جديد، وسجل نسخ يُراجع بحثًا عن الاستثناءات."
+          }
+        },
+        {
+          "tag": "G",
+          "text": {
+            "en": "A document that did not exist in the look-back period (at least four months) does not show compliance for that period.",
+            "ar": "مستند لم يكن موجودًا خلال فترة المراجعة (أربعة أشهر على الأقل) لا يثبت الالتزام خلالها."
+          }
+        },
+        {
+          "tag": "S",
+          "text": {
+            "en": "IMT.12 is not a GSR. A weak backup lowers the IMT score; it does not reject the hospital alone. Falsifying does.",
+            "ar": "IMT.12 ليس GSR. ضعف النسخ الاحتياطي يخفض درجة IMT ولا يرفض المستشفى وحده، أما التزوير فيفعل."
+          }
+        }
+      ],
+      "standards": [
+        "IMT.12"
+      ],
+      "realCase": {
+        "title": "HSE Ireland, Conti ransomware, 2021",
+        "text": "About 80% of the HSE's IT environment was encrypted in May 2021. The independent review found the backup infrastructure was only periodically backed up to offline tape; data would likely have stayed encrypted had the attackers not released a decryption key.",
+        "source": "PwC, Conti cyber attack on the HSE: independent post incident review, Dec 2021",
+        "status": "verified"
+      }
+    },
+    {
+      "id": 2,
+      "clock": "10:05",
+      "place": {
+        "en": "Medical record room · paper walk",
+        "ar": "غرفة السجلات الطبية · جولة الملفات الورقية"
+      },
+      "title": {
+        "en": "The file that is \"with Dr. Sherif\"",
+        "ar": "الملف الذي «مع د. شريف»"
+      },
+      "scene": {
+        "style": "chat",
+        "lines": [
+          {
+            "t": "10:05",
+            "who": "Mona (Records)",
+            "text": {
+              "en": "Two of the three files are on the shelf.",
+              "ar": "اتنين من التلات ملفات لقيناهم على الرف."
+            }
+          },
+          {
+            "t": "10:06",
+            "who": "Mona (Records)",
+            "text": {
+              "en": "The third: logbook says \"with Dr. Sherif\", 3 weeks ago.",
+              "ar": "الثالث في الدفتر: «مع د. شريف» من ٣ أسابيع"
+            }
+          },
+          {
+            "t": "10:06",
+            "who": "Hesham (Clerk)",
+            "text": {
+              "en": "I called his office twice. He said he will send it.",
+              "ar": "كلمت مكتبه مرتين، قال هبعته"
+            }
+          },
+          {
+            "t": "10:07",
+            "who": "Mona (Records)",
+            "text": {
+              "en": "Nobody is assigned to chase a file after one week.",
+              "ar": "مفيش حد مسؤول يطلب الملف بعد أسبوع"
+            }
+          },
+          {
+            "t": "10:08",
+            "who": "Surveyor",
+            "text": {
+              "en": "The logbook is the evidence. Please show me how a late file is chased.",
+              "ar": "دفتر الحركة هو الدليل. من فضلكم وضّحوا كيف يُتابَع الملف المتأخر."
+            }
+          }
+        ]
+      },
+      "question": {
+        "en": "One requested file is missing; the logbook says \"with Dr. Sherif, 3 weeks ago\". What should the surveyor do next?",
+        "ar": "أحد الملفات المطلوبة غير موجود، ودفتر الحركة يقول «مع د. شريف منذ 3 أسابيع». ماذا يفعل المُقيِّم بعد ذلك؟"
+      },
+      "timeLimit": 45,
+      "options": [
+        {
+          "key": "A",
+          "text": {
+            "en": "Score IMT.08 \"not met\" on the spot",
+            "ar": "يحكم فورًا بعدم استيفاء IMT.08"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Too early: one file is an anecdote, not a compliance rate.",
+            "ar": "مبكر جدًا: ملف واحد حكاية وليس نسبة التزام."
+          }
+        },
+        {
+          "key": "B",
+          "text": {
+            "en": "Ask staff to trace it, and pull more files to test whether it is a pattern",
+            "ar": "يطلب تتبّع الملف ويسحب ملفات إضافية لاختبار وجود نمط"
+          },
+          "score": 1000,
+          "knockout": false,
+          "feedback": {
+            "en": "Right: more evidence turns an anecdote into a measured finding.",
+            "ar": "صحيح: المزيد من الأدلة يحوّل الحكاية إلى نتيجة مقاسة."
+          }
+        },
+        {
+          "key": "C",
+          "text": {
+            "en": "Advise the team to buy an electronic file-tracking system",
+            "ar": "ينصح الفريق بشراء نظام إلكتروني لتتبّع الملفات"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Surveyors do not give advice, and a purchase is not a process.",
+            "ar": "المُقيِّمون لا يقدمون نصائح، والشراء ليس عملية."
+          }
+        },
+        {
+          "key": "D",
+          "text": {
+            "en": "Move on: one missing file is normal",
+            "ar": "ينتقل لنقطة أخرى: ملف واحد مفقود أمر طبيعي"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Misses a real availability risk: nobody owns the return of files.",
+            "ar": "يتجاهل خطر توفر الملفات: لا أحد مسؤول عن إرجاعها."
+          }
+        }
+      ],
+      "why": [
+        {
+          "tag": "S",
+          "text": {
+            "en": "IMT.08: the record policy covers flow, tracking, storage and availability. Surveyors check the movement logbook.",
+            "ar": "IMT.08: سياسة السجل تشمل التدفق والتتبع والتخزين والإتاحة. يفحص المُقيِّمون دفتر حركة الملفات."
+          }
+        },
+        {
+          "tag": "G",
+          "text": {
+            "en": "Surveyors judge the process, not people, and collect more evidence when a concern appears.",
+            "ar": "يُقيِّم المُقيِّمون العملية لا الأشخاص، ويجمعون أدلة إضافية عند ظهور قلق."
+          }
+        },
+        {
+          "tag": "I",
+          "text": {
+            "en": "Three weeks out suggests nobody owns file return: a workflow problem, not a clerk problem.",
+            "ar": "ثلاثة أسابيع خارج الغرفة تعني أن لا أحد مسؤول عن الإرجاع: مشكلة سير عمل لا مشكلة موظف."
+          }
+        }
+      ],
+      "standards": [
+        "IMT.08"
+      ],
+      "realCase": {
+        "title": "709,000 unprocessed clinical letters, England, 2017",
+        "text": "NHS Shared Business Services held about 709,000 unprocessed clinical letters, including results meant for GPs. The contracts had no performance indicators for redirection. By May 2017 the review had found 1,788 cases of potential harm; the NAO reported no actual harm identified yet.",
+        "source": "National Audit Office, clinical correspondence handling at NHS SBS, June 2017",
+        "status": "verified"
+      }
+    },
+    {
+      "id": 3,
+      "clock": "10:40",
+      "place": {
+        "en": "Ward 4 nursing station · electronic walk",
+        "ar": "محطة تمريض العنبر 4 · الجولة الإلكترونية"
+      },
+      "title": {
+        "en": "Two men with one name",
+        "ar": "رجلان بنفس الاسم"
+      },
+      "scene": {
+        "style": "document",
+        "lines": [
+          {
+            "t": "Session",
+            "tone": "warn",
+            "text": {
+              "en": "Logged in as: Nurse Hoda (screen left unlocked)",
+              "ar": "مسجّل الدخول باسم: الممرضة هدى (الشاشة مفتوحة)"
+            }
+          },
+          {
+            "t": "Search",
+            "tone": "normal",
+            "text": {
+              "en": "\"Mohamed Ahmed Hassan\": 2 results",
+              "ar": "«محمد أحمد حسن»: نتيجتان"
+            }
+          },
+          {
+            "t": "Bed 12",
+            "tone": "normal",
+            "text": {
+              "en": "Mohamed Ahmed Hassan, 61, chest pain",
+              "ar": "محمد أحمد حسن، 61، ألم بالصدر"
+            }
+          },
+          {
+            "t": "Bed 13",
+            "tone": "normal",
+            "text": {
+              "en": "Mohamed Ahmed Hassan, 58, kidney disease",
+              "ar": "محمد أحمد حسن، 58، مرض كلوي"
+            }
+          },
+          {
+            "t": "Wristband",
+            "tone": "crit",
+            "text": {
+              "en": "Shows: BED 12. No name, no ID number.",
+              "ar": "المكتوب: سرير 12. لا اسم ولا رقم هوية."
+            }
+          },
+          {
+            "t": "Monitor",
+            "tone": "warn",
+            "text": {
+              "en": "Sticky note with a password",
+              "ar": "ورقة لاصقة عليها كلمة مرور"
+            }
+          }
+        ]
+      },
+      "question": {
+        "en": "Which finding is the biggest patient-safety risk?",
+        "ar": "أي ملاحظة تمثل أكبر خطر على سلامة المرضى؟"
+      },
+      "timeLimit": 45,
+      "options": [
+        {
+          "key": "A",
+          "text": {
+            "en": "Screen left logged in under a nurse's account",
+            "ar": "الشاشة مفتوحة على حساب ممرضة"
+          },
+          "score": 400,
+          "knockout": false,
+          "feedback": {
+            "en": "A real IMT.05 finding, but the clinical harm is lower than a wrong-patient event.",
+            "ar": "ملاحظة حقيقية في IMT.05، لكن الضرر السريري أقل من خطأ تحديد المريض."
+          }
+        },
+        {
+          "key": "B",
+          "text": {
+            "en": "Two men with the same name in adjacent beds; wristbands show the bed number only",
+            "ar": "مريضان بنفس الاسم في سريرين متجاورين، والسوار عليه رقم السرير فقط"
+          },
+          "score": 1000,
+          "knockout": false,
+          "feedback": {
+            "en": "Right: a wrong-patient event is the harm, and ACT.03 / GSR.01 makes identification a knock-out.",
+            "ar": "صحيح: خطأ تحديد المريض هو الضرر، وACT.03 / GSR.01 يجعل التعريف شرطًا حاسمًا."
+          }
+        },
+        {
+          "key": "C",
+          "text": {
+            "en": "A password on a sticky note",
+            "ar": "كلمة مرور مكتوبة على ورقة لاصقة"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "A real security finding, with lower immediate clinical risk.",
+            "ar": "ملاحظة أمنية حقيقية، لكن خطرها السريري المباشر أقل."
+          }
+        },
+        {
+          "key": "D",
+          "text": {
+            "en": "A duplicate record for one of the two men",
+            "ar": "ملف مكرر لأحد المريضين"
+          },
+          "score": 400,
+          "knockout": false,
+          "feedback": {
+            "en": "Linked to B: the duplicate makes a wrong-patient event more likely.",
+            "ar": "مرتبطة بالخيار ب: التكرار يزيد احتمال خطأ تحديد المريض."
+          }
+        }
+      ],
+      "why": [
+        {
+          "tag": "S",
+          "text": {
+            "en": "ACT.03 / GSR.01: two patient identifiers at every point of care. A bed or room number is not an identifier.",
+            "ar": "ACT.03 / GSR.01: معرّفان للمريض عند كل نقطة رعاية. رقم السرير أو الغرفة ليس معرّفًا."
+          }
+        },
+        {
+          "tag": "S",
+          "text": {
+            "en": "One not-met GSR means rejection. The unlocked screen (IMT.05) lowers a score but is not a GSR.",
+            "ar": "عدم استيفاء GSR واحد يعني الرفض. الشاشة المفتوحة (IMT.05) تخفض الدرجة لكنها ليست GSR."
+          }
+        },
+        {
+          "tag": "E",
+          "text": {
+            "en": "Arabic names transliterate many ways (Mohamed / Mohammed), which creates duplicates at registration. No Egyptian prevalence data found.",
+            "ar": "الأسماء العربية تُكتب بصيغ متعددة (محمد / Mohamed / Mohammed) فتنتج ملفات مكررة عند التسجيل. لا توجد بيانات مصرية عن الانتشار."
+          }
+        }
+      ],
+      "standards": [
+        "ACT.03",
+        "GSR.01",
+        "IMT.05",
+        "IMT.08"
+      ],
+      "realCase": {
+        "title": "The wrong patient, USA, 2002",
+        "text": "A woman with a similar name was sent for an invasive heart procedure meant for another patient, after a phone request that used a surname only. Root cause analysis found at least 17 errors, none sufficient alone. The study was stopped after about an hour.",
+        "source": "Chassin MR, Becher EC. The wrong patient. Ann Intern Med 2002;136:826-833",
+        "status": "verified"
+      }
+    },
+    {
+      "id": 4,
+      "clock": "10:55",
+      "place": {
+        "en": "Server cupboard, ground-floor corridor",
+        "ar": "دولاب الخوادم، ممر الدور الأرضي"
+      },
+      "title": {
+        "en": "Where the data lives",
+        "ar": "أين توجد البيانات"
+      },
+      "scene": {
+        "style": "photo",
+        "image": "img/server-cupboard.jpg",
+        "lines": [
+          {
+            "t": "1",
+            "text": {
+              "en": "A pipe runs above the cabinet",
+              "ar": "ماسورة تمر فوق الدولاب"
+            }
+          },
+          {
+            "t": "2",
+            "text": {
+              "en": "The server sits on the top shelf",
+              "ar": "الخادم على الرف العلوي"
+            }
+          },
+          {
+            "t": "3",
+            "text": {
+              "en": "The backup disk is in the same cupboard",
+              "ar": "قرص النسخ الاحتياطي في نفس الدولاب"
+            }
+          },
+          {
+            "t": "4",
+            "text": {
+              "en": "The door is open, in a public corridor",
+              "ar": "الباب مفتوح في ممر عام"
+            }
+          },
+          {
+            "t": "5",
+            "text": {
+              "en": "No smoke detector in sight",
+              "ar": "لا يظهر كاشف دخان"
+            }
+          }
+        ]
+      },
+      "question": {
+        "en": "Which observation do you record first?",
+        "ar": "أي ملاحظة تسجلها أولًا؟"
+      },
+      "timeLimit": 45,
+      "options": [
+        {
+          "key": "A",
+          "text": {
+            "en": "A water pipe runs above the cabinet",
+            "ar": "ماسورة مياه فوق الدولاب"
+          },
+          "score": 400,
+          "knockout": false,
+          "feedback": {
+            "en": "Real, and it threatens server and backup together, but the shared location is the root problem.",
+            "ar": "حقيقية وتهدد الخادم والنسخة معًا، لكن اشتراكهما في مكان واحد هو أصل المشكلة."
+          }
+        },
+        {
+          "key": "B",
+          "text": {
+            "en": "The backup disk sits in the same cabinet as the server",
+            "ar": "قرص النسخ الاحتياطي في نفس الدولاب مع الخادم"
+          },
+          "score": 1000,
+          "knockout": false,
+          "feedback": {
+            "en": "Right: one event (water, fire, theft, ransomware) destroys both copies.",
+            "ar": "صحيح: حدث واحد (ماء أو حريق أو سرقة أو فدية) يدمّر النسختين."
+          }
+        },
+        {
+          "key": "C",
+          "text": {
+            "en": "No smoke detector and no suitable extinguisher",
+            "ar": "لا يوجد كاشف دخان ولا طفاية مناسبة"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "A real fire risk under IMT.06, but not the first thing to record here.",
+            "ar": "خطر حريق حقيقي ضمن IMT.06، لكنه ليس أول ما يُسجَّل هنا."
+          }
+        },
+        {
+          "key": "D",
+          "text": {
+            "en": "The cupboard is unlocked in a public corridor",
+            "ar": "الدولاب غير مغلق في ممر عام"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "A real access risk (IMT.05, IMT.06), but it does not cause total data loss.",
+            "ar": "خطر وصول حقيقي (IMT.05 وIMT.06)، لكنه لا يسبب فقدانًا كاملًا للبيانات."
+          }
+        }
+      ],
+      "why": [
+        {
+          "tag": "S",
+          "text": {
+            "en": "IMT.12 intent: a backup is a copy stored in a location separate from the original.",
+            "ar": "مقصد IMT.12: النسخة الاحتياطية تُحفظ في مكان منفصل عن الأصل."
+          }
+        },
+        {
+          "tag": "S",
+          "text": {
+            "en": "IMT.06: records protected from loss and unauthorised access. All four options are real findings; the order is the skill.",
+            "ar": "IMT.06: حماية السجلات من الفقد والوصول غير المصرح. الخيارات الأربعة ملاحظات حقيقية، والمهارة في الترتيب."
+          }
+        },
+        {
+          "tag": "X",
+          "text": {
+            "en": "Off-site, offline or immutable copies and recovery targets are good practice beyond GAHAR. The handbook names none.",
+            "ar": "النسخ خارج الموقع أو غير المتصلة أو غير القابلة للتعديل وأهداف الاسترجاع ممارسات جيدة تتجاوز GAHAR. الدليل لا يذكرها."
+          }
+        }
+      ],
+      "standards": [
+        "IMT.12",
+        "IMT.06",
+        "IMT.05"
+      ],
+      "realCase": {
+        "title": "Guy's and St Thomas', London, 2022",
+        "text": "Both data centres, designed as each other's backup but under two miles apart, failed together in the July 2022 heatwave. A 2018 warning had not been acted on. The hospital ran on paper and one pancreas transplant could not proceed.",
+        "source": "Guy's and St Thomas' NHS FT, IT critical incident review, Jan 2023",
+        "status": "verified"
+      }
+    },
+    {
+      "id": 5,
+      "clock": "11:05",
+      "place": {
+        "en": "Ward 4 · inject",
+        "ar": "العنبر 4 · حدث طارئ"
+      },
+      "title": {
+        "en": "The lights go out",
+        "ar": "انقطاع الكهرباء"
+      },
+      "scene": {
+        "style": "feed",
+        "lines": [
+          {
+            "t": "11:00",
+            "tone": "normal",
+            "text": {
+              "en": "Medication round starts on Ward 4.",
+              "ar": "بدأت جولة أدوية الساعة 11 في العنبر 4."
+            }
+          },
+          {
+            "t": "11:01",
+            "tone": "crit",
+            "text": {
+              "en": "MAINS POWER LOST. Ward in darkness.",
+              "ar": "انقطاع الكهرباء. العنبر في ظلام."
+            }
+          },
+          {
+            "t": "11:02",
+            "tone": "warn",
+            "text": {
+              "en": "Generator started. Emergency lights on.",
+              "ar": "اشتغل المولد. إضاءة الطوارئ تعمل."
+            }
+          },
+          {
+            "t": "11:03",
+            "tone": "crit",
+            "text": {
+              "en": "Generator tripped under load. Server on UPS only.",
+              "ar": "فصل المولد تحت الحمل. الخادم على البطارية فقط."
+            }
+          },
+          {
+            "t": "11:05",
+            "tone": "crit",
+            "text": {
+              "en": "HIS: connection lost on all ward PCs.",
+              "ar": "النظام: فُقد الاتصال في كل أجهزة العنبر."
+            }
+          },
+          {
+            "t": "11:06",
+            "tone": "warn",
+            "text": {
+              "en": "\"Where is the downtime kit key?\" Nobody knows.",
+              "ar": "«فين مفتاح حقيبة التوقف؟» محدش عارف."
+            }
+          }
+        ]
+      },
+      "question": {
+        "en": "Nurse in charge, Ward 4: what is your first action?",
+        "ar": "رئيسة تمريض العنبر 4: ما أول إجراء؟"
+      },
+      "timeLimit": 45,
+      "options": [
+        {
+          "key": "A",
+          "text": {
+            "en": "Declare downtime per the program and open the downtime kit",
+            "ar": "إعلان وقت التوقف حسب البرنامج وفتح حقيبة نماذج التوقف"
+          },
+          "score": 1000,
+          "knockout": false,
+          "feedback": {
+            "en": "Right: the program exists so nobody has to improvise. Downtime starts when care is affected.",
+            "ar": "صحيح: البرنامج موجود حتى لا يرتجل أحد. يبدأ التوقف عندما تتأثر الرعاية."
+          }
+        },
+        {
+          "key": "B",
+          "text": {
+            "en": "Wait 30 minutes for IT before changing anything",
+            "ar": "الانتظار 30 دقيقة حتى يرد قسم تقنية المعلومات"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Delay is the risk. Do not wait for IT to agree that care is affected.",
+            "ar": "التأخير هو الخطر. لا تنتظري موافقة تقنية المعلومات على أن الرعاية تأثرت."
+          }
+        },
+        {
+          "key": "C",
+          "text": {
+            "en": "Write orders and notes on any paper available",
+            "ar": "كتابة الأوامر والملاحظات على أي ورق متاح"
+          },
+          "score": 400,
+          "knockout": false,
+          "feedback": {
+            "en": "Better than nothing, but no structure, no identifiers and hard to reconcile later.",
+            "ar": "أفضل من لا شيء، لكن بلا هيكل ولا معرّفات ويصعب مطابقته لاحقًا."
+          }
+        },
+        {
+          "key": "D",
+          "text": {
+            "en": "Postpone the 11:00 medications until the system returns",
+            "ar": "تأجيل أدوية الساعة 11 حتى يعود النظام"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Unsafe: omitting time-critical medicines is itself a harm.",
+            "ar": "غير آمن: ترك أدوية حساسة للوقت ضرر في حد ذاته."
+          }
+        }
+      ],
+      "why": [
+        {
+          "tag": "S",
+          "text": {
+            "en": "IMT.11: a downtime program with paper forms, a recovery process, staff training and an annual test.",
+            "ar": "IMT.11: برنامج للتوقف يشمل نماذج ورقية وعملية استرجاع وتدريب العاملين واختبارًا سنويًا."
+          }
+        },
+        {
+          "tag": "S",
+          "text": {
+            "en": "EFS.11 / GSR.28: the generator must be tested with and without load. One that trips under load puts a GSR at risk.",
+            "ar": "EFS.11 / GSR.28: يجب اختبار المولد بحمل وبدونه. المولد الذي يفصل تحت الحمل يعرّض GSR للخطر."
+          }
+        },
+        {
+          "tag": "I",
+          "text": {
+            "en": "The kit is locked in the head nurse's office and she is on leave: a plan nobody can open is a plan on paper only.",
+            "ar": "الحقيبة مقفلة في مكتب رئيسة التمريض وهي في إجازة: خطة لا يستطيع أحد فتحها خطة على الورق فقط."
+          }
+        }
+      ],
+      "standards": [
+        "IMT.11",
+        "EFS.11",
+        "GSR.28"
+      ],
+      "realCase": {
+        "title": "Ismailia, Egypt, August 2014 (press reports)",
+        "text": "Press reports describe a hysterectomy finished by mobile-phone light after power failed and the hospital's generators broke down. A historical case: Ismailia is now a UHI governorate, so the same event today would also take down the information systems.",
+        "source": "Ahram Online, 28 Aug 2014; Gulf News, 2014",
+        "status": "verified"
+      }
+    },
+    {
+      "id": 6,
+      "clock": "11:40",
+      "place": {
+        "en": "Ward 4 · telephone",
+        "ar": "العنبر 4 · الهاتف"
+      },
+      "title": {
+        "en": "Potassium 6.9",
+        "ar": "بوتاسيوم 6.9"
+      },
+      "scene": {
+        "style": "chat",
+        "lines": [
+          {
+            "t": "11:38",
+            "who": "Hoda",
+            "text": {
+              "en": "HIS and the lab interface are still down.",
+              "ar": "النظام وواجهة المعمل لسه واقفين."
+            }
+          },
+          {
+            "t": "11:40",
+            "who": "Lab Ashraf",
+            "text": {
+              "en": "K 6.9 critical, Mohamed Ahmed Hassan. ضروري",
+              "ar": "بوتاسيوم 6.9 حرج، محمد أحمد حسن. ضروري"
+            }
+          },
+          {
+            "t": "11:41",
+            "who": "Amal",
+            "text": {
+              "en": "Which one? We have two Mohamed Ahmed Hassan, bed 12 and bed 13.",
+              "ar": "مين فيهم؟ عندنا اتنين محمد أحمد حسن، سرير ١٢ وسرير ١٣"
+            }
+          },
+          {
+            "t": "11:42",
+            "who": "Hoda",
+            "text": {
+              "en": "The request slip has no file number.",
+              "ar": "ورقة الطلب مفيهاش رقم الملف"
+            }
+          },
+          {
+            "t": "11:43",
+            "who": "Dr Karim",
+            "text": {
+              "en": "ok will see",
+              "ar": "تمام هشوف"
+            }
+          },
+          {
+            "t": "11:44",
+            "who": "Narrator",
+            "text": {
+              "en": "Nurse writes on the downtime form. What must it record?",
+              "ar": "الممرضة تكتب في نموذج التوقف. ماذا يجب أن يتضمن؟"
+            }
+          }
+        ]
+      },
+      "question": {
+        "en": "Which record of the call meets GAHAR?",
+        "ar": "أي تسجيل للمكالمة يستوفي متطلبات GAHAR؟"
+      },
+      "timeLimit": 60,
+      "options": [
+        {
+          "key": "A",
+          "text": {
+            "en": "Result and patient name",
+            "ar": "النتيجة واسم المريض"
+          },
+          "score": 0,
+          "knockout": true,
+          "feedback": {
+            "en": "Name alone cannot separate the two men: identification by one identifier breaches GSR.01.",
+            "ar": "الاسم وحده لا يميّز بين الرجلين: التعريف بمعرّف واحد يخالف GSR.01."
+          }
+        },
+        {
+          "key": "B",
+          "text": {
+            "en": "Result, time, and the caller's name",
+            "ar": "النتيجة والوقت واسم المتصل"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Missing the patient identifiers, who received it, read-back and escalation.",
+            "ar": "ينقصه معرّفات المريض ومن استلم وإعادة القراءة والتصعيد."
+          }
+        },
+        {
+          "key": "C",
+          "text": {
+            "en": "Two identifiers, date and time, who called, who received, read-back, physician informed and when",
+            "ar": "معرّفان للمريض، التاريخ والوقت، من اتصل، من استلم، إعادة القراءة، إبلاغ الطبيب ووقته"
+          },
+          "score": 1000,
+          "knockout": false,
+          "feedback": {
+            "en": "Right: all GSR.03 elements plus two identifiers, so the right man gets the right treatment.",
+            "ar": "صحيح: كل عناصر GSR.03 مع معرّفين، فيصل العلاج للمريض الصحيح."
+          }
+        },
+        {
+          "key": "D",
+          "text": {
+            "en": "Write the value on the wristband label for the doctor to see",
+            "ar": "كتابة القيمة على ملصق السوار ليراها الطبيب"
+          },
+          "score": 0,
+          "knockout": true,
+          "feedback": {
+            "en": "Unsafe and outside any record. It also exposes the result and does not close the loop.",
+            "ar": "غير آمن وخارج أي سجل، ويكشف النتيجة ولا يغلق الحلقة."
+          }
+        }
+      ],
+      "why": [
+        {
+          "tag": "S",
+          "text": {
+            "en": "ICD.19 / GSR.03: the record shows date and time, who notified, who was notified, the result, escalation and read-back.",
+            "ar": "ICD.19 / GSR.03: يوثّق السجل التاريخ والوقت ومن أبلغ ومن تلقى والنتيجة والتصعيد وإعادة القراءة."
+          }
+        },
+        {
+          "tag": "S",
+          "text": {
+            "en": "ACT.03 / GSR.01: two identifiers. Two GSR standards meet in one phone call.",
+            "ar": "ACT.03 / GSR.01: معرّفان للمريض. معيارا GSR يلتقيان في مكالمة واحدة."
+          }
+        },
+        {
+          "tag": "X",
+          "text": {
+            "en": "SAFER guide on test results: closing the loop on critical results is a named practice.",
+            "ar": "دليل SAFER لنتائج الفحوص: إغلاق الحلقة في النتائج الحرجة ممارسة منصوص عليها."
+          }
+        }
+      ],
+      "standards": [
+        "ICD.19",
+        "GSR.03",
+        "ACT.03",
+        "GSR.01"
+      ],
+      "realCase": {
+        "title": "PSA result sent to a graduated resident, USA, 2011",
+        "text": "A PSA of 83 ng/ml went electronically to a resident who had already left; no handover of pending results existed. Eight months later the patient presented with metastatic prostate cancer.",
+        "source": "AHRQ PSNet WebM&M, Seasonal care transition failure, 1 July 2011",
+        "status": "verified"
+      }
+    },
+    {
+      "id": 7,
+      "clock": "13:40",
+      "place": {
+        "en": "IT office and Ward 4 · recovery",
+        "ar": "مكتب تقنية المعلومات والعنبر 4 · الاسترجاع"
+      },
+      "title": {
+        "en": "The system comes back without the morning",
+        "ar": "النظام يعود بدون الصباح"
+      },
+      "scene": {
+        "style": "document",
+        "lines": [
+          {
+            "t": "13:40",
+            "tone": "normal",
+            "text": {
+              "en": "Restore point: database from the 02:00 backup.",
+              "ar": "نقطة الاسترجاع: قاعدة البيانات من نسخة الساعة 2:00."
+            }
+          },
+          {
+            "t": "Lost window",
+            "tone": "crit",
+            "text": {
+              "en": "02:00 to 11:05: not in the HIS",
+              "ar": "من 2:00 إلى 11:05: غير موجود في النظام"
+            }
+          },
+          {
+            "t": "Ward 4",
+            "tone": "warn",
+            "text": {
+              "en": "46 paper sheets waiting for entry",
+              "ar": "46 ورقة تنتظر الإدخال"
+            }
+          },
+          {
+            "t": "Clerk",
+            "tone": "warn",
+            "text": {
+              "en": "\"I can enter all 46 under my login. Faster.\"",
+              "ar": "«أقدر أدخل الـ 46 كلهم بحسابي. أسرع.»"
+            }
+          },
+          {
+            "t": "Risk",
+            "tone": "crit",
+            "text": {
+              "en": "11:00 doses given on paper may be given again",
+              "ar": "جرعات الساعة 11 المعطاة على الورق قد تُعطى مرة أخرى"
+            }
+          },
+          {
+            "t": "Paper originals",
+            "tone": "normal",
+            "text": {
+              "en": "Keep until entry is checked",
+              "ar": "تُحفظ حتى يتم التحقق من الإدخال"
+            }
+          }
+        ]
+      },
+      "question": {
+        "en": "How should the paper records go back into the system?",
+        "ar": "كيف تُدخل السجلات الورقية مرة أخرى إلى النظام؟"
+      },
+      "timeLimit": 45,
+      "options": [
+        {
+          "key": "A",
+          "text": {
+            "en": "The clerk enters everything under her own account with the current time",
+            "ar": "الموظفة تُدخل كل شيء بحسابها بالوقت الحالي"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Breaks authorship and timing: it will look as if the clerk ordered everything at 13:40.",
+            "ar": "يكسر نسبة الكاتب والتوقيت: سيبدو كأن الموظفة كتبت كل شيء الساعة 13:40."
+          }
+        },
+        {
+          "key": "B",
+          "text": {
+            "en": "Each author enters or countersigns their own entries with the true time, marked \"late entry: downtime\"",
+            "ar": "كل كاتب يُدخل أو يوقّع مدخلاته بالوقت الحقيقي مع علامة «إدخال متأخر: وقت التوقف»"
+          },
+          "score": 1000,
+          "knockout": false,
+          "feedback": {
+            "en": "Right: it preserves author, true time and the downtime trail.",
+            "ar": "صحيح: يحفظ الكاتب والوقت الحقيقي وأثر التوقف."
+          }
+        },
+        {
+          "key": "C",
+          "text": {
+            "en": "Scan the paper sheets and attach them as images only",
+            "ar": "مسح الأوراق ضوئيًا وإرفاقها كصور فقط"
+          },
+          "score": 400,
+          "knockout": false,
+          "feedback": {
+            "en": "Keeps the evidence, but nothing is searchable, alerting or reviewable.",
+            "ar": "يحفظ الدليل لكن لا شيء قابل للبحث أو التنبيه أو المراجعة."
+          }
+        },
+        {
+          "key": "D",
+          "text": {
+            "en": "Enter medications only; skip notes",
+            "ar": "إدخال الأدوية فقط وترك الملاحظات"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Loses clinical information and breaks continuity of care.",
+            "ar": "يفقد معلومات سريرية ويقطع استمرارية الرعاية."
+          }
+        }
+      ],
+      "why": [
+        {
+          "tag": "S",
+          "text": {
+            "en": "IMT.11 requires a downtime recovery process to protect data integrity. The hospital handbook does not spell out the rules.",
+            "ar": "IMT.11 يشترط عملية استرجاع بعد التوقف لحماية سلامة البيانات. دليل المستشفيات لا يفصّل القواعد."
+          }
+        },
+        {
+          "tag": "X",
+          "text": {
+            "en": "Author, date and time rules are in the PHC handbook (IMT.08), so for hospitals they are best practice, not a requirement.",
+            "ar": "قواعد الكاتب والتاريخ والوقت في دليل الرعاية الأولية (IMT.08)، فهي للمستشفيات ممارسة جيدة لا متطلب."
+          }
+        },
+        {
+          "tag": "I",
+          "text": {
+            "en": "Reconciliation is where duplicate doses happen. The loss window (02:00 to 11:05) is the real recovery point; GAHAR names no target.",
+            "ar": "المطابقة هي موضع تكرار الجرعات. نافذة الفقد (2:00 إلى 11:05) هي نقطة الاسترجاع الفعلية، وGAHAR لا يحدد هدفًا."
+          }
+        }
+      ],
+      "standards": [
+        "IMT.11"
+      ],
+      "realCase": {
+        "title": "VA new EHR 'unknown queue', USA, 2020-2022",
+        "text": "At Mann-Grandstaff VA, orders the new EHR did not recognise went to an unknown queue without alerting the clinician. Over 11,000 orders were not delivered; clinical review found 149 adverse events (VA Inspector General).",
+        "source": "VA OIG report 22-01137-204, 14 July 2022",
+        "status": "verified"
+      }
+    },
+    {
+      "id": 8,
+      "clock": "Day 3, 08:30",
+      "place": {
+        "en": "Daily briefing",
+        "ar": "الاجتماع اليومي"
+      },
+      "title": {
+        "en": "What could stop accreditation?",
+        "ar": "ما الذي قد يوقف الاعتماد؟"
+      },
+      "scene": {
+        "style": "photo",
+        "image": "img/dark-ward.jpg",
+        "lines": [
+          {
+            "t": "1",
+            "text": {
+              "en": "Downtime forms box: locked away yesterday",
+              "ar": "صندوق نماذج التوقف: كان مقفلًا أمس"
+            }
+          },
+          {
+            "t": "2",
+            "text": {
+              "en": "Screen: no connection",
+              "ar": "الشاشة: لا يوجد اتصال"
+            }
+          },
+          {
+            "t": "3",
+            "text": {
+              "en": "Nurse writing by phone torch",
+              "ar": "ممرضة تكتب على ضوء الهاتف"
+            }
+          },
+          {
+            "t": "4",
+            "text": {
+              "en": "Telephone: critical result by name only",
+              "ar": "الهاتف: نتيجة حرجة بالاسم فقط"
+            }
+          },
+          {
+            "t": "5",
+            "text": {
+              "en": "Clock: nobody timed the downtime declaration",
+              "ar": "الساعة: لم يقِس أحد زمن إعلان التوقف"
+            }
+          }
+        ]
+      },
+      "question": {
+        "en": "Which finding could stop accreditation on its own?",
+        "ar": "أي ملاحظة يمكن أن توقف الاعتماد وحدها؟"
+      },
+      "timeLimit": 60,
+      "options": [
+        {
+          "key": "A",
+          "text": {
+            "en": "Backup log never reviewed, restore never tested (IMT.12)",
+            "ar": "سجل النسخ لم يُراجع والاسترجاع لم يُختبر (IMT.12)"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Lowers the IMT chapter score but IMT.12 is not a GSR.",
+            "ar": "يخفض درجة فصل IMT لكن IMT.12 ليس GSR."
+          }
+        },
+        {
+          "key": "B",
+          "text": {
+            "en": "Critical-result records missing required elements across the sample (ICD.19 / GSR.03)",
+            "ar": "تسجيلات النتائج الحرجة ينقصها عناصر مطلوبة في العينة (ICD.19 / GSR.03)"
+          },
+          "score": 1000,
+          "knockout": false,
+          "feedback": {
+            "en": "Right: a GSR standard not met means rejection, whatever the overall score.",
+            "ar": "صحيح: عدم استيفاء معيار GSR يعني الرفض مهما كانت الدرجة الكلية."
+          }
+        },
+        {
+          "key": "C",
+          "text": {
+            "en": "Downtime kit locked away (IMT.11)",
+            "ar": "حقيبة التوقف مغلقة (IMT.11)"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Lowers IMT, but IMT.11 is not a GSR.",
+            "ar": "يخفض IMT لكن IMT.11 ليس GSR."
+          }
+        },
+        {
+          "key": "D",
+          "text": {
+            "en": "Server cupboard risks (IMT.06)",
+            "ar": "مخاطر دولاب الخوادم (IMT.06)"
+          },
+          "score": 0,
+          "knockout": false,
+          "feedback": {
+            "en": "Lowers IMT, but IMT.06 is not a GSR.",
+            "ar": "يخفض IMT لكن IMT.06 ليس GSR."
+          }
+        }
+      ],
+      "why": [
+        {
+          "tag": "G",
+          "text": {
+            "en": "Accreditation needs 80% overall, 70% per chapter, at most one whole standard not met, and no not-met GSR. One not-met GSR means rejection.",
+            "ar": "الاعتماد يتطلب 80% إجمالًا و70% لكل فصل وألا يزيد غير المستوفى عن معيار واحد كامل وألا يوجد GSR غير مستوفى. GSR واحد غير مستوفى يعني الرفض."
+          }
+        },
+        {
+          "tag": "S",
+          "text": {
+            "en": "GSR candidates today: ACT.03 / GSR.01, ICD.19 / GSR.03, EFS.11 / GSR.28. IMT.05, IMT.06, IMT.11 and IMT.12 are not GSR.",
+            "ar": "مرشحو GSR اليوم: ACT.03 / GSR.01 وICD.19 / GSR.03 وEFS.11 / GSR.28. أما IMT.05 وIMT.06 وIMT.11 وIMT.12 فليست GSR."
+          }
+        },
+        {
+          "tag": "G",
+          "text": {
+            "en": "A back-dated restore-test report is falsification. The legitimate route is a corrective action plan after the survey.",
+            "ar": "تقرير اختبار استرجاع بتاريخ سابق تزوير. الطريق المشروع هو خطة تصحيحية بعد المسح."
+          }
+        }
+      ],
+      "standards": [
+        "ICD.19",
+        "GSR.03",
+        "ACT.03",
+        "EFS.11",
+        "IMT.12"
+      ],
+      "realCase": {
+        "title": "WannaCry, NHS England, 2017",
+        "text": "At least 81 of 236 English NHS trusts were affected and 6,912 appointments cancelled. The national plan had not been tested at local level, so staff improvised, including on personal phones.",
+        "source": "National Audit Office, WannaCry cyber attack and the NHS, 27 Oct 2017",
+        "status": "verified"
+      }
+    }
+  ]
+}

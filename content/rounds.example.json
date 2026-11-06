@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": { "en": "Survey day at Canal General Hospital", "ar": "يوم المسح في مستشفى القناة العام" },
+    "hospital": "Canal General Hospital"
+  },
+  "rounds": [
+    {
+      "id": 1,
+      "clock": "10:40",
+      "place": { "en": "Medicine 3 ward", "ar": "عنبر الباطنة 3" },
+      "title": { "en": "The power cut", "ar": "انقطاع الكهرباء" },
+      "scene": {
+        "style": "feed",
+        "lines": [
+          { "t": "10:36", "who": "Ward", "tone": "normal", "text": { "en": "Morning round finished. HIS open on all ward PCs.", "ar": "انتهت الجولة الصباحية. نظام المعلومات يعمل على كل أجهزة العنبر." } },
+          { "t": "10:40", "who": "Facilities", "tone": "warn", "text": { "en": "Mains power lost in the east wing.", "ar": "انقطع التيار الرئيسي في الجناح الشرقي." } },
+          { "t": "10:40", "who": "Generator", "tone": "warn", "text": { "en": "Generator starting. Estimated 45 seconds.", "ar": "المولد قيد التشغيل. نحو 45 ثانية." } },
+          { "t": "10:41", "who": "HIS", "tone": "crit", "text": { "en": "Ward PCs have no connection to the HIS server.", "ar": "أجهزة العنبر فقدت الاتصال بخادم النظام." } },
+          { "t": "10:42", "who": "Nurse Amal", "tone": "crit", "text": { "en": "Three patients are due insulin and the electronic chart will not open.", "ar": "ثلاثة مرضى مستحقون للإنسولين والملف الإلكتروني لا يفتح." } }
+        ]
+      },
+      "question": { "en": "The HIS is down and insulin is due. What does the nurse in charge do first?", "ar": "النظام معطل وموعد الإنسولين حان. ما أول ما تفعله التمريض المسؤولة؟" },
+      "timeLimit": 40,
+      "options": [
+        { "key": "A", "text": { "en": "Switch to the downtime paper forms and give the doses against the paper medication chart", "ar": "التحول إلى نماذج الطوارئ الورقية وإعطاء الجرعات حسب جدول الدواء الورقي" }, "score": 1000, "knockout": false, "feedback": { "en": "Correct: paper downtime procedure keeps care safe.", "ar": "صحيح: إجراء الطوارئ الورقي يحافظ على سلامة الرعاية." } },
+        { "key": "B", "text": { "en": "Wait until the system is back before giving any insulin", "ar": "الانتظار حتى يعود النظام قبل إعطاء أي إنسولين" }, "score": 0, "knockout": true, "feedback": { "en": "Delaying time-critical medicine is a patient-safety failure.", "ar": "تأخير دواء حرج زمنيا يعد خللا في سلامة المريض." } },
+        { "key": "C", "text": { "en": "Give the doses from memory and enter them later", "ar": "إعطاء الجرعات من الذاكرة وتسجيلها لاحقا" }, "score": 0, "knockout": true, "feedback": { "en": "Giving medicine without a verified order is unsafe.", "ar": "إعطاء الدواء دون أمر موثق غير آمن." } },
+        { "key": "D", "text": { "en": "Ask a colleague on another ward to read the doses over the phone", "ar": "طلب زميل في عنبر آخر ليقرأ الجرعات عبر الهاتف" }, "score": 400, "knockout": false, "feedback": { "en": "Partly right: a verbal read-back is a risky stop-gap, paper is better.", "ar": "صحيح جزئيا: القراءة الشفهية حل مؤقت محفوف بالخطر والورق أفضل." } }
+      ],
+      "why": [
+        { "tag": "G", "text": { "en": "A written downtime procedure must exist and be known to staff.", "ar": "يجب وجود إجراء مكتوب لتعطل النظام ومعرفة الموظفين به." } },
+        { "tag": "S", "text": { "en": "Insulin is time-critical; the order source must stay verifiable.", "ar": "الإنسولين حرج زمنيا ويجب بقاء مصدر الأمر قابلا للتحقق." } },
+        { "tag": "E", "text": { "en": "Paper forms are back-entered after restore, with a reconciliation check.", "ar": "تدخل النماذج الورقية بعد الاستعادة مع مراجعة المطابقة." } }
+      ],
+      "standards": ["IMT.12", "MMU.01"],
+      "realCase": {
+        "title": "Illustrative downtime case",
+        "text": "Example text for development. A hospital lost its HIS for several hours; wards that held printed downtime forms kept medication on time.",
+        "source": "Example only (replace with real content)",
+        "status": "partly"
+      }
+    },
+    {
+      "id": 2,
+      "clock": "11:20",
+      "place": { "en": "Medicine 3 ward group chat", "ar": "مجموعة واتساب عنبر الباطنة 3" },
+      "title": { "en": "The critical potassium", "ar": "البوتاسيوم الحرج" },
+      "scene": {
+        "style": "chat",
+        "lines": [
+          { "t": "11:18", "who": "Lab", "tone": "crit", "text": { "en": "Bed 12: potassium 6.8, critical. Please acknowledge.", "ar": "سرير 12: بوتاسيوم 6.8 حرج. برجاء الإقرار." } },
+          { "t": "11:19", "who": "Amal", "tone": "normal", "text": { "en": "I cannot see it in the HIS, still down.", "ar": "لا أراه في النظام، ما زال معطلا." } },
+          { "t": "11:19", "who": "Dr Hany", "tone": "warn", "text": { "en": "Who is on the phone with the lab?", "ar": "من يتحدث مع المعمل على الهاتف؟" } },
+          { "t": "11:20", "tone": "crit", "text": { "en": "Critical result not yet acknowledged: 2 minutes", "ar": "نتيجة حرجة بلا إقرار: دقيقتان" } }
+        ]
+      },
+      "question": { "en": "A critical result arrives by phone during downtime. What must the nurse do?", "ar": "وصلت نتيجة حرجة بالهاتف أثناء التعطل. ماذا يجب على الممرضة؟" },
+      "timeLimit": 40,
+      "options": [
+        { "key": "A", "text": { "en": "Write it down, read it back to the lab, tell the doctor now and record the time", "ar": "تدونها، وتعيد قراءتها للمعمل، وتبلغ الطبيب فورا وتسجل الوقت" }, "score": 1000, "knockout": false, "feedback": { "en": "Correct: read-back, immediate escalation, time recorded.", "ar": "صحيح: إعادة القراءة والتصعيد الفوري وتسجيل الوقت." } },
+        { "key": "B", "text": { "en": "Wait for the HIS to come back and then check the value", "ar": "الانتظار حتى يعود النظام ثم مراجعة القيمة" }, "score": 0, "knockout": true, "feedback": { "en": "A critical value cannot wait for the system.", "ar": "القيمة الحرجة لا تنتظر النظام." } },
+        { "key": "C", "text": { "en": "Tell the doctor at the next round", "ar": "إبلاغ الطبيب في الجولة القادمة" }, "score": 0, "knockout": false, "feedback": { "en": "Too late: critical results need immediate escalation.", "ar": "متأخر: النتائج الحرجة تتطلب تصعيدا فوريا." } },
+        { "key": "D", "text": { "en": "Tell the doctor now but do not write anything down", "ar": "إبلاغ الطبيب الآن دون تدوين أي شيء" }, "score": 400, "knockout": false, "feedback": { "en": "Partly right: fast, but there is no record of who was told and when.", "ar": "صحيح جزئيا: سريع لكن بلا سجل لمن أبلغ ومتى." } }
+      ],
+      "why": [
+        { "tag": "S", "text": { "en": "Critical results must reach a clinician within a defined time.", "ar": "يجب أن تصل النتائج الحرجة إلى الطبيب خلال زمن محدد." } },
+        { "tag": "G", "text": { "en": "Read-back and a time-stamped note keep the chain auditable.", "ar": "إعادة القراءة والتدوين بالوقت يحفظان سلسلة قابلة للمراجعة." } }
+      ],
+      "standards": ["IMT.12"],
+      "realCase": {
+        "title": "Illustrative critical result case",
+        "text": "Example text for development. A critical value phoned during downtime was not recorded and the patient was reviewed late.",
+        "source": "Example only (replace with real content)",
+        "status": "partly"
+      }
+    }
+  ]
+}

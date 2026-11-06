@@ -1,0 +1,256 @@
+# Arabic check list
+Every Arabic string drafted by the model (not copied from the source `BEATS` array), grouped by round, for a native-speaker check. Question and option Arabic was copied from the existing simulation (`records-survey-sim/index.html`) and is not listed. Chat lines use Egyptian colloquial; everything else is Modern Standard Arabic. Where a chat line's Arabic is the original and the English is the translation, both are shown as en | ar.
+
+## Meta
+- [meta.title] Survey day at Canal General Hospital
+  - AR: يوم المسح في مستشفى القناة العام
+
+## Round 1
+- [place] Meeting room · IMT tracer, interactive session
+  - AR: قاعة الاجتماعات · تتبّع IMT التفاعلي
+- [title] "How do you know last night's backup worked?"
+  - AR: «كيف تعرفون أن نسخة الليلة الماضية نجحت؟»
+- [scene] Backup job started: OK
+  - AR: بدأت مهمة النسخ الاحتياطي: ناجحة
+- [scene] Backup finished. Verification: SKIPPED (warning)
+  - AR: انتهى النسخ. التحقق: لم يتم (تحذير)
+- [scene] Same warning every night. Nobody opened it.
+  - AR: نفس التحذير كل ليلة. لم يفتحه أحد.
+- [scene] Restore test: no record
+  - AR: اختبار الاسترجاع: لا يوجد سجل
+- [scene] Reviewed by: (blank)
+  - AR: راجعه: (فارغ)
+- [scene] The surveyor waits for an answer.
+  - AR: المُقيِّمة تنتظر الإجابة.
+- [feedback] Right: honesty keeps trust, and the gaps (IMT.12 items 3 and 5) are already known.
+  - AR: صحيح: الصراحة تحفظ الثقة، والثغرات معروفة أصلًا.
+- [feedback] Allowed, but a report written tonight cannot cover the look-back period.
+  - AR: مسموح، لكن تقريرًا يُكتب الليلة لا يغطي فترة المراجعة السابقة.
+- [feedback] A policy proves the plan exists, not that it was followed. The surveyor will ask for the log.
+  - AR: السياسة تثبت وجود الخطة لا تنفيذها. ستطلب المُقيِّمة السجل.
+- [feedback] Falsification: altered documents risk rejection or withdrawal of accreditation.
+  - AR: تزوير: المستندات المعدّلة تعرّض الاعتماد للرفض أو السحب.
+- [why] IMT.12 evidence: scheduled backups, a tested restore for every new system, and a backup log reviewed for exceptions.
+  - AR: أدلة IMT.12: نسخ مجدولة، واسترجاع مُختبر لكل نظام جديد، وسجل نسخ يُراجع بحثًا عن الاستثناءات.
+- [why] A document that did not exist in the look-back period (at least four months) does not show compliance for that period.
+  - AR: مستند لم يكن موجودًا خلال فترة المراجعة (أربعة أشهر على الأقل) لا يثبت الالتزام خلالها.
+- [why] IMT.12 is not a GSR. A weak backup lowers the IMT score; it does not reject the hospital alone. Falsifying does.
+  - AR: IMT.12 ليس GSR. ضعف النسخ الاحتياطي يخفض درجة IMT ولا يرفض المستشفى وحده، أما التزوير فيفعل.
+
+## Round 2
+- [place] Medical record room · paper walk
+  - AR: غرفة السجلات الطبية · جولة الملفات الورقية
+- [title] The file that is "with Dr. Sherif"
+  - AR: الملف الذي «مع د. شريف»
+- [scene] Two of the three files are on the shelf.
+  - AR: اتنين من التلات ملفات لقيناهم على الرف.
+- [scene] The third: logbook says "with Dr. Sherif", 3 weeks ago.
+  - AR: الثالث في الدفتر: «مع د. شريف» من ٣ أسابيع
+- [scene] I called his office twice. He said he will send it.
+  - AR: كلمت مكتبه مرتين، قال هبعته
+- [scene] Nobody is assigned to chase a file after one week.
+  - AR: مفيش حد مسؤول يطلب الملف بعد أسبوع
+- [scene] The logbook is the evidence. Please show me how a late file is chased.
+  - AR: دفتر الحركة هو الدليل. من فضلكم وضّحوا كيف يُتابَع الملف المتأخر.
+- [feedback] Too early: one file is an anecdote, not a compliance rate.
+  - AR: مبكر جدًا: ملف واحد حكاية وليس نسبة التزام.
+- [feedback] Right: more evidence turns an anecdote into a measured finding.
+  - AR: صحيح: المزيد من الأدلة يحوّل الحكاية إلى نتيجة مقاسة.
+- [feedback] Surveyors do not give advice, and a purchase is not a process.
+  - AR: المُقيِّمون لا يقدمون نصائح، والشراء ليس عملية.
+- [feedback] Misses a real availability risk: nobody owns the return of files.
+  - AR: يتجاهل خطر توفر الملفات: لا أحد مسؤول عن إرجاعها.
+- [why] IMT.08: the record policy covers flow, tracking, storage and availability. Surveyors check the movement logbook.
+  - AR: IMT.08: سياسة السجل تشمل التدفق والتتبع والتخزين والإتاحة. يفحص المُقيِّمون دفتر حركة الملفات.
+- [why] Surveyors judge the process, not people, and collect more evidence when a concern appears.
+  - AR: يُقيِّم المُقيِّمون العملية لا الأشخاص، ويجمعون أدلة إضافية عند ظهور قلق.
+- [why] Three weeks out suggests nobody owns file return: a workflow problem, not a clerk problem.
+  - AR: ثلاثة أسابيع خارج الغرفة تعني أن لا أحد مسؤول عن الإرجاع: مشكلة سير عمل لا مشكلة موظف.
+
+## Round 3
+- [place] Ward 4 nursing station · electronic walk
+  - AR: محطة تمريض العنبر 4 · الجولة الإلكترونية
+- [title] Two men with one name
+  - AR: رجلان بنفس الاسم
+- [scene] Logged in as: Nurse Hoda (screen left unlocked)
+  - AR: مسجّل الدخول باسم: الممرضة هدى (الشاشة مفتوحة)
+- [scene] "Mohamed Ahmed Hassan": 2 results
+  - AR: «محمد أحمد حسن»: نتيجتان
+- [scene] Mohamed Ahmed Hassan, 61, chest pain
+  - AR: محمد أحمد حسن، 61، ألم بالصدر
+- [scene] Mohamed Ahmed Hassan, 58, kidney disease
+  - AR: محمد أحمد حسن، 58، مرض كلوي
+- [scene] Shows: BED 12. No name, no ID number.
+  - AR: المكتوب: سرير 12. لا اسم ولا رقم هوية.
+- [scene] Sticky note with a password
+  - AR: ورقة لاصقة عليها كلمة مرور
+- [feedback] A real IMT.05 finding, but the clinical harm is lower than a wrong-patient event.
+  - AR: ملاحظة حقيقية في IMT.05، لكن الضرر السريري أقل من خطأ تحديد المريض.
+- [feedback] Right: a wrong-patient event is the harm, and ACT.03 / GSR.01 makes identification a knock-out.
+  - AR: صحيح: خطأ تحديد المريض هو الضرر، وACT.03 / GSR.01 يجعل التعريف شرطًا حاسمًا.
+- [feedback] A real security finding, with lower immediate clinical risk.
+  - AR: ملاحظة أمنية حقيقية، لكن خطرها السريري المباشر أقل.
+- [feedback] Linked to B: the duplicate makes a wrong-patient event more likely.
+  - AR: مرتبطة بالخيار ب: التكرار يزيد احتمال خطأ تحديد المريض.
+- [why] ACT.03 / GSR.01: two patient identifiers at every point of care. A bed or room number is not an identifier.
+  - AR: ACT.03 / GSR.01: معرّفان للمريض عند كل نقطة رعاية. رقم السرير أو الغرفة ليس معرّفًا.
+- [why] One not-met GSR means rejection. The unlocked screen (IMT.05) lowers a score but is not a GSR.
+  - AR: عدم استيفاء GSR واحد يعني الرفض. الشاشة المفتوحة (IMT.05) تخفض الدرجة لكنها ليست GSR.
+- [why] Arabic names transliterate many ways (Mohamed / Mohammed), which creates duplicates at registration. No Egyptian prevalence data found.
+  - AR: الأسماء العربية تُكتب بصيغ متعددة (محمد / Mohamed / Mohammed) فتنتج ملفات مكررة عند التسجيل. لا توجد بيانات مصرية عن الانتشار.
+
+## Round 4
+- [place] Server cupboard, ground-floor corridor
+  - AR: دولاب الخوادم، ممر الدور الأرضي
+- [title] Where the data lives
+  - AR: أين توجد البيانات
+- [scene] A pipe runs above the cabinet
+  - AR: ماسورة تمر فوق الدولاب
+- [scene] The server sits on the top shelf
+  - AR: الخادم على الرف العلوي
+- [scene] The backup disk is in the same cupboard
+  - AR: قرص النسخ الاحتياطي في نفس الدولاب
+- [scene] The door is open, in a public corridor
+  - AR: الباب مفتوح في ممر عام
+- [scene] No smoke detector in sight
+  - AR: لا يظهر كاشف دخان
+- [feedback] Real, and it threatens server and backup together, but the shared location is the root problem.
+  - AR: حقيقية وتهدد الخادم والنسخة معًا، لكن اشتراكهما في مكان واحد هو أصل المشكلة.
+- [feedback] Right: one event (water, fire, theft, ransomware) destroys both copies.
+  - AR: صحيح: حدث واحد (ماء أو حريق أو سرقة أو فدية) يدمّر النسختين.
+- [feedback] A real fire risk under IMT.06, but not the first thing to record here.
+  - AR: خطر حريق حقيقي ضمن IMT.06، لكنه ليس أول ما يُسجَّل هنا.
+- [feedback] A real access risk (IMT.05, IMT.06), but it does not cause total data loss.
+  - AR: خطر وصول حقيقي (IMT.05 وIMT.06)، لكنه لا يسبب فقدانًا كاملًا للبيانات.
+- [why] IMT.12 intent: a backup is a copy stored in a location separate from the original.
+  - AR: مقصد IMT.12: النسخة الاحتياطية تُحفظ في مكان منفصل عن الأصل.
+- [why] IMT.06: records protected from loss and unauthorised access. All four options are real findings; the order is the skill.
+  - AR: IMT.06: حماية السجلات من الفقد والوصول غير المصرح. الخيارات الأربعة ملاحظات حقيقية، والمهارة في الترتيب.
+- [why] Off-site, offline or immutable copies and recovery targets are good practice beyond GAHAR. The handbook names none.
+  - AR: النسخ خارج الموقع أو غير المتصلة أو غير القابلة للتعديل وأهداف الاسترجاع ممارسات جيدة تتجاوز GAHAR. الدليل لا يذكرها.
+
+## Round 5
+- [place] Ward 4 · inject
+  - AR: العنبر 4 · حدث طارئ
+- [title] The lights go out
+  - AR: انقطاع الكهرباء
+- [scene] 11:00 medication round starts on Ward 4.
+  - AR: بدأت جولة أدوية الساعة 11 في العنبر 4.
+- [scene] MAINS POWER LOST. Ward in darkness.
+  - AR: انقطاع الكهرباء. العنبر في ظلام.
+- [scene] Generator started. Emergency lights on.
+  - AR: اشتغل المولد. إضاءة الطوارئ تعمل.
+- [scene] Generator tripped under load. Server on UPS only.
+  - AR: فصل المولد تحت الحمل. الخادم على البطارية فقط.
+- [scene] HIS: connection lost on all ward PCs.
+  - AR: النظام: فُقد الاتصال في كل أجهزة العنبر.
+- [scene] "Where is the downtime kit key?" Nobody knows.
+  - AR: «فين مفتاح حقيبة التوقف؟» محدش عارف.
+- [feedback] Right: the program exists so nobody has to improvise. Downtime starts when care is affected.
+  - AR: صحيح: البرنامج موجود حتى لا يرتجل أحد. يبدأ التوقف عندما تتأثر الرعاية.
+- [feedback] Delay is the risk. Do not wait for IT to agree that care is affected.
+  - AR: التأخير هو الخطر. لا تنتظري موافقة تقنية المعلومات على أن الرعاية تأثرت.
+- [feedback] Better than nothing, but no structure, no identifiers and hard to reconcile later.
+  - AR: أفضل من لا شيء، لكن بلا هيكل ولا معرّفات ويصعب مطابقته لاحقًا.
+- [feedback] Unsafe: omitting time-critical medicines is itself a harm.
+  - AR: غير آمن: ترك أدوية حساسة للوقت ضرر في حد ذاته.
+- [why] IMT.11: a downtime program with paper forms, a recovery process, staff training and an annual test.
+  - AR: IMT.11: برنامج للتوقف يشمل نماذج ورقية وعملية استرجاع وتدريب العاملين واختبارًا سنويًا.
+- [why] EFS.11 / GSR.28: the generator must be tested with and without load. One that trips under load puts a GSR at risk.
+  - AR: EFS.11 / GSR.28: يجب اختبار المولد بحمل وبدونه. المولد الذي يفصل تحت الحمل يعرّض GSR للخطر.
+- [why] The kit is locked in the head nurse's office and she is on leave: a plan nobody can open is a plan on paper only.
+  - AR: الحقيبة مقفلة في مكتب رئيسة التمريض وهي في إجازة: خطة لا يستطيع أحد فتحها خطة على الورق فقط.
+
+## Round 6
+- [place] Ward 4 · telephone
+  - AR: العنبر 4 · الهاتف
+- [title] Potassium 6.9
+  - AR: بوتاسيوم 6.9
+- [scene] HIS and the lab interface are still down.
+  - AR: النظام وواجهة المعمل لسه واقفين.
+- [scene] K 6.9 critical, Mohamed Ahmed Hassan. ضروري
+  - AR: بوتاسيوم 6.9 حرج، محمد أحمد حسن. ضروري
+- [scene] Which one? We have two Mohamed Ahmed Hassan, bed 12 and bed 13.
+  - AR: مين فيهم؟ عندنا اتنين محمد أحمد حسن، سرير ١٢ وسرير ١٣
+- [scene] The request slip has no file number.
+  - AR: ورقة الطلب مفيهاش رقم الملف
+- [scene] ok will see
+  - AR: تمام هشوف
+- [scene] Nurse writes on the downtime form. What must it record?
+  - AR: الممرضة تكتب في نموذج التوقف. ماذا يجب أن يتضمن؟
+- [feedback] Name alone cannot separate the two men: identification by one identifier breaches GSR.01.
+  - AR: الاسم وحده لا يميّز بين الرجلين: التعريف بمعرّف واحد يخالف GSR.01.
+- [feedback] Missing the patient identifiers, who received it, read-back and escalation.
+  - AR: ينقصه معرّفات المريض ومن استلم وإعادة القراءة والتصعيد.
+- [feedback] Right: all GSR.03 elements plus two identifiers, so the right man gets the right treatment.
+  - AR: صحيح: كل عناصر GSR.03 مع معرّفين، فيصل العلاج للمريض الصحيح.
+- [feedback] Unsafe and outside any record. It also exposes the result and does not close the loop.
+  - AR: غير آمن وخارج أي سجل، ويكشف النتيجة ولا يغلق الحلقة.
+- [why] ICD.19 / GSR.03: the record shows date and time, who notified, who was notified, the result, escalation and read-back.
+  - AR: ICD.19 / GSR.03: يوثّق السجل التاريخ والوقت ومن أبلغ ومن تلقى والنتيجة والتصعيد وإعادة القراءة.
+- [why] ACT.03 / GSR.01: two identifiers. Two GSR standards meet in one phone call.
+  - AR: ACT.03 / GSR.01: معرّفان للمريض. معيارا GSR يلتقيان في مكالمة واحدة.
+- [why] SAFER guide on test results: closing the loop on critical results is a named practice.
+  - AR: دليل SAFER لنتائج الفحوص: إغلاق الحلقة في النتائج الحرجة ممارسة منصوص عليها.
+
+## Round 7
+- [place] IT office and Ward 4 · recovery
+  - AR: مكتب تقنية المعلومات والعنبر 4 · الاسترجاع
+- [title] The system comes back without the morning
+  - AR: النظام يعود بدون الصباح
+- [scene] Restore point: database from the 02:00 backup.
+  - AR: نقطة الاسترجاع: قاعدة البيانات من نسخة الساعة 2:00.
+- [scene] 02:00 to 11:05: not in the HIS
+  - AR: من 2:00 إلى 11:05: غير موجود في النظام
+- [scene] 46 paper sheets waiting for entry
+  - AR: 46 ورقة تنتظر الإدخال
+- [scene] "I can enter all 46 under my login. Faster."
+  - AR: «أقدر أدخل الـ 46 كلهم بحسابي. أسرع.»
+- [scene] 11:00 doses given on paper may be given again
+  - AR: جرعات الساعة 11 المعطاة على الورق قد تُعطى مرة أخرى
+- [scene] Keep until entry is checked
+  - AR: تُحفظ حتى يتم التحقق من الإدخال
+- [feedback] Breaks authorship and timing: it will look as if the clerk ordered everything at 13:40.
+  - AR: يكسر نسبة الكاتب والتوقيت: سيبدو كأن الموظفة كتبت كل شيء الساعة 13:40.
+- [feedback] Right: it preserves author, true time and the downtime trail.
+  - AR: صحيح: يحفظ الكاتب والوقت الحقيقي وأثر التوقف.
+- [feedback] Keeps the evidence, but nothing is searchable, alerting or reviewable.
+  - AR: يحفظ الدليل لكن لا شيء قابل للبحث أو التنبيه أو المراجعة.
+- [feedback] Loses clinical information and breaks continuity of care.
+  - AR: يفقد معلومات سريرية ويقطع استمرارية الرعاية.
+- [why] IMT.11 requires a downtime recovery process to protect data integrity. The hospital handbook does not spell out the rules.
+  - AR: IMT.11 يشترط عملية استرجاع بعد التوقف لحماية سلامة البيانات. دليل المستشفيات لا يفصّل القواعد.
+- [why] Author, date and time rules are in the PHC handbook (IMT.08), so for hospitals they are best practice, not a requirement.
+  - AR: قواعد الكاتب والتاريخ والوقت في دليل الرعاية الأولية (IMT.08)، فهي للمستشفيات ممارسة جيدة لا متطلب.
+- [why] Reconciliation is where duplicate doses happen. The loss window (02:00 to 11:05) is the real recovery point; GAHAR names no target.
+  - AR: المطابقة هي موضع تكرار الجرعات. نافذة الفقد (2:00 إلى 11:05) هي نقطة الاسترجاع الفعلية، وGAHAR لا يحدد هدفًا.
+
+## Round 8
+- [place] Daily briefing
+  - AR: الاجتماع اليومي
+- [title] What could stop accreditation?
+  - AR: ما الذي قد يوقف الاعتماد؟
+- [scene] Downtime forms box: locked away yesterday
+  - AR: صندوق نماذج التوقف: كان مقفلًا أمس
+- [scene] Screen: no connection
+  - AR: الشاشة: لا يوجد اتصال
+- [scene] Nurse writing by phone torch
+  - AR: ممرضة تكتب على ضوء الهاتف
+- [scene] Telephone: critical result by name only
+  - AR: الهاتف: نتيجة حرجة بالاسم فقط
+- [scene] Clock: nobody timed the downtime declaration
+  - AR: الساعة: لم يقِس أحد زمن إعلان التوقف
+- [feedback] Lowers the IMT chapter score but IMT.12 is not a GSR.
+  - AR: يخفض درجة فصل IMT لكن IMT.12 ليس GSR.
+- [feedback] Right: a GSR standard not met means rejection, whatever the overall score.
+  - AR: صحيح: عدم استيفاء معيار GSR يعني الرفض مهما كانت الدرجة الكلية.
+- [feedback] Lowers IMT, but IMT.11 is not a GSR.
+  - AR: يخفض IMT لكن IMT.11 ليس GSR.
+- [feedback] Lowers IMT, but IMT.06 is not a GSR.
+  - AR: يخفض IMT لكن IMT.06 ليس GSR.
+- [why] Accreditation needs 80% overall, 70% per chapter, at most one whole standard not met, and no not-met GSR. One not-met GSR means rejection.
+  - AR: الاعتماد يتطلب 80% إجمالًا و70% لكل فصل وألا يزيد غير المستوفى عن معيار واحد كامل وألا يوجد GSR غير مستوفى. GSR واحد غير مستوفى يعني الرفض.
+- [why] GSR candidates today: ACT.03 / GSR.01, ICD.19 / GSR.03, EFS.11 / GSR.28. IMT.05, IMT.06, IMT.11 and IMT.12 are not GSR.
+  - AR: مرشحو GSR اليوم: ACT.03 / GSR.01 وICD.19 / GSR.03 وEFS.11 / GSR.28. أما IMT.05 وIMT.06 وIMT.11 وIMT.12 فليست GSR.
+- [why] A back-dated restore-test report is falsification. The legitimate route is a corrective action plan after the survey.
+  - AR: تقرير اختبار استرجاع بتاريخ سابق تزوير. الطريق المشروع هو خطة تصحيحية بعد المسح.

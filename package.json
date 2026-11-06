@@ -1,0 +1,16 @@
+{
+  "name": "play-his1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun src/main.ts",
+    "dev": "sh scripts/dev.sh",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "bun test --timeout=30000",
+    "check": "bun run typecheck && bun test --timeout=30000"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2",
+    "typescript": "5.9.3"
+  }
+}

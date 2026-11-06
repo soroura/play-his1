@@ -1,0 +1,26 @@
+:root{--ink:#1b1035;--muted:#5a5570;--line:#d9d6e3;--bg:#f6f4fb;--ok:#1c6e0a;--bad:#a3101c;--warn:#8a6100}
+*{box-sizing:border-box}
+body.doc{font-family:'IBM Plex Sans','IBM Plex Sans Arabic',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;margin:0}
+.page{max-width:820px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:30px;margin:0 0 6px}h2{font-size:21px;margin:26px 0 8px;border-bottom:2px solid var(--line);padding-bottom:4px}
+.lead,.muted{color:var(--muted)}
+ul,ol{padding-inline-start:22px}li{margin:6px 0}
+code,kbd{font-family:'IBM Plex Mono',monospace;background:#fff;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.92em}
+table{border-collapse:collapse;width:100%}td{border-bottom:1px solid var(--line);padding:8px 6px;vertical-align:top}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;text-align:center}
+.stat b{display:block;font-size:30px}
+.rcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;margin:16px 0;break-inside:avoid}
+.rcard h3{margin:0 0 4px;font-size:19px}
+.badge{display:inline-block;border-radius:4px;padding:2px 10px;font-size:14px;font-weight:600;color:#fff}
+.badge.best{background:var(--ok)}.badge.partly{background:var(--warn)}.badge.wrong,.badge.none{background:#6b6680}.badge.knockout{background:var(--bad)}
+.ans{margin:8px 0;padding:8px 12px;border-radius:6px;border:1px solid var(--line)}
+.ans.you{border-color:var(--ink)}.ans.bestans{background:#eaf6e6;border-color:#9bd08d}
+.ans small{display:block;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.tag{display:inline-block;font:600 12px 'IBM Plex Mono',monospace;border:1px solid var(--ink);border-radius:3px;padding:0 5px;margin-inline-end:6px}
+.std span{display:inline-block;font:500 13px 'IBM Plex Mono',monospace;border:1px solid var(--line);border-radius:4px;padding:1px 7px;margin:2px 4px 2px 0}
+.case{background:#faf8ff;border-inline-start:4px solid var(--ink);padding:8px 12px;margin-top:10px}
+.bar{display:flex;gap:8px;margin:14px 0}
+.bar button{background:var(--ink);color:#fff;border:0;border-radius:6px;padding:10px 16px;font:inherit;cursor:pointer}
+.bar button.sec{background:#fff;color:var(--ink);border:1px solid var(--ink)}
+@media print{body.doc{background:#fff}.bar{display:none}.rcard,.stat{border-color:#999}.page{padding:0}a{color:inherit}}

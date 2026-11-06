@@ -1,0 +1,44 @@
+# play-his1 CI/CD: Woodpecker ONLY deploys to the shared VPS over OpenSSH tar-stream. No installs or tests here (the 8 GB VPS is shared).
+# RELEASE PATH: runs on push to main (and manually). Deploys ONLY a head commit whose message carries 'Play-check: pass YYYY-MM-DD N',
+# written by scripts/release-commit.sh after scripts/play-check.sh passed on exactly that tree. [CI SKIP] is for docs-only pushes.
+# No submodule, so no clone override is needed.
+# ASCII ONLY in executed lines. Secrets (Woodpecker UI, same names as play-emt): VPS_HOST (172.17.0.1), VPS_USER, VPS_SSH_KEY.
+
+when:
+  - event: [push, manual]
+    branch: main
+
+steps:
+  - name: verify
+    image: alpine:3.20
+    commands:
+      - sh scripts/ci-verify.sh
+      - printf '%s\n' "$CI_COMMIT_SHA" > RELEASE_SHA
+      - test -s RELEASE_SHA
+
+  - name: deploy
+    image: alpine:3.20
+    depends_on: [verify]
+    environment:
+      VPS_HOST:
+        from_secret: VPS_HOST
+      VPS_USER:
+        from_secret: VPS_USER
+      VPS_SSH_KEY:
+        from_secret: VPS_SSH_KEY
+    commands:
+      - apk add --no-cache openssh-client tar
+      - |
+        if [ -z "$VPS_HOST" ] || [ -z "$VPS_USER" ] || [ -z "$VPS_SSH_KEY" ]; then
+          echo "ERROR: missing VPS deployment secret - check the names match the Woodpecker UI exactly"
+          exit 1
+        fi
+      - mkdir -p ~/.ssh
+      - printf '%s\n' "$VPS_SSH_KEY" | tr -d '\r' > ~/.ssh/id_deploy
+      - chmod 600 ~/.ssh/id_deploy
+      - ssh-keygen -y -f ~/.ssh/id_deploy >/dev/null
+      - export TARGET=/opt/play-his1
+      - export SSH_OPTS="-i ~/.ssh/id_deploy -p 22 -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=20 -o ServerAliveCountMax=6 -o ConnectTimeout=20"
+      - export REMOTE="$VPS_USER@$VPS_HOST"
+      - sh scripts/ci-gate.sh
+      - sh scripts/ci-upload.sh

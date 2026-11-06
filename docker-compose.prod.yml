@@ -1,0 +1,33 @@
+name: play-his1
+services:
+  play-app:
+    image: play-his1-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RELEASE_SHA: ${RELEASE_SHA:-unknown}   # baked into the image, not set at container start
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+    mem_limit: 384m
+    cpus: 1.0
+    tmpfs:
+      - /tmp:size=64m,mode=1777   # the backup copy never reaches the disk; counts against mem_limit
+    env_file: .env
+    environment:
+      PORT: "8098"
+      NODE_ENV: production   # pinned: environment beats env_file, so the server .env cannot undo these
+      PLAY_DB: /data/play.sqlite
+    ports:
+      - "${HOST_BIND_IP:-172.17.0.1}:${HOST_APP_PORT:-8098}:8098"
+    volumes:
+      # Host directory (owned by uid 1000, the image's bun user; deploy.sh creates it). Survives every deploy.
+      - ${PLAY_DATA_DIR:-/opt/play-his1/data}:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:8098/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Join the survey game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Arabic:wght@400;600&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<main class="screen" id="root">
+  <div class="center" style="justify-content:flex-start;padding-top:24px;align-items:stretch;text-align:start">
+    <div class="display" style="font-size:44px;color:var(--gold)">Survey day</div>
+    <div class="sub" id="hospital">Records survey simulation</div>
+    <form id="f" autocomplete="off" style="margin-top:10px">
+      <div class="field"><label for="code" id="lcode">Room code</label><input id="code" class="code" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="0000"></div>
+      <div class="field"><label for="nick" id="lnick">Nickname</label><input id="nick" maxlength="20" autocapitalize="words" placeholder="Your name"></div>
+      <div class="field"><label id="llang">Language</label>
+        <div class="seg"><button type="button" data-l="en" class="on">English</button><button type="button" data-l="ar">العربية</button></div></div>
+      <button class="btn" id="go" type="submit" style="width:100%">Join</button>
+      <div class="err" id="err" role="alert"></div>
+    </form>
+  </div>
+</main>
+<script src="/js/common.js"></script>
+<script src="/js/join.js"></script>
+</body>
+</html>
