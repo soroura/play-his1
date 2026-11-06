@@ -45,5 +45,5 @@ if [ "$PRINT" = "1" ]; then
   echo "$TRAILER"
   exit 0
 fi
-git commit --allow-empty -q -m "$SUBJECT" -m "$TRAILER" -m "Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+git commit --allow-empty -q -m "$SUBJECT" -m "$TRAILER" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 echo "release-commit: created $(git rev-parse --short HEAD) with trailer '$TRAILER'. Next: git push origin main (never with [CI SKIP])."
