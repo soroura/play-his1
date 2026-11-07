@@ -667,3 +667,7 @@ All Arabic below is drafted by the model and needs a native-speaker check. Round
   - AR: لو سألت مُقيِّمة اليوم عن مدة احتفاظكم بتقرير أشعة، فماذا تعرضون ومن اعتمدها؟
 
 - R1 why look-back wording (first survey vs re-survey), R4 callout 5 (extinguisher) Arabic edited by Opus, 2026-11-06: needs native check.
+
+## Added with the phone and self-paced settings (2026-11-07)
+
+The player screens (`public/js/play.js`, `T.ar`) gained model-drafted strings that also need a native check: `howPhones`, `howSelf`, `showAll`, `goQ`, `waitQ`, `reread`, `why`, `real`, `reported`, `source`, `std`, `nextRound`, `seeResult`, `done`, `doneSub`, `waitNext`. Real-case text stays in English, as it does in the report.

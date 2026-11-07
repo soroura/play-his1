@@ -1,6 +1,22 @@
 # Facilitator run sheet
 
-Live online session, about 60 to 75 minutes for the core rounds (the picker shows the estimate for your selection). Players use their own phones or laptops; you share the host screen.
+Live online session, about 60 to 75 minutes for the core rounds (the picker shows the estimate for your selection). Players use their own phones or laptops; you share the host screen. The steps and timings below are for the shared-screen setting.
+
+## Settings: how people follow the scenario
+
+Create game asks for one of three:
+
+| Setting | Who sets the pace | Where the scene and full feedback appear | Timer and speed bonus |
+|---|---|---|---|
+| Shared screen | You | Shared screen | Yes |
+| Phones, you set the pace | You | Every phone (and the host screen, if you share it) | Yes |
+| Phones, each at their own speed | Each person | Every phone | No |
+
+**Self-paced.** Nobody starts until you press Open the exercise; after that, anyone who joins starts at round 1. Your screen is a progress board: where each person is, points, Knock-outs, and per round how many chose the best answer. Use that table for the debrief. People can stop and come back on the same phone and browser. End exercise stops everyone and shows the podium; reports then show every round. Presenter notes show the key messages instead of following a round.
+
+## Other facilitators
+
+With the main PIN, open `/host/team`, add a name and copy the message into chat (the PIN is shown only once). Each person gets their own room and code, so several groups can run at once and nobody can end another group's game. They can read all rounds and answers. New PIN replaces a lost one and logs that person out. Remove stops access at once and ends any room they have open; its players keep their reports. To co-run one game, log in with the same PIN on two devices.
 
 ## Before the day: check the rounds
 

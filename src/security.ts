@@ -1,4 +1,4 @@
-import { createHmac, timingSafeEqual } from "node:crypto";
+import { createHmac, randomInt, timingSafeEqual } from "node:crypto";
 
 export const COOKIE_NAME = "play_host";
 const SESSION_MS = 12 * 3600 * 1000;
@@ -13,19 +13,34 @@ export function safeEqual(a: string, b: string): boolean {
   return timingSafeEqual(ha, hb);
 }
 
-export function makeHostToken(secret: string, now = Date.now()): string {
-  const exp = String(now + SESSION_MS);
-  return `${exp}.${sign(secret, "host:" + exp)}`;
+/** Eight random digits for an added facilitator. Shown once; only the hash is stored. */
+export function newPin(): string {
+  return String(randomInt(10_000_000, 100_000_000));
 }
 
-export function verifyHostToken(secret: string, token: string | undefined, now = Date.now()): boolean {
-  if (!token) return false;
-  const i = token.indexOf(".");
-  if (i < 1) return false;
-  const exp = token.slice(0, i);
-  const sig = token.slice(i + 1);
-  if (!/^\d+$/.test(exp) || Number(exp) < now) return false;
-  return safeEqual(sig, sign(secret, "host:" + exp));
+export function hashPin(secret: string, pin: string): string {
+  return sign(secret, "pin:" + pin);
+}
+
+/**
+ * Cookie value: `<facilitator id>.<expiry>.<signature>`. The signature also covers `key` (a hash of that
+ * facilitator's PIN), so changing a PIN or removing a person ends their existing logins.
+ */
+export function makeHostToken(secret: string, id: number, key: string, now = Date.now()): string {
+  const exp = String(now + SESSION_MS);
+  return `${id}.${exp}.${sign(secret, `host:${id}:${key}:${exp}`)}`;
+}
+
+/** Returns the facilitator id, or null. `keyOf` gives the current key for an id, or null if that id no longer exists. */
+export function verifyHostToken(secret: string, token: string | undefined, keyOf: (id: number) => string | null, now = Date.now()): number | null {
+  if (!token) return null;
+  const m = /^(\d{1,12})\.(\d{1,16})\.([0-9a-f]{64})$/.exec(token);
+  if (!m) return null;
+  const id = Number(m[1]);
+  if (Number(m[2]) < now) return null;
+  const key = keyOf(id);
+  if (key === null) return null;
+  return safeEqual(m[3]!, sign(secret, `host:${id}:${key}:${m[2]}`)) ? id : null;
 }
 
 export function readCookie(header: string | null, name: string): string | undefined {

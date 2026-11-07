@@ -1,5 +1,5 @@
 // Spawn fake players against a running server.
-//   bun scripts/simulate.ts [url] [--players 30] [--code 1234] [--auto --pin 1234] [--origin https://...] [--fast] [--rounds 1,3,5]
+//   bun scripts/simulate.ts [url] [--players 30] [--code 1234] [--auto --pin 1234] [--origin https://...] [--fast] [--rounds 1,3,5] [--mode screen|phones|self]
 // Without --auto the host is driven manually in the browser; pass --code <room code>.
 // With --auto the script logs in as host (PIN from --pin or HOST_PIN), creates the game and drives every step.
 export {};
@@ -14,6 +14,7 @@ const N = Number(opt("players", "30"));
 const auto = flag("auto");
 const fast = flag("fast");
 const roundIds = opt("rounds") ? opt("rounds")!.split(",").map((x) => Number(x.trim())) : undefined; // default: server's core rounds
+const mode = opt("mode");
 const pin = opt("pin", process.env.HOST_PIN ?? "1234")!;
 const reqOrigin = opt("origin", new URL(url).origin)!;
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -67,6 +68,22 @@ async function player(i: number, code: string) {
     }
     const st = s.data;
     if (st.game?.phase === "final") return token;
+    if (st.game?.mode === "self") {
+      // Each simulated person moves alone: read, answer, read the feedback, next.
+      const ph = st.game.phase;
+      if (ph === "done") return token;
+      if (ph === "scene" || ph === "reveal") {
+        const n = await call("/api/next", { token, from: `${ph}:${st.game.round}` }, "", ip);
+        if (n.status !== 200) stats.errors++;
+      } else if (ph === "question") {
+        const keys: string[] = st.round.options.map((o: any) => o.key);
+        const a = await call("/api/answer", { token, key: keys[Math.floor(Math.random() * keys.length)] }, "", ip);
+        if (a.status === 200) stats.answers++;
+        else stats.errors++;
+      }
+      await sleep(fast ? 50 + Math.random() * 200 : 500 + Math.random() * 3000);
+      continue;
+    }
     if (st.game?.phase === "question" && !st.answer && !answered.has(st.game.round)) {
       answered.add(st.game.round);
       const keys: string[] = st.round.options.map((o: any) => o.key);
@@ -86,7 +103,7 @@ async function main() {
   let code = opt("code");
   if (auto) {
     await hostLogin();
-    const g = await call("/api/host/game", roundIds ? { roundIds } : {}, hostCookie);
+    const g = await call("/api/host/game", { ...(roundIds ? { roundIds } : {}), ...(mode ? { mode } : {}) }, hostCookie);
     if (g.status !== 200) throw new Error("create game failed: " + JSON.stringify(g.data));
     code = g.data.game.code;
     expectedRounds = g.data.game.rounds;
@@ -106,6 +123,15 @@ async function main() {
     let guard = 0;
     while (s.game.phase !== "final" && guard++ < 3000) {
       const ph: string = s.game.phase;
+      if (ph === "running") {
+        await sleep(500);
+        s = (await hostGet()).data;
+        if (s.board.total > 0 && s.board.finished >= s.board.total) {
+          console.log(`everyone finished: ${s.board.finished}/${s.board.total}`);
+          s = (await hostDo("advance", "running:0")).data;
+        }
+        continue;
+      }
       if (ph === "question") {
         await sleep(500);
         s = (await hostGet()).data;

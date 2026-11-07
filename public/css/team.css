@@ -1,0 +1,16 @@
+.team{max-width:880px;margin:0 auto;padding:24px 16px 48px}
+.team h1{font-weight:600;font-size:30px;margin:0 0 4px}
+.team h2{font-weight:600;font-size:20px;margin:28px 0 8px}
+.tadd{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tadd input{flex:1 1 220px;padding:10px 12px;font:inherit;border:1px solid var(--ink);border-radius:6px}
+.tpin{background:var(--fbox);border:1px solid var(--fline);border-inline-start:6px solid var(--fline);border-radius:8px;padding:14px 16px;margin-top:16px}
+.tpin .big{font:600 34px 'IBM Plex Mono',monospace;letter-spacing:3px;margin:4px 0 8px}
+.tpin .row{display:flex;gap:8px;flex-wrap:wrap}
+.twrap{overflow-x:auto}
+.ttable{width:100%;border-collapse:collapse;background:var(--card)}
+.ttable th{text-align:start;font-size:13px;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line)}
+.ttable td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+.ttable .acts{white-space:nowrap;text-align:end}
+.ttable .acts .sbtn{padding:5px 10px;font-size:14px;margin-inline-start:4px}
+.ttable .danger{color:var(--bad);border-color:var(--bad)}
+.tnote{margin-top:8px}

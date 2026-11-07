@@ -1,7 +1,7 @@
 import { existsSync, statSync } from "node:fs";
 import { join, normalize, resolve, sep } from "node:path";
-import { Engine, HttpError } from "./game.ts";
-import { COOKIE_NAME, RateLimiter, SECURITY_HEADERS, hostCookie, makeHostToken, readCookie, safeEqual, verifyHostToken } from "./security.ts";
+import { Engine, HttpError, MAIN_OWNER } from "./game.ts";
+import { COOKIE_NAME, RateLimiter, SECURITY_HEADERS, hashPin, hostCookie, makeHostToken, newPin, readCookie, safeEqual, verifyHostToken } from "./security.ts";
 
 export interface ServerConfig {
   port: number;
@@ -19,6 +19,7 @@ const PAGES: Record<string, string> = {
   "/host/help": "help.html",
   "/host/review": "review.html",
   "/host/notes": "notes.html",
+  "/host/team": "team.html",
 };
 
 const TYPES: Record<string, string> = {
@@ -69,8 +70,26 @@ export function createServer(engine: Engine, cfg: ServerConfig) {
     throw new HttpError(400, "Invalid JSON");
   }
 
-  function isHost(req: Request): boolean {
-    return verifyHostToken(cfg.secret, readCookie(req.headers.get("cookie"), COOKIE_NAME));
+  const mainKey = hashPin(cfg.secret, cfg.hostPin);
+  const keyOf = (id: number) => (id === MAIN_OWNER ? mainKey : (engine.facilitator(id)?.pin_hash ?? null));
+
+  /** The logged-in facilitator's id, or null. */
+  function hostId(req: Request): number | null {
+    return verifyHostToken(cfg.secret, readCookie(req.headers.get("cookie"), COOKIE_NAME), keyOf);
+  }
+
+  function who(id: number) {
+    return id === MAIN_OWNER ? { name: "Main facilitator", main: true } : { name: engine.facilitator(id)?.name ?? "", main: false };
+  }
+
+  /** An unused PIN and its hash (never equal to the main PIN or another facilitator's). */
+  function freshPin(): { pin: string; hash: string } {
+    for (let i = 0; i < 50; i++) {
+      const pin = newPin();
+      const hash = hashPin(cfg.secret, pin);
+      if (pin !== cfg.hostPin && !engine.facilitatorByPinHash(hash)) return { pin, hash };
+    }
+    throw new HttpError(503, "Could not make a PIN. Try again.");
   }
 
   function requestOrigin(req: Request): string {
@@ -117,40 +136,69 @@ export function createServer(engine: Engine, cfg: ServerConfig) {
       const now = Date.now();
       while (loginFailures.length && now - loginFailures[0]! > 10 * 60_000) loginFailures.shift();
       if (loginFailures.length >= 30) throw new HttpError(429, "Too many failed attempts. Wait ten minutes.");
-      if (typeof b.pin !== "string" || !safeEqual(b.pin, cfg.hostPin)) {
+      const pin = typeof b.pin === "string" ? b.pin : null;
+      const isMain = pin !== null && safeEqual(pin, cfg.hostPin);
+      const fac = pin !== null && !isMain ? engine.facilitatorByPinHash(hashPin(cfg.secret, pin)) : null;
+      if (!isMain && !fac) {
         loginFailures.push(now);
         throw new HttpError(401, "Wrong PIN");
       }
-      return json({ ok: true }, 200, { "Set-Cookie": hostCookie(makeHostToken(cfg.secret), secureCookie) });
+      if (fac) engine.noteFacilitatorLogin(fac.id);
+      const id = fac ? fac.id : MAIN_OWNER;
+      return json({ ok: true, who: who(id) }, 200, { "Set-Cookie": hostCookie(makeHostToken(cfg.secret, id, keyOf(id) as string), secureCookie) });
     }
     if (path === "/api/host/logout" && isPost) return json({ ok: true }, 200, { "Set-Cookie": hostCookie("", secureCookie, true) });
     if (path.startsWith("/api/host/")) {
-      if (!isHost(req)) throw new HttpError(401, "Host login required");
+      const me = hostId(req);
+      if (me === null) throw new HttpError(401, "Host login required");
+      const state = (since?: number) => json({ ...engine.hostState(requestOrigin(req), since, me), who: who(me) });
       if (path === "/api/host/state" && req.method === "GET") {
         const v = url.searchParams.get("v");
-        return json(engine.hostState(requestOrigin(req), v !== null && /^\d+$/.test(v) ? Number(v) : undefined));
+        return state(v !== null && /^\d+$/.test(v) ? Number(v) : undefined);
       }
       if (path === "/api/host/content" && req.method === "GET") return json({ ok: true, ...engine.content });
+      if (path.startsWith("/api/host/team")) {
+        if (me !== MAIN_OWNER) throw new HttpError(403, "Only the main facilitator can manage facilitators");
+        if (path === "/api/host/team" && req.method === "GET") return json({ ok: true, ...engine.team() });
+        if (!isPost) throw new HttpError(405, "Method not allowed");
+        const b = await body(req);
+        const id = typeof b.id === "number" && Number.isInteger(b.id) ? b.id : -1;
+        if (path === "/api/host/team/add") {
+          const { pin, hash } = freshPin();
+          const f = engine.addFacilitator(b.name, hash);
+          return json({ ok: true, id: f.id, name: f.name, pin });
+        }
+        if (path === "/api/host/team/pin") {
+          const { pin, hash } = freshPin();
+          const f = engine.setFacilitatorPin(id, hash);
+          return json({ ok: true, id: f.id, name: f.name, pin });
+        }
+        if (path === "/api/host/team/remove") {
+          engine.removeFacilitator(id);
+          return json({ ok: true });
+        }
+        throw new HttpError(404, "Not found");
+      }
       if (isPost) {
         const b = await body(req);
         const from = typeof b.from === "string" ? b.from : undefined;
         switch (path) {
           case "/api/host/game":
-            engine.createGame(b.roundIds);
+            engine.createGame(b.roundIds, { owner: me, mode: b.mode });
             break;
           case "/api/host/advance":
-            engine.advance(from);
+            engine.advance(from, me);
             break;
           case "/api/host/reveal":
-            engine.reveal();
+            engine.reveal(me);
             break;
           case "/api/host/extend":
-            engine.extend();
+            engine.extend(undefined, me);
             break;
           default:
             throw new HttpError(404, "Not found");
         }
-        return json(engine.hostState(requestOrigin(req)));
+        return state();
       }
       throw new HttpError(405, "Method not allowed");
     }
@@ -169,6 +217,12 @@ export function createServer(engine: Engine, cfg: ServerConfig) {
       if (!answerLimit.allow(ip)) throw new HttpError(429, "Too many answers. Wait a moment.");
       const b = await body(req);
       return json({ ok: true, ...engine.answer(b.token, b.key) });
+    }
+    if (path === "/api/next" && isPost) {
+      if (!answerLimit.allow(ip)) throw new HttpError(429, "Too many requests. Wait a moment.");
+      const b = await body(req);
+      engine.selfNext(b.token, b.from);
+      return json({ ok: true });
     }
     if (path.startsWith("/api/report/") && req.method === "GET") {
       return json(engine.report(decodeURIComponent(path.slice("/api/report/".length))));

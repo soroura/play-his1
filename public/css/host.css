@@ -145,3 +145,26 @@ body{overflow-x:hidden}
 .prow .pt{flex:1}.prow .ps{color:var(--soft);font-size:15px;text-transform:uppercase;letter-spacing:.06em}.prow .pm{color:var(--soft);font-size:16px;min-width:56px;text-align:end}
 .ptotal{font-size:22px;font-weight:600;margin:8px 0}
 .toollinks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:16px;margin-top:10px}
+
+/* settings and self-paced board */
+.mrow{display:flex;gap:14px;align-items:flex-start;background:var(--bg2);border:2px solid transparent;border-radius:8px;padding:12px 16px;cursor:pointer;font-size:20px}
+.mrow.on{border-color:var(--gold)}
+.mrow input{width:22px;height:22px;accent-color:#ffcc00;margin-top:4px;flex:0 0 auto}
+.mrow b{display:block;font-weight:600}
+.mrow .md{display:block;color:var(--soft);font-size:16px}
+.selfmode .pm,.selfmode .pmins{display:none}
+.modeline{color:var(--soft);font-size:18px;margin-bottom:8px}
+.whoami{color:var(--soft);font-size:16px}
+.linkbtn{background:none;color:var(--soft);text-decoration:underline;font-size:inherit;padding:0}
+.board{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:16px 24px;align-items:start}
+.bcol{min-width:0;padding:0 24px 24px}
+.board .bcol{padding:0}
+.bcol h3{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:2px;font-size:30px;color:var(--gold);margin-bottom:8px}
+.btable{width:100%;border-collapse:collapse;font-size:18px}
+.btable th{color:var(--soft);font-weight:600;font-size:15px;text-align:start;padding:4px 8px;border-bottom:1px solid #8f7bd6}
+.btable td{padding:5px 8px;border-bottom:1px solid #3a2a66}
+.btable .n{text-align:end;white-space:nowrap}
+.btable .bko{color:#ffb3ac;font-weight:700}
+.btable .bdone td{color:var(--ok)}
+.btable .baway td{color:var(--soft)}
+@media (max-width:900px){.board{grid-template-columns:1fr}}

@@ -45,7 +45,7 @@
       catch (e) { err.textContent = e.message; pin.select(); }
     };
     pin.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
-    root.replaceChildren(h('div', { class: 'slogin' }, h('h1', { text: 'Facilitator login' }), h('p', { text: 'Enter the host PIN to continue.' }), pin, h('button', { class: 'sbtn', onclick: go, text: 'Log in' }), err));
+    root.replaceChildren(h('div', { class: 'slogin' }, h('h1', { text: 'Facilitator login' }), h('p', { text: 'Enter your PIN to continue.' }), pin, h('button', { class: 'sbtn', onclick: go, text: 'Log in' }), err));
     pin.focus();
   }
   window.P = { SHAPES, TAGS, TAGS_AR, h, $, tr, api, store, staffLogin };

@@ -29,7 +29,14 @@
   // ---------- facilitator tool links (review before the session, notes during it) ----------
   function toolLinks() {
     const a = (href, text) => h('a', { href, target: '_blank', rel: 'noopener', style: 'color:var(--soft)', text });
-    return h('div', { class: 'toollinks' }, a('/host/review', 'Review rounds'), a('/host/notes', 'Presenter notes'), a('/host/help', 'Run sheet'));
+    return h('div', { class: 'toollinks' }, a('/host/review', 'Review rounds'), a('/host/notes', 'Presenter notes'), a('/host/help', 'Run sheet'), st && st.who && st.who.main ? a('/host/team', 'Facilitators') : null);
+  }
+  const whoLine = () => (st && st.who ? h('div', { class: 'whoami' }, 'Logged in as ', h('b', { text: st.who.name }), ' ', h('button', { class: 'linkbtn', onclick: logout, text: 'Log out' })) : null);
+  async function logout() {
+    if (inviteOpen) toggleInvite(false);
+    try { await api('/api/host/logout', {}); } catch (e) { /* the cookie simply stays until it expires */ }
+    authed = false; st = null; version = null; hidden = false; picking = false;
+    loginView();
   }
 
   // ---------- login ----------
@@ -42,7 +49,7 @@
       catch (e) { err.textContent = e.message; pin.select(); }
     };
     pin.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
-    app.replaceChildren(h('div', { class: 'login' }, h('div', { class: 'display', style: 'font-size:48px;color:var(--gold)', text: 'Host' }), pin, h('button', { class: 'btn', onclick: go, text: 'Log in' }), err, toolLinks()));
+    app.replaceChildren(h('div', { class: 'login' }, h('div', { class: 'display', style: 'font-size:48px;color:var(--gold)', text: 'Facilitator login' }), pin, h('button', { class: 'btn', onclick: go, text: 'Log in' }), err, toolLinks()));
     pin.focus();
   }
 
@@ -51,7 +58,7 @@
     const g = st.game, r = st.round;
     return h('div', { class: 'hd' },
       h('span', null, h('b', { text: st.meta.hospital }), r ? '  -  ' + (r.clock || '') + '  ' + tr(r.place, 'en') : ''),
-      h('span', { class: 'rt', text: g.phase === 'lobby' ? 'LOBBY' : g.phase === 'final' ? 'FINAL' : 'ROUND ' + (g.round + 1) + ' / ' + g.rounds }));
+      h('span', { class: 'rt', text: g.phase === 'lobby' ? 'LOBBY' : g.phase === 'final' ? 'FINAL' : g.phase === 'running' ? 'SELF-PACED' : 'ROUND ' + (g.round + 1) + ' / ' + g.rounds }));
   }
 
   // ---------- invite (QR + link with the code + copy for chat) ----------
@@ -98,6 +105,14 @@
     renderControls();
   }
 
+  // ---------- how people follow the scenario (chosen before creating a game) ----------
+  const MODES = [
+    { id: 'screen', t: 'Shared screen, you set the pace', d: 'As before. You share this screen and the scenes play here. Phones are for answering. Timer and speed bonus.' },
+    { id: 'phones', t: 'Phones, you set the pace', d: 'Scenes and the full feedback also appear on every phone, so sharing a screen is optional. You move everyone on. Timer and speed bonus.' },
+    { id: 'self', t: 'Phones, each person at their own speed', d: 'Each person reads, answers, gets feedback and taps Next alone. No timer or speed bonus. You watch progress and end it when you choose. Also works as homework.' },
+  ];
+  const MODE_LINE = { screen: 'Setting: shared screen, you set the pace', phones: 'Setting: scenes on phones, you set the pace', self: 'Setting: self-paced on phones. Nobody starts until you open the exercise.' };
+
   // ---------- lobby ----------
   function lobbyView() {
     const g = st.game;
@@ -105,7 +120,7 @@
     dyn.count = h('div', { class: 'count', text: '0 players' });
     app.replaceChildren(header(), h('div', { class: 'lobby' },
       h('div', { class: 'joinbox' }, inviteBox(g, false)),
-      h('div', null, dyn.count, dyn.names)));
+      h('div', null, h('div', { class: 'modeline', text: MODE_LINE[g.mode] || MODE_LINE.screen }), dyn.count, dyn.names)));
     updateLobby();
   }
   let shownNames = 0;
@@ -247,13 +262,39 @@
     const order = [pod[1], pod[0], pod[2]].filter(Boolean);
     app.replaceChildren(header(), h('div', { class: 'fin' }, h('h2', { text: 'Final podium' }),
       pod.length ? h('div', { class: 'pod' }, order.map((p) => h('div', { class: 'p' + p.rank }, h('div', { class: 'display', style: 'font-size:56px', text: '#' + p.rank }), h('div', { class: 'nm', text: p.name }), h('div', { class: 'tt', text: p.total })))) : h('div', { class: 'sub', text: 'No players' }),
-      h('div', { class: 'sub', style: 'font-size:24px', text: 'Open your personal report on your phone.' })));
+      h('div', { class: 'sub', style: 'font-size:24px', text: 'Open your personal report on your phone.' })),
+      st.board ? roundsTable(st.board) : null);
+  }
+
+  // ---------- self-paced progress board ----------
+  const STEP_WORD = { scene: 'reading', question: 'answering', reveal: 'feedback', done: 'finished' };
+  function roundsTable(b) {
+    return h('div', { class: 'bcol' }, h('h3', { text: st.game.phase === 'final' ? 'How each round went' : 'How each round is going' }),
+      h('table', { class: 'btable' },
+        h('thead', null, h('tr', null, h('th', { text: 'Round' }), h('th', { class: 'n', text: 'Answered' }), h('th', { class: 'n', text: 'Best answer' }), h('th', { class: 'n', text: 'Knock-outs' }))),
+        h('tbody', null, b.rounds.map((r) => h('tr', null, h('td', { text: r.id + '. ' + tr(r.title, 'en') }), h('td', { class: 'n', text: r.answered }), h('td', { class: 'n', text: r.answered ? Math.round((r.best / r.answered) * 100) + '%' : '-' }), h('td', { class: 'n' + (r.knockouts ? ' bko' : ''), text: r.knockouts }))))));
+  }
+  function boardView() {
+    dyn.board = h('div', { class: 'board' });
+    app.replaceChildren(header(), dyn.board);
+    updateBoard();
+  }
+  function updateBoard() {
+    const b = st.board;
+    if (!dyn.board || !b) return;
+    dyn.board.replaceChildren(
+      h('div', { class: 'bcol' },
+        h('h3', { text: b.finished + ' of ' + b.total + ' finished' }),
+        h('table', { class: 'btable' },
+          h('thead', null, h('tr', null, h('th', { text: '#' }), h('th', { text: 'Name' }), h('th', { text: 'Where' }), h('th', { class: 'n', text: 'Points' }), h('th', { class: 'n', text: 'Knock-outs' }))),
+          h('tbody', null, b.people.map((p) => h('tr', { class: p.step === 'done' ? 'bdone' : p.online ? '' : 'baway' }, h('td', { text: p.rank }), h('td', { text: p.name }), h('td', { text: p.step === 'done' ? 'Finished' : 'Round ' + p.round + ' of ' + st.game.rounds + ', ' + STEP_WORD[p.step] + (p.online ? '' : ' (away)') }), h('td', { class: 'n', text: p.total }), h('td', { class: 'n' + (p.knockouts ? ' bko' : ''), text: p.knockouts })))))),
+      roundsTable(b));
   }
 
   // ---------- noGame ----------
   function noGameView() {
     app.replaceChildren(h('div', { class: 'login' }, h('div', { class: 'display', style: 'font-size:56px;color:var(--gold)', text: st.meta.title.en }), h('div', { class: 'sub', text: st.rounds + ' rounds - ' + st.meta.hospital }),
-      h('button', { class: 'btn', onclick: () => showPicker(), text: 'Create game' }), toolLinks()));
+      whoLine(), h('button', { class: 'btn', onclick: () => showPicker(), text: 'Create game' }), toolLinks()));
   }
 
   // ---------- round picker (before creating a game) ----------
@@ -274,13 +315,22 @@
     const boxes = new Map();
     const total = h('div', { class: 'ptotal' });
     const create = h('button', { class: 'btn', text: 'Create game' });
+    let mode = MODES.some((m) => m.id === store('play_mode')) ? store('play_mode') : 'screen';
+    const modeCards = MODES.map((m) => {
+      const rb = h('input', { type: 'radio', name: 'gmode', 'aria-label': m.t });
+      rb.addEventListener('change', () => { mode = m.id; refresh(); });
+      return { m, rb, el: h('label', { class: 'mrow' }, rb, h('span', null, h('b', { text: m.t }), h('span', { class: 'md', text: m.d }))) };
+    });
     function refresh() {
+      modeCards.forEach((c) => { c.rb.checked = c.m.id === mode; c.el.classList.toggle('on', c.m.id === mode); });
+      const pk = $('.picker'); if (pk) pk.classList.toggle('selfmode', mode === 'self'); // facilitated minutes mean nothing when each person sets the pace
       boxes.forEach((cb, id) => { cb.checked = sel.has(id); cb.closest('.prow').classList.toggle('on', sel.has(id)); });
       const ids = rounds.filter((r) => sel.has(r.id)).map((r) => r.id);
-      total.textContent = ids.length + (ids.length === 1 ? ' round' : ' rounds') + ', about ' + sum(ids) + ' min (including ' + INTRO_MIN + ' min intro and close)';
+      const n = ids.length + (ids.length === 1 ? ' round' : ' rounds');
+      total.textContent = mode === 'self' ? n + '. Each person goes at their own speed.' : n + ', about ' + sum(ids) + ' min (including ' + INTRO_MIN + ' min intro and close)';
       create.disabled = ids.length === 0;
     }
-    const preset = (label, ids) => h('button', { class: 'btn sec', onclick: () => { sel.clear(); ids.forEach((i) => sel.add(i)); refresh(); }, text: label });
+    const preset = (name, ids) => h('button', { class: 'btn sec', onclick: () => { sel.clear(); ids.forEach((i) => sel.add(i)); refresh(); } }, name + ' (' + ids.length + ' rounds', h('span', { class: 'pmins', text: ', ~' + sum(ids) + ' min' }), ')');
     const group = (name, list) => list.length ? [h('h3', { class: 'pgrp', text: name + ' (' + list.length + ')' }), list.map((r) => {
       const cb = h('input', { type: 'checkbox', 'aria-label': 'Round ' + r.id });
       cb.addEventListener('change', () => { cb.checked ? sel.add(r.id) : sel.delete(r.id); refresh(); });
@@ -291,15 +341,19 @@
       const ids = rounds.filter((r) => sel.has(r.id)).map((r) => r.id);
       if (!ids.length) return;
       store('play_rounds_sel', JSON.stringify(ids));
+      store('play_mode', mode);
       create.disabled = true;
-      await act('game', { roundIds: ids });
+      await act('game', { roundIds: ids, mode });
       if (picking) refresh(); // the request failed (alert shown): let the facilitator retry
     };
     const cancel = h('button', { class: 'btn sec', text: 'Cancel', onclick: () => { picking = false; key = ''; if (st) applyState(st); } });
     app.replaceChildren(h('div', { class: 'picker' },
-      h('div', { class: 'display', style: 'font-size:48px;color:var(--gold)', text: 'Choose the rounds' }),
+      h('div', { class: 'display', style: 'font-size:48px;color:var(--gold)', text: 'Game settings' }),
+      h('h3', { class: 'pgrp', text: 'How people follow the scenario' }),
+      modeCards.map((c) => c.el),
+      h('h3', { class: 'pgrp', text: 'Choose the rounds' }),
       h('div', { class: 'sub', text: 'Core rounds are on by default. Order follows the content file.' }),
-      h('div', { class: 'ppre' }, preset('Core (' + core.length + ' rounds, ~' + sum(core) + ' min)', core), preset('All (' + rounds.length + ' rounds, ~' + sum(rounds.map((r) => r.id)) + ' min)', rounds.map((r) => r.id))),
+      h('div', { class: 'ppre' }, preset('Core', core), preset('All', rounds.map((r) => r.id))),
       group('Core', rounds.filter((r) => (r.set || 'core') === 'core')), group('Extra', rounds.filter((r) => r.set === 'extra')),
       total, h('div', { class: 'ppre' }, create, cancel)));
     refresh();
@@ -313,7 +367,8 @@
     const b = (label, fn, cls) => h('button', { class: 'btn' + (cls ? ' ' + cls : ''), onclick: fn, text: label });
     const kids = [];
     if (ph === 'none') kids.push(b('Create game', () => showPicker()));
-    if (ph === 'lobby') kids.push(b('Start game  [Space]', () => act('advance')));
+    if (ph === 'lobby') kids.push(b(g.mode === 'self' ? 'Open the exercise  [Space]' : 'Start game  [Space]', () => act('advance')));
+    if (ph === 'running') kids.push(b('End exercise', () => { if (confirm('End the exercise for everyone? Anyone still working goes to their report with the rounds they answered.')) act('advance'); }, 'sec'));
     if (ph === 'scene') kids.push(b('Question  [Space]', next));
     if (ph === 'question') { kids.push(b('Reveal now  [R]', () => act('reveal'))); kids.push(b('+15 s  [+]', () => act('extend'), 'sec')); }
     if (ph === 'reveal') kids.push(b('Leaderboard  [L]', () => act('advance')));
@@ -325,7 +380,9 @@
     kids.push(h('a', { href: '/host/notes', target: '_blank', rel: 'noopener', style: 'color:var(--soft)', text: 'Notes' }));
     kids.push(h('a', { href: '/host/review', target: '_blank', rel: 'noopener', style: 'color:var(--soft)', text: 'Review' }));
     kids.push(h('a', { href: '/host/help', target: '_blank', rel: 'noopener', style: 'color:var(--soft)', text: 'Run sheet' }));
-    kids.push(h('span', { class: 'hint', text: g ? g.phase + (g.phase === 'lobby' ? '' : ' - round ' + (g.round + 1)) + ' - room ' + g.code : '' }));
+    if (st.who && st.who.main) kids.push(h('a', { href: '/host/team', target: '_blank', rel: 'noopener', style: 'color:var(--soft)', text: 'Facilitators' }));
+    kids.push(h('button', { class: 'linkbtn', onclick: logout, text: 'Log out' }));
+    kids.push(h('span', { class: 'hint', text: g ? g.phase + (g.phase === 'lobby' || g.mode === 'self' ? '' : ' - round ' + (g.round + 1)) + ' - room ' + g.code : '' }));
     controls.replaceChildren(...kids);
   }
   function toggleMute() { muted = !muted; store('play_muted', muted ? '1' : '0'); renderControls(); }
@@ -345,7 +402,7 @@
   document.addEventListener('keydown', (e) => {
     if (!authed || !st || e.target.tagName === 'INPUT' || e.metaKey || e.ctrlKey || e.altKey) return;
     const k = e.key, ph = st.game ? st.game.phase : 'none';
-    if (k === ' ' || k === 'ArrowRight') { e.preventDefault(); if (ph === 'question') return; if (ph === 'final') return; if (ph !== 'none') next(); }
+    if (k === ' ' || k === 'ArrowRight') { e.preventDefault(); if (ph === 'question' || ph === 'final' || ph === 'running') return; if (ph !== 'none') next(); }
     else if (k === 'r' || k === 'R') { if (ph === 'question') act('reveal'); }
     else if (k === '+' || k === '=') { if (ph === 'question') act('extend'); }
     else if (k === 'l' || k === 'L') { if (ph === 'reveal') act('advance'); }
@@ -369,11 +426,13 @@
       else if (ph === 'question') questionView();
       else if (ph === 'reveal') revealView();
       else if (ph === 'leaderboard') leaderView();
+      else if (ph === 'running') boardView();
       else if (ph === 'final') finalView();
       if (ph === 'final') updateLobby();
     } else if (st.game) {
       if (st.game.phase === 'lobby') updateLobby();
       if (st.game.phase === 'question') updateQuestion();
+      if (st.game.phase === 'running') updateBoard();
     }
     renderControls();
   }

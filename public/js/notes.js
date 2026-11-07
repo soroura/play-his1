@@ -24,7 +24,7 @@
     const b = (label, fn, cls) => h('button', { class: 'sbtn' + (cls ? ' ' + cls : ''), onclick: fn, text: label });
     const btns = [];
     if (g) {
-      if (phase === 'lobby') btns.push(b('Start game', () => act('advance')));
+      if (phase === 'lobby') btns.push(b(g.mode === 'self' ? 'Open the exercise' : 'Start game', () => act('advance')));
       if (phase === 'scene') btns.push(b('Open question', () => act('advance')));
       if (phase === 'question') { btns.push(b('Reveal now', () => act('reveal'))); btns.push(b('+15 s', () => act('extend'), 'sec')); }
       if (phase === 'reveal') btns.push(b('Leaderboard', () => act('advance')));
@@ -32,7 +32,7 @@
     }
     dyn.timer = h('div', { class: 'ntimer mono', text: '' });
     dyn.prog = h('div', { class: 'nprog' });
-    const label = !g ? 'No game running' : phase === 'lobby' ? 'LOBBY' : phase === 'final' ? 'FINAL' : 'ROUND ' + (g.round + 1) + ' / ' + g.rounds;
+    const label = !g ? 'No game running' : phase === 'lobby' ? 'LOBBY' : phase === 'final' ? 'FINAL' : phase === 'running' ? 'SELF-PACED' : 'ROUND ' + (g.round + 1) + ' / ' + g.rounds;
     const top = h('header', { class: 'ntop' },
       h('div', { class: 'ni1' }, g ? h('div', { class: 'code mono', text: g.code }) : null, h('div', null, h('div', { class: 'rl', text: label }), h('div', { class: 'ph muted', text: g ? 'phase: ' + phase : 'Open /host and create a game' }))),
       dyn.timer, dyn.prog,
@@ -54,6 +54,7 @@
     if (dyn.prog) {
       if (g.phase === 'question' || g.phase === 'reveal') dyn.prog.textContent = 'answered ' + (st.answered || 0) + ' / ' + (st.answerTotal || 0);
       else if (g.phase === 'lobby') dyn.prog.textContent = (st.names ? st.names.length : 0) + ' players joined';
+      else if (g.phase === 'running' && st.board) dyn.prog.textContent = st.board.finished + ' of ' + st.board.total + ' finished';
       else dyn.prog.textContent = '';
     }
   }
@@ -111,9 +112,10 @@
     const g = st.game;
     const body = h('div', { class: 'nbody' });
     if (!g) body.append(h('div', { class: 'nsec' }, h('h1', { text: 'No game is running' }), h('p', { text: 'Create a game on the host screen (/host). This page follows it automatically.' })));
-    else if (g.phase === 'final') {
+    else if (g.phase === 'final' || g.phase === 'running') {
       const rounds = g.roundIds.map((id) => byId.get(id)).filter(Boolean);
-      body.append(h('div', { class: 'nsec' }, h('h1', { text: 'Game finished - wrap-up' }), h('p', { class: 'muted', text: 'Key messages from the rounds you played. Tell players to open their personal report on their phone.' })),
+      const running = g.phase === 'running';
+      body.append(h('div', { class: 'nsec' }, h('h1', { text: running ? 'Self-paced: people are on different rounds' : 'Game finished - wrap-up' }), h('p', { class: 'muted', text: running ? 'These notes do not follow one round. Key messages for your debrief are below; progress is on the host screen.' : 'Key messages from the rounds you played. Tell players to open their personal report on their phone.' })),
         ...rounds.map((r) => h('section', { class: 'nsec fbox' }, h('h4', { text: 'Round ' + r.id + ': ' + r.title.en }), list(r.keyMessages))));
     } else {
       const idx = g.phase === 'lobby' ? 0 : g.round;
